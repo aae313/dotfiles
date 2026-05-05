@@ -18,12 +18,8 @@ use = "AnirudhG07/plugins-yazi:copy-file-contents"
 rev = "71545f4"
 hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 
-[[flavor.deps]]
-use = "ficd0/ashen:ashen"
-rev = "7d18c13"
-hash = "65b56e9ee65dd33eec62d6ca4209611b"
 
 [[flavor.deps]]
-use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "0670801"
-hash = "7dfe41c9c3d9be76da8a844263d0bbed"
+use = "CFY98/synthwave84"
+rev = "a6f4143"
+hash = "e310961626145e61102c4dde65d7f186"

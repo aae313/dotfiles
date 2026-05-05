@@ -7,7 +7,7 @@ auto-update = off
 unfocused-split-opacity = 0.7
 focus-follows-mouse
 keybind=clear
-mouse-scroll-multiplier = 0.95
+mouse-scroll-multiplier = 2.5
 gtk-toolbar-style = flat
 
 keybind = alt+1=goto_tab:1
@@ -43,4 +43,5 @@ keybind = ctrl+0=reset_font_size
 #custom-shader = shaders/cursor_smear.glsl
 quick-terminal-animation-duration = 0.08
 
-theme = Catppuccin Mocha
+theme = Modus Vivendi
+cursor-color = #00cc4f

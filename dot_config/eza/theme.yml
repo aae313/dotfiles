@@ -1,101 +1,147 @@
+# Modus Themes for eza
+# Auto generated with https://github.com/miikanissi/modus-themes.nvim/blob/master/lua/modus-themes/extras/eza.lua
 colourful: true
 
+# base colors
+define: &bg_main "#000000"
+define: &bg_dim = "#1e1e1e"
+define: &bg_alt = "#0f0f0f"
+define: &fg_main = "#ffffff"
+define: &fg_dim = "#989898"
+define: &fg_alt = "#c6daff"
+define: &border = "#646464"
+define: &border_highlight = "#C4C4C4"
+
+# foreground colors
+define: &red "#ff5f59"
+define: &red_warmer "#ff6b55"
+define: &red_cooler "#ff7f9f"
+define: &red_faint "#ff9580"
+define: &green "#44bc44"
+define: &green_warmer "#70b900"
+define: &green_cooler "#00c06f"
+define: &green_faint "#88ca9f"
+define: &yellow "#d0bc00"
+define: &yellow_warmer "#fec43f"
+define: &yellow_cooler "#dfaf7a"
+define: &yellow_faint "#d2b580"
+define: &blue "#2fafff"
+define: &blue_warmer "#79a8ff"
+define: &blue_cooler "#00bcff"
+define: &blue_faint "#82b0ec"
+define: &magenta "#feacd0"
+define: &magenta_warmer "#f78fe7"
+define: &magenta_cooler "#b6a0ff"
+define: &magenta_faint "#caa6df"
+define: &cyan "#00d3d0"
+define: &cyan_warmer "#4ae2f0"
+define: &cyan_cooler "#6ae4b9"
+define: &cyan_faint "#9ac8e0"
+define: &rust "#db7b5f"
+define: &gold "#c0965b"
+define: &olive "#9cbd6f"
+define: &slate "#76afbf"
+define: &indigo "#9099d9"
+define: &maroon "#cf7fa7"
+define: &pink "#d09dc0"
+
 filekinds:
-  normal: {foreground: "#cdd6f4"}
-  directory: {foreground: "#b4befe"}
-  symlink: {foreground: "#89b4fa"}
-  pipe: {foreground: "#bac2de"}
-  block_device: {foreground: "#eba0ac"}
-  char_device: {foreground: "#eba0ac"}
-  socket: {foreground: "#bac2de"}
-  special: {foreground: "#cba6f7"}
-  executable: {foreground: "#a6e3a1"}
-  mount_point: {foreground: "#94e2d5"}
+  normal: {foreground: *fg_main}
+  directory: {foreground: *blue_warmer}
+  symlink: {foreground: *blue}
+  pipe: {foreground: *fg_dim}
+  block_device: {foreground: *magenta_cooler}
+  char_device: {foreground: *yellow_warmer}
+  socket: {foreground: *magenta}
+  special: {foreground: *pink}
+  executable: {foreground: *green}
+  mount_point: {foreground: *cyan}
 
 perms:
-  user_read: {foreground: "#f38ba8", is_bold: true}
-  user_write: {foreground: "#f9e2af", is_bold: true}
-  user_execute_file: {foreground: "#a6e3a1", is_bold: true}
-  user_execute_other: {foreground: "#a6e3a1", is_bold: true}
-  group_read: {foreground: "#f38ba8"}
-  group_write: {foreground: "#f9e2af"}
-  group_execute: {foreground: "#a6e3a1"}
-  other_read: {foreground: "#f38ba8"}
-  other_write: {foreground: "#f9e2af"}
-  other_execute: {foreground: "#a6e3a1"}
-  special_user_file: {foreground: "#cba6f7"}
-  special_other: {foreground: "#7f849c"}
-  attribute: {foreground: "#9399b2"}
+  user_read: {foreground: *fg_dim}
+  user_write: {foreground: *red}
+  user_execute_file: {foreground: *green}
+  user_execute_other: {foreground: *green}
+  group_read: {foreground: *fg_dim}
+  group_write: {foreground: *red}
+  group_execute: {foreground: *green}
+  other_read: {foreground: *fg_dim}
+  other_write: {foreground: *red}
+  other_execute: {foreground: *green}
+  special_user_file: {foreground: *magenta_cooler}
+  special_other: {foreground: *red}
+  attribute: {foreground: *pink}
 
 size:
-  major: {foreground: "#a6adc8"}
-  minor: {foreground: "#89dceb"}
-  number_byte: {foreground: "#bac2de"}
-  number_kilo: {foreground: "#a6adc8"}
-  number_mega: {foreground: "#89b4fa"}
-  number_giga: {foreground: "#cba6f7"}
-  number_huge: {foreground: "#cba6f7"}
-  unit_byte: {foreground: "#a6adc8"}
-  unit_kilo: {foreground: "#89dceb"}
-  unit_mega: {foreground: "#cba6f7"}
-  unit_giga: {foreground: "#cba6f7"}
-  unit_huge: {foreground: "#94e2d5"}
+  major: {foreground: *fg_dim}
+  minor: {foreground: *blue_warmer}
+  number_byte: {foreground: *pink}
+  number_kilo: {foreground: *rust}
+  number_mega: {foreground: *blue_warmer}
+  number_giga: {foreground: *magenta_cooler}
+  number_huge: {foreground: *magenta}
+  unit_byte: {foreground: *pink}
+  unit_kilo: {foreground: *rust}
+  unit_mega: {foreground: *blue_warmer}
+  unit_giga: {foreground: *magenta_cooler}
+  unit_huge: {foreground: *magenta}
 
 users:
-  user_you: {foreground: "#cdd6f4"}
-  user_root: {foreground: "#f38ba8"}
-  user_other: {foreground: "#eba0ac"}
-  group_yours: {foreground: "#a6adc8"}
-  group_other: {foreground: "#9399b2"}
-  group_root: {foreground: "#f38ba8"}
+  user_you: {foreground: *yellow_warmer}
+  user_root: {foreground: *red}
+  user_other: {foreground: *magenta_cooler}
+  group_yours: {foreground: *pink}
+  group_other: {foreground: *fg_dim}
+  group_root: {foreground: *red}
 
 links:
-  normal: {foreground: "#89b4fa"}
-  multi_link_file: {foreground: "#89b4fa"}
+  normal: {foreground: *blue}
+  multi_link_file: {foreground: *cyan}
 
 git:
-  new: {foreground: "#a6e3a1"}
-  modified: {foreground: "#f9e2af"}
-  deleted: {foreground: "#eba0ac"}
-  renamed: {foreground: "#94e2d5"}
-  typechange: {foreground: "#f5c2e7"}
-  ignored: {foreground: "#7f849c"}
-  conflicted: {foreground: "#fab387"}
+  new: {foreground: *green}
+  modified: {foreground: *yellow_warmer}
+  deleted: {foreground: *red}
+  renamed: {foreground: *cyan}
+  typechange: {foreground: *magenta_cooler}
+  ignored: {foreground: *pink}
+  conflicted: {foreground: *magenta}
 
 git_repo:
-  branch_main: {foreground: "#a6adc8"}
-  branch_other: {foreground: "#cba6f7"}
-  git_clean: {foreground: "#a6e3a1"}
-  git_dirty: {foreground: "#eba0ac"}
+  branch_main: {foreground: *fg_dim}
+  branch_other: {foreground: *magenta_cooler}
+  git_clean: {foreground: *green}
+  git_dirty: {foreground: *red}
 
 security_context:
-  colon: {foreground: "#6c7086"}
-  user: {foreground: "#7f849c"}
-  role: {foreground: "#cba6f7"}
-  typ: {foreground: "#585b70"}
-  range: {foreground: "#cba6f7"}
+  colon: {foreground: *fg_dim}
+  user: {foreground: *blue_warmer}
+  role: {foreground: *magenta_cooler}
+  typ: {foreground: *pink}
+  range: {foreground: *magenta_cooler}
 
 file_type:
-  image: {foreground: "#f9e2af"}
-  video: {foreground: "#f38ba8"}
-  music: {foreground: "#a6e3a1"}
-  lossless: {foreground: "#94e2d5"}
-  crypto: {foreground: "#7f849c"}
-  document: {foreground: "#cdd6f4"}
-  compressed: {foreground: "#f5c2e7"}
-  temp: {foreground: "#eba0ac"}
-  compiled: {foreground: "#74c7ec"}
-  source: {foreground: "#89b4fa"}
+  image: {foreground: *yellow_warmer}
+  video: {foreground: *magenta}
+  music: {foreground: *blue_warmer}
+  lossless: {foreground: *cyan}
+  crypto: {foreground: *pink}
+  document: {foreground: *fg_dim}
+  compressed: {foreground: *magenta_cooler}
+  temp: {foreground: *yellow_warmer}
+  compiled: {foreground: *cyan}
+  build: {foreground: *pink}
+  source: {foreground: *green}
 
-punctuation: {foreground: "#6c7086"}
-date: {foreground: "#f9e2af"}
-inode: {foreground: "#a6adc8"}
-blocks: {foreground: "#6c7086"}
-header: {foreground: "#cdd6f4"}
-octal: {foreground: "#94e2d5"}
-flags: {foreground: "#cba6f7"}
+punctuation: {foreground: *pink}
+date: {foreground: *cyan}
+inode: {foreground: *fg_dim}
+blocks: {foreground: *pink}
+header: {foreground: *fg_dim}
+octal: {foreground: *blue_warmer}
+flags: {foreground: *magenta_cooler}
 
-symlink_path: {foreground: "#89dceb"}
-control_char: {foreground: "#74c7ec"}
-broken_symlink: {foreground: "#f38ba8"}
-broken_path_overlay: {foreground: "#585b70"}
+symlink_path: {foreground: *blue}
+control_char: {foreground: *cyan}
+broken_symlink: {foreground: *red}
+broken_path_overlay: {foreground: *pink}

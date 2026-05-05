@@ -14,15 +14,17 @@ layout {
     }
     focus-ring {
         width 1
-        active-gradient from="#89b4fa" to="#cba6f7" angle=45
-        inactive-color "#313244"
+        active-gradient from="#5ef1ff" to="#bd5eff" angle=45 in="oklch increasing hue"
+        inactive-gradient from="#7b8496" to="#3c4048" angle=135
     }
     border {
-        width 2
-        active-gradient from="#89b4fa" to="#cba6f7" angle=45
-        inactive-color "#313244"
+        on
+        width 1
+        active-gradient from="#5ef1ff" to="#bd5eff" angle=45 in="oklch increasing hue"
+        inactive-gradient from="#7b8496" to="#3c4048" angle=135
     }
     tab-indicator {
+        hide-when-single-tab
         active-color "#5ef1ff90"
         inactive-color "#7b849690"
         width 8
@@ -41,7 +43,6 @@ layout {
         color "#0007"
     }
 }
-
 overview {
     backdrop-color "#1a1b26"
     workspace-shadow {
@@ -51,21 +52,16 @@ overview {
         color "#0007"
     }
 }
-
 screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
-
 animations {
     slowdown 0.7
 }
-
 blur {
-    // off
     passes 3
-    offset 3.0
+    offset 3
     noise 0.02
     saturation 1.5
 }
-
 recent-windows {
     open-delay-ms 250
     binds {
@@ -83,22 +79,21 @@ recent-windows {
         }
     }
     highlight {
-        urgent-color "#AA4869"
-        active-color "#1e66f5"
-        padding 30
+        padding 32
         corner-radius 8
+        active-color "#bd5eff90"
+        urgent-color "#ff6eb890"
     }
 }
-
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 24
 }
-
 hotkey-overlay {
     skip-at-startup
 }
-
 xwayland-satellite {
  // off
+
 }
+

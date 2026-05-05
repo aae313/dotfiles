@@ -18,6 +18,7 @@ input {
 }
 
 output "DP-1" {
+focus-at-startup
     mode "2560x1440@59.951"
     position x=0 y=0
 }

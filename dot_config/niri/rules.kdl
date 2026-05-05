@@ -11,25 +11,21 @@ window-rule {
         fixed 1200
     }
 }
-
 window-rule {
     exclude app-id="firefox"
     match is-active=false
-    opacity 0.85
+    opacity 0.8
 }
-
 window-rule {
     match app-id="firefox"
     open-fullscreen true
 }
-
 window-rule {
     exclude app-id="firefox"
     background-effect {
         blur true
     }
 }
-
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
     match app-id="^org\\.gnome\\.NautilusPreviewer$"
@@ -38,7 +34,6 @@ window-rule {
     min-width 900
     min-height 700
 }
-
 window-rule {
     match app-id="foot.yazi"
     match app-id="foot.float"
@@ -54,7 +49,6 @@ window-rule {
     }
     default-floating-position x=500 y=300
 }
-
 window-rule {
     match app-id="ticktick"
     match app-id="chrome-calendar.google.com__-Default"
@@ -67,23 +61,19 @@ window-rule {
     }
     default-floating-position x=500 y=300
 }
-
 window-rule {
     match app-id="ticktick" is-focused=false
     match app-id="chrome-calendar.google.com__-Default" is-focused=false
     opacity 0.6
 }
-
 window-rule {
     match app-id="ticktick" is-focused=true
     match app-id="chrome-calendar.google.com__-Default" is-focused=true
     opacity 1.0
 }
-
 window-rule {
     match app-id="neovide"
 }
-
 window-rule {
     match app-id="(?i)^firefox$" title="^Picture-in-Picture$"
     match app-id="(?i)(pavucontrol|keepass|nm-connection-editor)"
@@ -91,19 +81,23 @@ window-rule {
     match app-id="xdg-desktop-portal-gtk"
     open-floating true
 }
-
 window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
 }
-
 window-rule {
     match is-floating=true
     background-effect {
         xray false
     }
 }
-
+window-rule {
+    match is-window-cast-target=true
+    border {
+        active-gradient from="#ff6e5e" to="#ffbd5e" angle=45
+        inactive-gradient from="#ffbd5e90" to="#ff5ea090" angle=135
+    }
+}
 layer-rule {
     match namespace="^launcher$"
     shadow {
@@ -113,7 +107,6 @@ layer-rule {
         blur true
     }
 }
-
 layer-rule {
     match layer="top"
     match layer="overlay"
@@ -121,9 +114,9 @@ layer-rule {
         xray false
     }
 }
-
 layer-rule {
     match namespace="^notifications$"
     match namespace="^dms:notification-popup$"
     block-out-from "screencast"
 }
+

@@ -8,9 +8,10 @@ anchor=top-right
 default-timeout=5000
 ignore-timeout=1
 
-text-color=#f2f2e3
-border-color=#b300ad
-background-color=#241b30
+text-color=#ff9999
+border-color=#ff00ff
+background-color=#0a0a0aee
+progress-color=#ff3333
 
 [urgency=high]
 border-color=#fab387

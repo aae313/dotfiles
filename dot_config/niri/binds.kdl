@@ -3,7 +3,7 @@ binds {
         spawn-sh "nirius focus-or-spawn -a com.mitchellh.ghostty app2unit-term"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "app2unit-term"
+        spawn-sh "app2unit footclienT"
     }
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a neovide nv"
@@ -23,11 +23,14 @@ binds {
     Mod+T hotkey-overlay-title="Ticktick" {
         spawn-sh "~/.config/niri/scripts/ns -id ticktick -s ticktick"
     }
+    Mod+Period {
+        spawn "nirius" "scratchpad-show"
+    }
     Mod+Shift+Period hotkey-overlay-title="scratchpad-toggle" {
         spawn "nirius" "scratchpad-toggle"
     }
-    Mod+Period {
-        spawn "nirius" "scratchpad-show"
+    Mod+Ctrl+Period hotkey-overlay-title="scratchpad-toggle" {
+        spawn "nirius" "scratchpad-show-all"
     }
     Mod+B hotkey-overlay-title="open-bookmark" {
         spawn "open-bookmark"
@@ -262,31 +265,31 @@ binds {
     Mod+9 {
         focus-workspace 9
     }
-    Mod+Ctrl+1 {
+    Mod+Shift+1 {
         move-column-to-workspace "main"
     }
-    Mod+Ctrl+2 {
+    Mod+Shift+2 {
         move-column-to-workspace "2"
     }
-    Mod+Ctrl+3 {
+    Mod+Shift+3 {
         move-column-to-workspace 3
     }
-    Mod+Ctrl+4 {
+    Mod+Shift+4 {
         move-column-to-workspace 4
     }
-    Mod+Ctrl+5 {
+    Mod+Shift+5 {
         move-column-to-workspace 5
     }
-    Mod+Ctrl+6 {
+    Mod+Shift+6 {
         move-column-to-workspace 6
     }
-    Mod+Ctrl+7 {
+    Mod+Shift+7 {
         move-column-to-workspace 7
     }
-    Mod+Ctrl+8 {
+    Mod+Shift+8 {
         move-column-to-workspace 8
     }
-    Mod+Ctrl+9 {
+    Mod+Shift+9 {
         move-column-to-workspace 9
     }
     Mod+BracketLeft {

@@ -18,7 +18,7 @@ binds {
         spawn-sh "~/.config/niri/scripts/ns -id chrome-chatgpt.com__-Default -s ~/.config/niri/scripts/spawn-chatgpt -m"
     }
     Mod+A hotkey-overlay-title="Claude" {
-        spawn-sh "~/.config/niri/scripts/ns -id com.anthropic.claude-desktop -s claude-desktop"
+        spawn-sh "~/.config/niri/scripts/ns -id claude -s claude-desktop"
     }
     Mod+T hotkey-overlay-title="Ticktick" {
         spawn-sh "~/.config/niri/scripts/ns -id ticktick -s ticktick"
@@ -329,7 +329,7 @@ binds {
         spawn-sh "nirius focus-or-spawn -a firefox app2unit firefox-developer-edition"
     }
     Mod+Shift+BackSpace {
-        spawn-sh "app2unit firefox-browser"
+        spawn-sh "app2unit firefox-developer-editionfirefox-browser"
     }
     Mod+Minus {
         set-column-width "-10%"

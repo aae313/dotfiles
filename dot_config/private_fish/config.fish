@@ -12,7 +12,7 @@ if status is-interactive
     set fish_greeting ""
     set fish_key_bindings fish_vi_key_bindings
     starship init fish | source
-    zoxide init fish >~/.config/fish/conf.d/zoxide_init.fish
+    zoxide init fish --cmd cd | source
 end
 
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
@@ -22,22 +22,11 @@ set -gx FZF_DEFAULT_OPTS "\
 --cycle \
 --layout=reverse \
 --height 80% \
-  --color=bg+:#283457 \
-  --color=bg:#000000 \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
+  --color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 \
+  --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c \
+  --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c \
+  --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 \
+  --color=query:#ffffff \
 "
 abbr -a cp cp -rv
 abbr -a rm rm -rvf

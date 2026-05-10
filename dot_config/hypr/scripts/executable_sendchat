@@ -1,8 +1,8 @@
 #!/bin/bash
 msg="$*"
-target_class="zen-browser"
 
-nirius focus -a chrome-chatgpt.com__-Default
+printf 'dispatch focuswindow class:chrome-chatgpt.com__-Default\n' |
+  socat - UNIX-CONNECT:"/run/user/$(id -u)/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket.sock"
 
 sleep 0.1
 

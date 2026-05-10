@@ -1,6 +1,0 @@
-include "binds.kdl"
-include "devices.kdl"
-include "appearance.kdl"
-include "workspaces.kdl"
-include "rules.kdl"
-include "startup.kdl"

@@ -1,0 +1,32 @@
+[pyprland]
+plugins = [
+  "fetch_client_menu",
+  "lost_windows",
+  "magnify",
+  "scratchpads",
+  "toggle_special",
+]
+
+[fetch_client_menu]
+engine = "fuzzel"
+separator = ""
+
+[scratchpads.chatgpt]
+command = "~/architect/scripts/create-webapp 'https://chatgpt.com' chatgpt"
+class = "chrome-chatgpt.com__-Default"
+process_tracking = false
+size = "40% 40%"
+max_size = "2560px 100%"
+
+[scratchpads.claude]
+command = "app2unit claude-desktop"
+class = "claude"
+process_tracking = false
+size = "30% 40%"
+max_size = "2560px 100%"
+
+
+[scratchpads.chatgpt.eDP-1]
+max_size = "1920px 100%"
+[scratchpads.claude.eDP-1]
+max_size = "1920px 100%"

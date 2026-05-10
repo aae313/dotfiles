@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+MAX_WS=4
+
+CURRENT=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .activeWorkspace.id')
+
+if [[ "$1" == "next" ]]; then
+  TARGET=$((CURRENT + 1))
+  if ((TARGET > MAX_WS)); then
+    TARGET=1
+  fi
+elif [[ "$1" == "prev" ]]; then
+  TARGET=$((CURRENT - 1))
+  if ((TARGET < 1)); then
+    TARGET=$MAX_WS
+  fi
+else
+  exit 1
+fi
+
+hyprctl dispatch workspace $TARGET

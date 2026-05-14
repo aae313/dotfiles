@@ -1,4 +1,4 @@
-palette = "dracula"
+palette = "catppuccin_mocha"
 
 add_newline = false
 
@@ -19,8 +19,8 @@ success_symbol = "[λ](fg:green)"
 error_symbol = "[ λ](fg:red)"
 vimcmd_symbol = "[  ❮](bold fg:green)"
 vimcmd_visual_symbol = "[  ▼](bold fg:yellow)"
-vimcmd_replace_symbol = "[  ](bold fg:purple)"
-vimcmd_replace_one_symbol = "[  ](bold fg:purple)"
+vimcmd_replace_symbol = "[  ](bold fg:mauve)"
+vimcmd_replace_one_symbol = "[  ](bold fg:mauve)"
 format = "$symbol "
 
 [directory]
@@ -28,8 +28,8 @@ truncation_length = 5
 truncation_symbol = '…/'
 home_symbol = '󰋜 ~'
 read_only = '  '
-format = '[@](bold purple) [$path]($style)[$read_only]($read_only_style) '
-style = "bold purple"
+format = '[@](bold mauve) [$path]($style)[$read_only]($read_only_style) '
+style = "bold mauve"
 read_only_style = "red"
 
 [git_branch]
@@ -41,18 +41,18 @@ style = 'bold green'
 format = '([$all_status$ahead_behind]($style)) '
 style = 'bold green'
 conflicted = '[🏳](red)'
-untracked = '[?](orange)'
+untracked = '[?](peach)'
 ahead = '[⇡${count}](green)'
 behind = '[⇣${count}](green)'
 diverged = '[⇕⇡${ahead_count}⇣${behind_count}](red)'
 stashed = '[](pink)'
 modified = '[](yellow)'
 staged = '[+](green)'
-renamed = '[»](orange)'
+renamed = '[»](peach)'
 deleted = '[-](red)'
 
 [c]
-style = " fg:blue"
+style = "fg:blue"
 detect_files = ["CMakeLists.txt", "compile_commands.json"]
 disabled = false
 symbol = " "
@@ -69,15 +69,30 @@ symbol = " "
 [python]
 symbol = " "
 
-[palettes.dracula]
-background = "#282a36"
-current_line = "#44475a"
-foreground = "#f8f8f2"
-comment = "#6272a4"
-cyan = "#8be9fd"
-green = "#50fa7b"
-orange = "#ffb86c"
-pink = "#ff79c6"
-purple = "#bd93f9"
-red = "#ff5555"
-yellow = "#f1fa8c"
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

@@ -73,7 +73,9 @@ def main() -> None:
     if not clients:
         sys.exit(0)
     if addr := select_client(clients):
-        subprocess.run(["hyprctl", "dispatch", "focuswindow", f"address:{addr}"], check=False)
+        subprocess.run(
+            ["hyprctl", "dispatch", f'hl.dsp.focus({{ window = "address:{addr}" }})'], check=False,
+)
 
 
 if __name__ == "__main__":

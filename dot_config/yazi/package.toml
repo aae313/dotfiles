@@ -18,7 +18,6 @@ use = "AnirudhG07/plugins-yazi:copy-file-contents"
 rev = "71545f4"
 hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 
-
 [[flavor.deps]]
 use = "CFY98/synthwave84"
 rev = "a6f4143"

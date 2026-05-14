@@ -1,2 +1,0 @@
-#!/bin/sh
-create-webapp 'https://claude.ai' 'claude'

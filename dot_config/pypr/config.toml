@@ -10,6 +10,7 @@ plugins = [
 [fetch_client_menu]
 engine = "fuzzel"
 separator = ""
+center_on_fetch = false
 
 [scratchpads.chatgpt]
 command = "~/architect/scripts/create-webapp 'https://chatgpt.com' chatgpt"
@@ -29,15 +30,6 @@ max_size = "2560px 100%"
 preserve_aspect = true
 animation = ""
 
-
-[scratchpads.ticktick]
-command = "ticktick"
-class = "ticktick"
-process_tracking = false
-size = "40% 40%"
-max_size = "2560px 100%"
-smart_focus = true
-animation = ""
 
 [scratchpads.chatgpt.monitor.eDP-1]
 max_size = "1920px 100%"

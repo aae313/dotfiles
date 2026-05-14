@@ -22,12 +22,11 @@ set -gx FZF_DEFAULT_OPTS "\
 --cycle \
 --layout=reverse \
 --height 80% \
-  --color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 \
-  --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c \
-  --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c \
-  --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 \
-  --color=query:#ffffff \
-"
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4"
 abbr -a cp cp -rv
 abbr -a rm rm -rvf
 abbr -a che chezmoi

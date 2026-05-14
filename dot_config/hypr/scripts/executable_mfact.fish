@@ -11,4 +11,4 @@ end
 
 set factor (math "$input / 100")
 
-hyprctl dispatch layoutmsg mfact exact "$factor"
+hyprctl dispatch "hl.dsp.layout('mfact exact $factor')"

@@ -1,3 +1,8 @@
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("XCURSOR_SIZE", "24")
+
 hl.monitor({
 	output = "DP-1",
 	mode = "2560x1440@59.951",

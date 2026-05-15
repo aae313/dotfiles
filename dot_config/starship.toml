@@ -2,7 +2,7 @@ palette = "catppuccin_mocha"
 
 add_newline = false
 
-command_timeout = 1000
+command_timeout = 100
 
 format = """$os$directory$git_branch$git_status$c$lua$zig$python$rust$nix_shell
 $character"""
@@ -15,16 +15,17 @@ disabled = false
 Arch = '󰣇'
 
 [character]
-success_symbol = "[λ](fg:green)"
-error_symbol = "[ λ](fg:red)"
+error_symbol = "[[ ](bold #f38ba8) ❯](bold #f38ba8)"
+format = "$symbol "
+success_symbol = "[[󰋕](bold #a6e3a1) ❯](bold #b4befe)"
 vimcmd_symbol = "[  ❮](bold fg:green)"
 vimcmd_visual_symbol = "[  ▼](bold fg:yellow)"
 vimcmd_replace_symbol = "[  ](bold fg:mauve)"
 vimcmd_replace_one_symbol = "[  ](bold fg:mauve)"
-format = "$symbol "
+
 
 [directory]
-truncation_length = 5
+truncation_length = 7
 truncation_symbol = '…/'
 home_symbol = '󰋜 ~'
 read_only = '  '

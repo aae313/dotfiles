@@ -41,7 +41,7 @@ hl.window_rule({ match = { class = "^(firefox.*)$" }, opacity = "1.0 override" }
 hl.window_rule({ match = { class = "foot" }, float = true, size = { 1000, 1000 }, center = true })
 hl.window_rule({ match = { class = "foot.yazi" }, float = true, size = { 1600, 1000 }, center = true })
 hl.window_rule({ match = { class = "^(chrome-.*__-Default)$" }, float = true, center = true })
-hl.window_rule({ match = { class = "^(claude)$" }, float = true, center = true })
+hl.window_rule({ match = { class = "claude" }, float = true, center = true })
 
 hl.window_rule({ match = { class = ".*(confirm|pavucontrol|cpupower|xdg-desktop-portal-gtk).*" }, tag = "+dialog" })
 hl.window_rule({ match = { title = ".*(Extension.*Bitwarden).*" }, tag = "+dialog" })

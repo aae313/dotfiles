@@ -308,10 +308,10 @@ binds {
         fullscreen-window
     }
     Mod+BackSpace {
-        spawn-sh "nirius focus-or-spawn -a firefox app2unit firefox-nightly"
+        spawn-sh "nirius focus-or-spawn -a firefox app2unit firefox-developer-edition"
     }
     Mod+Shift+BackSpace {
-        spawn-sh "app2unit firefox-nightly"
+        spawn-sh "app2unit firefox-developer-edition"
     }
     Mod+Minus {
         set-column-width "-10%"

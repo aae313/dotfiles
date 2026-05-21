@@ -1,6 +1,10 @@
 function xrg
-    set file (rg --files-with-matches $argv | \
-        fzf --exit-0 --preview 'bat --style=numbers --color=always {}')
+    if test (count $argv) -eq 0
+        echo "xrg: missing search pattern" >&2
+        return 1
+    end
+
+    set -f file (command rg --files-with-matches -- $argv | command fzf --exit-0 --preview 'bat --style=numbers --color=always {}')
     test -n "$file"; or return
     nv $file
 end

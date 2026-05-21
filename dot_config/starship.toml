@@ -1,99 +1,99 @@
-palette = "catppuccin_mocha"
-
 add_newline = false
-
 command_timeout = 100
-
-format = """$os$directory$git_branch$git_status$c$lua$zig$python$rust$nix_shell
-$character"""
-
-[os]
-format = '[󰣇](bold blue) '
-disabled = false
-
-[os.symbols]
-Arch = '󰣇'
-
-[character]
-error_symbol = "[[ ](bold #f38ba8) ❯](bold #f38ba8)"
-format = "$symbol "
-success_symbol = "[[󰋕](bold #a6e3a1) ❯](bold #b4befe)"
-vimcmd_symbol = "[  ❮](bold fg:green)"
-vimcmd_visual_symbol = "[  ▼](bold fg:yellow)"
-vimcmd_replace_symbol = "[  ](bold fg:mauve)"
-vimcmd_replace_one_symbol = "[  ](bold fg:mauve)"
-
-
-[directory]
-truncation_length = 7
-truncation_symbol = '…/'
-home_symbol = '󰋜 ~'
-read_only = '  '
-format = '[@](bold mauve) [$path]($style)[$read_only]($read_only_style) '
-style = "bold mauve"
-read_only_style = "red"
-
-[git_branch]
-symbol = ""
-format = '[on](text) [$symbol $branch]($style) '
-style = 'bold green'
-
-[git_status]
-format = '([$all_status$ahead_behind]($style)) '
-style = 'bold green'
-conflicted = '[🏳](red)'
-untracked = '[?](peach)'
-ahead = '[⇡${count}](green)'
-behind = '[⇣${count}](green)'
-diverged = '[⇕⇡${ahead_count}⇣${behind_count}](red)'
-stashed = '[](pink)'
-modified = '[](yellow)'
-staged = '[+](green)'
-renamed = '[»](peach)'
-deleted = '[-](red)'
+format = "[┏](bold frame)$status$cmd_duration[━](bold frame) $hostname$directory$nix_shell${custom.jj}$package$c$python$lua$rust$jobs$container\n$character"
+palette = "modus"
+scan_timeout = 2
 
 [c]
-style = "fg:blue"
-detect_files = ["CMakeLists.txt", "compile_commands.json"]
+detect_files = ["Makefile"]
+format = "[$symbol$version]($style) "
+style = "bold context"
+
+[character]
+error_symbol = "[┃ 󰘧](bold error)"
+format = "$symbol "
+success_symbol = "[┃ 󰘧](bold frame)"
+vimcmd_symbol = "[┃ 󰘧](bold prompt)"
+
+[cmd_duration]
+format = "[┫](bold frame)[$duration](bold duration)[┣](bold frame)"
+min_time = 2000
+show_milliseconds = false
+
+[container]
+format = "[$symbol$name]($style) "
+style = "bold context"
+
+[custom.jj]
+format = "$output "
+shell = ["jj-starship"]
+when = "jj-starship detect"
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+home_symbol = "~"
+read_only = " "
+read_only_style = "warning"
+style = "bold path"
+truncate_to_repo = false
+truncation_length = 100
+
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_status]
+disabled = true
+
+[hostname]
 disabled = false
-symbol = " "
+format = "[@$hostname](bold remote) "
+ssh_only = true
+
+[jobs]
+format = "[$symbol$number]($style) "
+style = "bold context"
+
+[lua]
+format = "[$symbol$version]($style) "
+style = "bold context"
 
 [nix_shell]
-impure_msg = '[impure shell](bold red)'
-pure_msg = '[pure shell](bold green)'
-unknown_msg = '[unknown shell](bold yellow)'
-format = 'via [ $state( \($name\))](bold blue) '
+format = "[via](muted) [$symbol$name]($style) "
+heuristic = true
+style = "bold context"
+symbol = " "
 
-[rust]
-symbol = " "
+[package]
+format = "[$symbol$version]($style) "
+style = "bold context"
+symbol = " "
+
+[palettes.modus]
+context = "#79a8ff"
+duration = "#feacd0"
+error = "#ff7f9f"
+frame = "#d2b580"
+muted = "#989898"
+path = "#00d3d0"
+prompt = "#b6a0ff"
+remote = "#6ae4b9"
+success = "#6ae4b9"
+warning = "#ff9f80"
 
 [python]
-symbol = " "
+format = "[$symbol$pyenv_prefix($version )(($virtualenv) )]($style)"
+style = "bold context"
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[rust]
+format = "[$symbol$version]($style) "
+style = "bold context"
+
+[status]
+disabled = false
+format = "[┫](bold frame)[$status](bold error)[┣](bold frame)"

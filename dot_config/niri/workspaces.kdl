@@ -1,0 +1,5 @@
+workspace "main"
+workspace "2"
+workspace "scratch"
+
+prefer-no-csd

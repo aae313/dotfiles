@@ -6,28 +6,28 @@
 <plist version="1.0">
   <dict>
     <key>name</key>
-    <string>modus_vivendi</string>
+    <string>modus_vivendi_Tinted</string>
     <key>settings</key>
     <array>
       <dict>
         <key>settings</key>
         <dict>
           <key>background</key>
-          <string>#000000</string>
+          <string>#0d0e1c</string>
           <key>caret</key>
           <string>#989898</string>
           <key>foreground</key>
           <string>#ffffff</string>
           <key>invisibles</key>
-          <string>#989898</string>
+          <string>#ff9f80</string>
           <key>lineHighlight</key>
-          <string>#2f3849</string>
+          <string>#303a6f</string>
           <key>selection</key>
           <string>#7030af</string>
           <key>findHighlight</key>
           <string>#7a6100</string>
           <key>selectionBorder</key>
-          <string>#646464</string>
+          <string>#61647a</string>
           <key>gutterForeground</key>
           <string>#989898</string>
         </dict>
@@ -42,7 +42,7 @@
           <key>fontStyle</key>
           <string>italic</string>
           <key>foreground</key>
-          <string>#989898</string>
+          <string>#ff9f80</string>
         </dict>
       </dict>
       <dict>
@@ -275,7 +275,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#989898</string>
+          <string>#ff9f80</string>
         </dict>
       </dict>
       <dict>
@@ -286,7 +286,7 @@
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#989898</string>
+          <string>#ff9f80</string>
         </dict>
       </dict>
       <dict>
@@ -319,7 +319,7 @@
         <key>settings</key>
         <dict>
           <key>background</key>
-          <string>#4f1119</string>
+          <string>#4f1127</string>
         </dict>
       </dict>
       <dict>
@@ -330,7 +330,7 @@
         <key>settings</key>
         <dict>
           <key>background</key>
-          <string>#00381f</string>
+          <string>#003a2f</string>
         </dict>
       </dict>
       <dict>

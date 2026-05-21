@@ -1,0 +1,12 @@
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+personality = "pragmatic"
+
+[projects."/home/wasd/.config/nvim"]
+trust_level = "trusted"
+
+[projects."/home/wasd"]
+trust_level = "trusted"
+
+[tui]
+theme = "monokai-extended-origin"

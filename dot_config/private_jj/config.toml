@@ -1,12 +1,58 @@
-"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
-
-[user]
-name = "BaudilliardAlt"
-email = "230780735+aae313@users.noreply.github.com"
+[aliases]
+",," = ["edit", "@+"]
+".." = ["edit", "@-"]
+a = ["abandon"]
+c = ["commit"]
+ci = ["commit", "--interactive"]
+cl = ["git", "clone"]
+d = ["diff"]
+e = ["edit"]
+f = ["git", "fetch"]
+i = ["git", "init"]
+l = ["log"]
+la = ["log", "--revisions", "::"]
+p = ["git", "push"]
+r = ["rebase"]
+res = ["resolve"]
+resa = ["resolve-ast"]
+resolve-ast = ["resolve", "--tool", "mergiraf"]
+s = ["squash"]
+sh = ["show"]
+si = ["squash", "--interactive"]
+u = ["undo"]
 
 [git]
-push-new-bookmarks = true
+push = "origin"
+sign-on-push = true
+
+[merge-tools.mergiraf]
+program = "mergiraf"
+
+[remotes."*"]
+auto-track-bookmarks = "aae313/*"
+
+[revsets]
+bookmark-advance-to = "heads(::@ & ~description(exact:\"\") & (~empty() | merges()))\n"
+log = "present(@) | present(trunk()) | ancestors(remote_bookmarks().. | @.., 8)\n"
+
+[signing]
+backend = "ssh"
+behavior = "drop"
+key = "~/.ssh/id_ed25519.pub"
+
+[signing.backends.ssh]
+allowed-signers = "/home/wasd/.config/git/allowed_signers"
 
 [ui]
-diff-formatter = ["difft", "--color=always", "$left", "$right"]
-default-command = ["status", "--no-pager"]
+conflict-marker-style = "snapshot"
+default-command = "log"
+diff-editor = ":builtin"
+merge-editor = "mergiraf"
+
+
+[ui.graph]
+style = "square"
+
+[user]
+email = "230780735+aae313@users.noreply.github.com"
+name = "aae313"

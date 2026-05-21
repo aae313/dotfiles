@@ -1,4 +1,2 @@
---theme='Catppuccin Mocha'
 --style="plain"
---paging=never
---wrap=never
+--theme=modus_vivendi

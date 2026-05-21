@@ -5,7 +5,7 @@ function _fzf_search_processes --description "Search all running processes. Repl
     set -f ps_preview_fmt (string join ',' 'pid' 'ppid=PARENT' 'user' '%cpu' 'rss=RSS_IN_KB' 'start=START_TIME' 'command')
     set -f processes_selected (
         $ps_cmd -A -opid,command | \
-        fzf --multi \
+        command fzf --multi \
             --prompt="Processes> " \
             --query (commandline --current-token) \
             --ansi \
@@ -14,10 +14,12 @@ function _fzf_search_processes --description "Search all running processes. Repl
             --preview-window="bottom:4:wrap" \
             $fzf_processes_opts
     )
+    set -f fzf_status $status
 
-    if test $status -eq 0
+    if test $fzf_status -eq 0
+        set -f pids_selected
         for process in $processes_selected
-            set -f --append pids_selected (string split --no-empty --field=1 -- " " $process)
+            set -f --append pids_selected (string match --regex --groups-only '^\s*([0-9]+)' -- $process)
         end
 
         commandline --current-token --replace -- (string join ' ' $pids_selected)

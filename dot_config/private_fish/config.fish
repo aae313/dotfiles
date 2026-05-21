@@ -29,9 +29,22 @@ end
 set -gx EDITOR nv
 set -gx VISUAL nv
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
-set -gx PAGER 'bat --plain'
-set -gx MANPAGER 'bat --plain'
+set -gx PAGER 'bat --style=plain --paging always'
+set -gx BAT_PAGER 'ov -F -H3'
+set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
 set -gx MANROFFOPT -c
 set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
 set -gx DIRENV_LOG_FORMAT ''
 set -gx NIX_AUTO_RUN 1
+
+
+if status is-login; and command -q systemctl
+    systemctl --user show-environment | while read -l line
+        set -l kv (string split -m 1 = -- $line)
+        if test $kv[1] = PATH
+            set -gx PATH (string split : -- $kv[2])
+        else
+            set -gx $kv[1] $kv[2]
+        end
+    end
+end

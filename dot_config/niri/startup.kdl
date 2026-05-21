@@ -4,3 +4,5 @@ spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/leaves.pn
 spawn-at-startup "app2unit" "-t" "service" "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+
+spawn-at-startup "vicinae" "server"

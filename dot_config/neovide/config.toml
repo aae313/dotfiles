@@ -3,7 +3,6 @@ frame = "full"
 idle = true
 no-multigrid = false
 theme = "auto"
-neovim-bin = "/usr/bin/nvim"
 title-hidden = true
 vsync = true
 wsl = false

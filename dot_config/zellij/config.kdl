@@ -634,7 +634,7 @@ theme "ao"
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "/usr/bin/fish"
+default_shell "/usr/bin/fish"
 // Choose the path to override cwd that zellij will use for opening new panes
 //
 // default_cwd "/tmp"

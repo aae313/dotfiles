@@ -43,12 +43,14 @@ if status is-interactive
     bind -M default tab fzf_complete
 end
 
-# set -gx EDITOR nv
-# set -gx VISUAL nv
-# set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
-# set -gx PAGER bat
-# set -gx BAT_PAGER 'ov -F -H3'
-# set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
-# set -gx SYSTEMD_PAGER "bat -l syslog -p --strip-ansi=auto"
-# set -gx SYSTEMD_PAGERSECURE false
-# set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/config
+set -gx EDITOR nv
+set -gx VISUAL nv
+set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
+set -gx PAGER bat
+set -gx BAT_PAGER 'ov -F -H3'
+set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
+set -gx SYSTEMD_PAGER "bat -l syslog -p --strip-ansi=auto"
+set -gx SYSTEMD_PAGERSECURE false
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/config
+
+fish_add_path --global --prepend ~/architect/scripts

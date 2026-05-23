@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.hostname "desktop" -}}
+{{ template "niri/devices.kdl.desktop" . }}
+{{- else if eq .chezmoi.hostname "laptop" -}}
+{{ template "niri/devices.kdl.laptop" . }}
+{{- else -}}
+{{ fail (printf "unknown hostname %q for niri devices.kdl" .chezmoi.hostname) }}
+{{- end -}}

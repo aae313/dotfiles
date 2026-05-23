@@ -1,6 +1,6 @@
 window-rule {
     match app-id="claude"
-    match app-id="codex-desktop"
+    match app-id="Codex"
     open-on-workspace "scratch"
     open-focused false
     open-floating true
@@ -35,7 +35,7 @@ window-rule {
     min-height 700
 }
 window-rule {
-    match app-id="kitty-yazi"
+    match app-id="foot.yazi"
     open-floating true
     default-column-width {
         fixed 1600

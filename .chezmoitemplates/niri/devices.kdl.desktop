@@ -1,6 +1,6 @@
 input {
     mouse {
-        accel-speed 0.4
+        accel-speed 0.6
         accel-profile "flat"
     }
     keyboard {
@@ -13,17 +13,25 @@ input {
     tablet {
         map-to-output "ASUSTek COMPUTER INC PA278QV SCLMQS108511"
     }
-    focus-follows-mouse max-scroll-amount="1%"
+    focus-follows-mouse max-scroll-amount="0%"
     workspace-auto-back-and-forth
 }
 
+output "HDMI-A-1" {
+    mode "1920x1080@60.000"
+layout {
+    struts {
+        left 280
+    }
+}
+}
+
 output "DP-1" {
-focus-at-startup
+    focus-at-startup
     mode "2560x1440@59.951"
     position x=0 y=0
 }
 
-output "HDMI-A-1" {
-    mode "1920x1080@60.00"
-    position x=2560 y=250
-}
+
+
+

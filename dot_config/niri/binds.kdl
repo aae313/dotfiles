@@ -1,9 +1,9 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a kitty kitty"
+        spawn-sh "nirius focus-or-spawn -a foot xdg-terminal-exec"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "kitty"
+        spawn-sh "app2unit-term"
     }
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a neovide nv"
@@ -15,7 +15,7 @@ binds {
         spawn-sh "ns -id claude -s claude-desktop"
     }
     Mod+Shift+A hotkey-overlay-title="codex" {
-        spawn-sh "ns -id codex-desktop -s codex-desktop"
+        spawn-sh "ns -id Codex -s codex-desktop"
     }
     Mod+Period {
         spawn "nirius" "scratchpad-show"

@@ -1,6 +1,18 @@
 if status is-interactive
 
-    set fish_greeting ""
+    set -gx ZELLIJ_AUTO_ATTACH true
+
+    if not set -q ZELLIJ
+        if test "$ZELLIJ_AUTO_ATTACH" = true
+            if test (pgrep -c footclient) -le 1
+                zellij attach --create main
+            end
+        else
+            zellij --session main
+        end
+    end
+
+    set -g fish_greeting
     set fish_key_bindings fish_vi_key_bindings
     fzf --fish | source
     starship init fish | source
@@ -19,32 +31,26 @@ if status is-interactive
     abbr -a py python
     abbr -a wl wl-copy
     abbr -a che chezmoi
-    set -gx FZF_DEFAULT_OPTS "--highlight-line --cycle --layout=reverse --height=80%"
+    abbr -a apply chezmoi apply --verbose
+    set -gx FZF_DEFAULT_OPTS "--highlight-line --cycle --layout=reverse --height=80% --bind=tab:down,btab:up,ctrl-space:toggle"
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
     abbr -a .... 'cd ../../..'
     abbr -a ..... 'cd ../../../..'
+
+    bind tab fzf_complete
+    bind -M insert tab fzf_complete
+    bind -M default tab fzf_complete
 end
 
 set -gx EDITOR nv
 set -gx VISUAL nv
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
-set -gx PAGER 'bat --style=plain --paging always'
+set -gx PAGER bat
 set -gx BAT_PAGER 'ov -F -H3'
 set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
-set -gx MANROFFOPT -c
-set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
-set -gx DIRENV_LOG_FORMAT ''
-set -gx NIX_AUTO_RUN 1
+set -gx SYSTEMD_PAGER "bat -l syslog -p --strip-ansi=auto"
+set -gx SYSTEMD_PAGERSECURE false
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/config
 
-
-if status is-login; and command -q systemctl
-    systemctl --user show-environment | while read -l line
-        set -l kv (string split -m 1 = -- $line)
-        if test $kv[1] = PATH
-            set -gx PATH (string split : -- $kv[2])
-        else
-            set -gx $kv[1] $kv[2]
-        end
-    end
-end
+fish_add_path --global --prepend ~/architect/scripts

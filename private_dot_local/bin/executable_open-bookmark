@@ -1,0 +1,62 @@
+#!/usr/bin/env nu
+
+def firefox-places []: nothing -> string {
+  $env.HOME | path join ".config/mozilla/firefox/hey/places.sqlite"
+}
+
+def copy-places [source: string destination: string]: nothing -> nothing {
+  cp $source $destination
+
+  for extension in ["-wal" "-shm"] {
+    let sidecar = $"($source)($extension)"
+    if ($sidecar | path exists) {
+      cp $sidecar $"($destination)($extension)"
+    }
+  }
+}
+
+def bookmark-rows [database: string]: nothing -> table<title: string, url: string> {
+  open $database | query db "
+    SELECT COALESCE(MAX(b.title), p.title, p.url) AS title, p.url AS url
+    FROM moz_bookmarks b JOIN moz_places p ON b.fk = p.id
+    WHERE b.type = 1 AND p.url NOT LIKE 'place:%'
+    GROUP BY p.url
+    ORDER BY MAX(b.dateAdded) DESC
+  "
+}
+
+def main []: nothing -> nothing {
+  let source = firefox-places
+  if not ($source | path exists) {
+    print --stderr $"open-bookmark: missing Firefox places database: ($source)"
+    exit 1
+  }
+
+  let temporary = ^mktemp -d | str trim
+  let database = $temporary | path join "places.sqlite"
+
+  let rows = try {
+    copy-places $source $database
+    bookmark-rows $database
+  } catch {|error|
+    rm --recursive --force $temporary
+    error make { msg: $error.msg }
+  }
+
+  rm --recursive --force $temporary
+
+  let selection = (
+    $rows
+    | each {|row| $"($row.title)\t($row.url)"}
+    | str join "\n"
+    | ^vicinae dmenu --placeholder "Open Bookmark: "
+    | str trim
+  )
+
+  if ($selection | is-empty) {
+    return
+  }
+
+  let url = $selection | split row "\t" | last
+  ^firefox-developer-edition --new-window $url
+}

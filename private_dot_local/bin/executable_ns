@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+# Adapted from the many ideas shared at: https://github.com/YaLTeR/niri/discussions/329
+
+import argparse
+import json
+import os
+import shlex
+import subprocess
+import sys
+import time
+
+scratch_window = {}
+focused_workspace = {}
+scratch_workspace = os.getenv("NS_WORKSPACE", "scratch")
+
+
+def niri_cmd(cmd_args):
+    subprocess.run(["niri", "msg", "action"] + cmd_args)
+
+
+def fetch_windows():
+    props = subprocess.run(
+        ["niri", "msg", "--json", "windows"],
+        capture_output=True,
+        text=True,
+    )
+    return json.loads(props.stdout)
+
+
+def move_window_to_scratchpad(window_id, animations):
+    niri_cmd(["move-window-to-workspace", "--window-id", str(window_id), scratch_workspace, "--focus=false"])
+    if animations:
+        niri_cmd(["move-window-to-tiling", "--id", str(window_id)])
+
+
+def bring_scratchpad_window_to_focus(window_id, args):
+    niri_cmd(["move-window-to-workspace", "--window-id", str(window_id), str(focused_workspace["idx"])])
+    if args.multi_monitor:
+        niri_cmd(["move-window-to-monitor", "--id", str(window_id), focused_workspace["output"]])
+    if args.animations and not scratch_window["is_floating"]:
+        niri_cmd(["move-window-to-floating", "--id", str(window_id)])
+    niri_cmd(["focus-window", "--id", str(window_id)])
+
+
+def find_scratch_window(args, windows):
+    scratch_window.clear()
+    for window in windows:
+        if (args.app_id and window["app_id"] == args.app_id) or (args.title and window["title"] == args.title):
+            scratch_window["id"] = window["id"]
+            scratch_window["workspace_id"] = window["workspace_id"]
+            scratch_window["is_focused"] = window["is_focused"]
+            scratch_window["is_floating"] = window["is_floating"]
+            break
+
+
+def wait_for_scratch_window(args):
+    deadline = time.monotonic() + args.spawn_delay
+    while time.monotonic() < deadline:
+        find_scratch_window(args, fetch_windows())
+        if scratch_window:
+            return True
+        time.sleep(args.spawn_poll_interval)
+    return False
+
+
+def fetch_focused_workspace():
+    props = subprocess.run(
+        ["niri", "msg", "--json", "workspaces"],
+        capture_output=True,
+        text=True,
+    )
+    workspaces = json.loads(props.stdout)
+
+    for workspace in workspaces:
+        if workspace["is_focused"]:
+            focused_workspace["idx"] = workspace["idx"]
+            focused_workspace["output"] = workspace["output"]
+            return workspace["id"]
+
+
+def ns(parser):
+    args = parser.parse_args()
+    spawned = False
+    find_scratch_window(args, fetch_windows())
+
+    if not scratch_window:
+        if args.spawn:
+            spawned = True
+            niri_cmd(["spawn", "--"] + shlex.split(args.spawn))
+            if not wait_for_scratch_window(args):
+                sys.exit(0)
+        else:
+            parser.print_help()
+            sys.exit(1)
+
+    window_id = scratch_window["id"]
+
+    if spawned:
+        if not scratch_window["is_focused"]:
+            workspace_id = fetch_focused_workspace()
+            if scratch_window["workspace_id"] != workspace_id:
+                bring_scratchpad_window_to_focus(window_id, args)
+            else:
+                niri_cmd(["focus-window", "--id", str(window_id)])
+        return
+
+    if not scratch_window["is_focused"]:
+        workspace_id = fetch_focused_workspace()
+        if scratch_window["workspace_id"] != workspace_id:
+            bring_scratchpad_window_to_focus(window_id, args)
+            return
+
+    move_window_to_scratchpad(window_id, args.animations)
+
+
+def main():
+    parser = argparse.ArgumentParser(prog="nscratch", description="Niri Scratchpad support")
+    group = parser.add_mutually_exclusive_group(required=True)
+
+    group.add_argument("-id", "--app-id", help="The application identifier")
+    group.add_argument("-t", "--title", help="The application title")
+    parser.add_argument("-s", "--spawn", help="The process name to spawn when non-existing")
+    parser.add_argument("-a", "--animations", action="store_true", help="Enable animations")
+    parser.add_argument("-m", "--multi-monitor", action="store_true", help="Multi-monitor support")
+    parser.add_argument("--spawn-delay", type=float, default=1.5, help="Seconds to wait for a spawned window")
+    parser.add_argument("--spawn-poll-interval", type=float, default=0.05, help="Polling interval while waiting for a spawned window")
+
+    ns(parser)
+
+
+if __name__ == "__main__":
+    main()

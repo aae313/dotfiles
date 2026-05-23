@@ -1,5 +1,5 @@
-{{- if eq .chezmoi.hostname "light" -}}
-{{ template "niri/devices.kdl.light" . }}
+{{- if eq .chezmoi.hostname "desktop" -}}
+{{ template "niri/devices.kdl.desktop" . }}
 {{- else if eq .chezmoi.hostname "laptop" -}}
 {{ template "niri/devices.kdl.laptop" . }}
 {{- else -}}

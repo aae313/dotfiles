@@ -83,8 +83,11 @@
   };
 
   system.activationScripts.chezmoiConfig.text = /* bash */ ''
-    config=/home/wasd/.config/chezmoi/chezmoi.toml
+    configDir=/home/wasd/.config/chezmoi
+    config="$configDir/chezmoi.toml"
     sourceLine='sourceDir = "/home/wasd/.local/share/nixos"'
+
+    ${pkgs.coreutils}/bin/install -d -m0755 -o wasd -g users "$configDir"
 
     if ! ${pkgs.coreutils}/bin/test -e "$config"; then
       ${pkgs.coreutils}/bin/install -Dm0644 -o wasd -g users /dev/null "$config"
@@ -97,5 +100,8 @@
     else
       ${pkgs.coreutils}/bin/printf '\n%s\n' "$sourceLine" >> "$config"
     fi
+
+    ${pkgs.coreutils}/bin/chown wasd:users "$config"
+    ${pkgs.coreutils}/bin/chmod 0644 "$config"
   '';
 }

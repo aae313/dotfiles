@@ -1,11 +1,19 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+
+let
+  inherit (lib.meta) getExe;
+in
 
 {
   environment = {
     localBinInPath = true;
 
     systemPackages = [
-      pkgs.atuin
       pkgs.ast-grep
       pkgs.bash-language-server
       pkgs.bat
@@ -19,7 +27,7 @@
       pkgs.fd
       pkgs.ffmpeg
       pkgs.file
-      pkgs.fish-lsp
+      pkgs.fish
       pkgs.fzf
       pkgs.gcc
       pkgs.glow
@@ -36,7 +44,6 @@
       pkgs.markdown-toc
       pkgs.markdownlint-cli2
       pkgs.marksman
-      pkgs.man-db
       pkgs.nil
       pkgs.nix-index
       pkgs.nirius
@@ -56,14 +63,14 @@
       pkgs.tree-sitter
       pkgs.usbutils
       pkgs.util-linux
+      pkgs.nufmt
       pkgs.vscode-langservers-extracted
       pkgs.xdg-terminal-exec
       pkgs.yazi
       pkgs.zoxide
-      pkgs.starship
       pkgs.zellij
       pkgs.python3
-      pkgs.nushell
+      pkgs.carapace
 
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -71,6 +78,7 @@
   };
 
   environment.sessionVariables = {
+    SHELL = getExe pkgs.nushell;
     EDITOR = "nv";
     VISUAL = "nv";
     SUDO_EDITOR = "env -u NVIM_LISTEN_ADDRESS nvim";

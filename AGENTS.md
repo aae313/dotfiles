@@ -1,47 +1,10 @@
-# Repository Guidelines
-
-## Project Structure & Module Organization
-
-This repository is a Nix flake for a NixOS system configuration:
-
-- `flake.nix` defines inputs and exports `nixosConfigurations`.
-- `hosts/` contains host-specific systems. The current host is `hosts/light/`.
-- `modules/` contains shared NixOS modules, grouped by concern: `core/`, `hardware/`, `network/`, `programs/`, and `services/`.
-- `home/` contains Home Manager modules for user programs, shell, editors, terminals, Wayland, and scripts.
-- `settings/` contains small shared values.
-- Assets live near consumers, for example `home/wayland/niri/wallpapers/`.
-
-Prefer adding a small module in the relevant directory, then importing it from that directory's `default.nix`.
-
-## Build, Test, and Development Commands
-
-- `just switch` applies the flake to the current NixOS system.
-- `just boot` builds and registers the system for next boot.
-- `just up` updates flake inputs, then switches.
-- `just history` and `just curgen` inspect system generations.
-
-These commands are documented for maintainers. Agents should not run build, switch, boot, or activation commands unless explicitly asked.
-
-## Coding Style & Naming Conventions
-
-Nix files use two-space indentation and small attribute sets. Keep modules focused on one concern, and match names such as `networkmanager.nix`, `sysctl.nix`, `kitty.nix`, and `niri.nix`.
-
-Use lowercase, descriptive file names. Prefer directory-level `default.nix` files to collect imports. Put shared constants in `settings/` only when multiple modules need them.
-
-## Testing Guidelines
-
-There is no standalone test suite. Prefer non-building checks:
-
-- Use Nix option/package searches and evaluation commands for validation.
-- Do not run real build, compile, or system activation tests unless explicitly asked.
-
-For Home Manager or service changes, document intended manual runtime checks in the PR.
-
-## Agent-Specific Instructions
+# Agent Instructions
 
 Do not revert unrelated local changes. Inspect `git status --short` before modifying files and keep changes surgical.
 
 Never run real build or compile commands by default, including `nix build`, `just switch`, `just boot`, or similar activation/build tests. Searching packages, checking options, reading docs, and evaluating snippets is encouraged; the restriction is only on direct compiling, building, or activating.
+
+Only run tests when explicitly instructed to do so.
 
 # Nix Style Rules
 

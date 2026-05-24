@@ -9,8 +9,7 @@ let
 in
 {
   environment = {
-    shells = singleton pkgs.fish;
-    shellAliases = lib.genAttrs [ "ls" "ll" "l" ] (_: null);
+    shells = singleton pkgs.nushell;
   };
 
   programs = {
@@ -31,7 +30,7 @@ in
       wasd = {
         isNormalUser = true;
         hashedPasswordFile = "/persist/passwd";
-        shell = pkgs.fish;
+        shell = pkgs.nushell;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqPLz1VVjaPGsWaeAUnajDs/1awhmQLluvf+J+O9BOa light"
         ];

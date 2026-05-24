@@ -1,3 +1,0 @@
-function cz
-    cdi
-end

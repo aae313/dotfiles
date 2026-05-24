@@ -1,0 +1,5 @@
+result/
+.claude/
+nixpkgs/
+.direnv
+.pre-commit-config.yaml

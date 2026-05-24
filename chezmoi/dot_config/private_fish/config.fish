@@ -1,7 +1,6 @@
 if status is-interactive
 
     set -gx ZELLIJ_AUTO_ATTACH true
-
     if not set -q ZELLIJ
         if test "$ZELLIJ_AUTO_ATTACH" = true
             if test (pgrep -c footclient) -le 1
@@ -42,13 +41,3 @@ if status is-interactive
     bind -M insert tab fzf_complete
     bind -M default tab fzf_complete
 end
-
-set -gx EDITOR nv
-set -gx VISUAL nv
-set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
-set -gx PAGER bat
-set -gx BAT_PAGER 'ov -F -H3'
-set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
-set -gx SYSTEMD_PAGER "bat -l syslog -p --strip-ansi=auto"
-set -gx SYSTEMD_PAGERSECURE false
-set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/config

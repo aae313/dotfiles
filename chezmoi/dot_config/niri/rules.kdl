@@ -12,16 +12,16 @@ window-rule {
     }
 }
 window-rule {
-    exclude app-id="firefox-developer-edition"
+    exclude app-id="firefox-nightly"
     match is-active=false
     opacity 0.9
 }
 // window-rule {
-//     match app-id="firefox-developer-edition"
+//     match app-id="firefox-nightly"
 //     open-fullscreen true
 // }
 window-rule {
-    exclude app-id="firefox-developer-edition"
+    exclude app-id="firefox-nightly"
     background-effect {
         blur true
     }
@@ -49,7 +49,7 @@ window-rule {
     match app-id="neovide"
 }
 window-rule {
-    match app-id="(?i)^firefox-developer-edition$" title="^Picture-in-Picture$"
+    match app-id="(?i)^firefox-nightly$" title="^Picture-in-Picture$"
     match title=".*Extension.*Bitwarden.*"
     match app-id="xdg-desktop-portal-gtk"
     open-floating true

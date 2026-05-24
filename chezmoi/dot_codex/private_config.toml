@@ -16,6 +16,9 @@ trust_level = "trusted"
 [projects."/home/wasd/architect"]
 trust_level = "trusted"
 
+[projects."/home/wasd/linix"]
+trust_level = "trusted"
+
 [tui]
 theme = "monokai-extended-origin"
 

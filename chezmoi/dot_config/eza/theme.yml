@@ -1,5 +1,4 @@
 # Modus Themes for eza
-# Auto generated with https://github.com/miikanissi/modus-themes.nvim/blob/master/lua/modus-themes/extras/eza.lua
 colourful: true
 
 # base colors

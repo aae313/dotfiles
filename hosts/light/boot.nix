@@ -1,22 +1,11 @@
 {
   boot = {
-
-    swraid.enable = false;
-    kernelParams = [
-      "mitigations=off"
-      "nowatchdog"
-      "zswap.enabled=0"
+    initrd.supportedFilesystems = [
+      "btrfs"
+      "ext4"
+      "tmpfs"
+      "vfat"
     ];
-
-    initrd = {
-      systemd.enable = true;
-      supportedFilesystems = [
-        "btrfs"
-        "ext4"
-        "tmpfs"
-        "vfat"
-      ];
-    };
     loader = {
       timeout = 20;
       efi.canTouchEfiVariables = true;
@@ -26,7 +15,5 @@
         maxGenerations = 8;
       };
     };
-    # binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
-
 }

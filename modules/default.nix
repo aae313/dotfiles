@@ -1,14 +1,23 @@
 {
   imports = [
-    ./core/fonts.nix
-    ./core/locale.nix
-    ./core/nix.nix
-    ./core/user.nix
+    ./nix.nix
+    ./locale.nix
+    ./user.nix
+    ./impermanence.nix
     ./hardware
     ./network
-    ./services
-    ./programs
-    ./impermanence.nix
-    ./kernel.nix
+    ./kernel
+    ./wayland
+    ./theme
+    ./audio
+    ./logging.nix
+    ./ssh.nix
+    ./keyd.nix
+    ./btrfs.nix
+    ./firefox.nix
+    ./command-line.nix
+    ./chezmoi.nix
+    ./packages/gui.nix
+    ./terminals.nix
   ];
 }

@@ -55,6 +55,14 @@ overview {
 screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
 animations {
     slowdown 0.7
+
+    window-open {
+        duration-ms 300
+    }
+
+    window-close {
+        duration-ms 300
+    }
 }
 blur {
     passes 4

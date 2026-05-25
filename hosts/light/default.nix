@@ -2,6 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
-    ./amd.nix
+    ./cpu.nix
   ];
+
+  system.stateVersion = "26.05";
 }

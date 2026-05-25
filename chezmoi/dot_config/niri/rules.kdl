@@ -36,17 +36,10 @@ window-rule {
 }
 window-rule {
     match app-id="foot.yazi"
+    match app-id="footclient"
     open-floating true
-    default-column-width {
-        fixed 1600
-    }
-    default-window-height {
-        fixed 800
-    }
-    default-floating-position x=500 y=300
-}
-window-rule {
-    match app-id="neovide"
+    default-column-width { proportion 0.75; }
+    default-window-height { proportion 0.7; }
 }
 window-rule {
     match app-id="(?i)^firefox-nightly$" title="^Picture-in-Picture$"
@@ -92,4 +85,3 @@ layer-rule {
     match namespace="^dms:notification-popup$"
     block-out-from "screencast"
 }
-

@@ -1,6 +1,6 @@
 keybinds clear-defaults=true {
     normal {
-        bind "Alt Shift d" {
+        bind "Alt d" {
             Detach
         }
         bind "Alt /" {
@@ -36,12 +36,6 @@ keybinds clear-defaults=true {
         }
         bind "Alt Enter" {
             NewPane
-        }
-        bind "Ctrl p" {
-            Run "bash" "-lc" "$HOME/architect/scripts/prompt-selector-fzf" {
-                in_place true
-                close_on_exit true
-            }
         }
         bind "Alt 1" {
             GoToTab 1
@@ -340,12 +334,13 @@ keybinds clear-defaults=true {
         bind "n" {
             Search "down"
         }
+        bind "shift n" {
+            Search "up"
+        }
         bind "o" {
             SearchToggleOption "WholeWord"
         }
-        bind "p" {
-            Search "up"
-        }
+
         bind "w" {
             SearchToggleOption "Wrap"
         }
@@ -393,23 +388,18 @@ keybinds clear-defaults=true {
     shared_except "locked" {
         bind "Ctrl [" {
             MoveTab "left"
-            SwitchToMode "normal"
         }
         bind "Ctrl ]" {
             MoveTab "right"
-            SwitchToMode "normal"
         }
         bind "Alt Shift [" {
             BreakPaneLeft
-            SwitchToMode "normal"
         }
         bind "Alt Shift ]" {
             BreakPaneRight
-            SwitchToMode "normal"
         }
         bind "Ctrl Alt ]" {
             BreakPane
-            SwitchToMode "normal"
         }
         bind "Alt left" {
             MoveFocusOrTab "left"
@@ -433,10 +423,10 @@ keybinds clear-defaults=true {
             Resize "Increase"
         }
         bind "Alt [" {
-            FocusPreviousPane
+            MoveFocusOrTab "left"
         }
         bind "Alt ]" {
-            FocusNextPane
+            MoveFocusOrTab "right"
         }
         bind "Ctrl g" {
             SwitchToMode "locked"
@@ -712,7 +702,6 @@ copy_command "wl-copy"
 copy_on_select true
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
-// scrollback_editor "/usr/bin/nvim --nofork"
 // A fixed name to always give the Zellij session.
 // Consider also setting `attach_to_session true,`
 // otherwise this will error if such a session exists.
@@ -735,7 +724,7 @@ attach_to_session true
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization true
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true

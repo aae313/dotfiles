@@ -69,7 +69,16 @@
     memoryPercent = 25;
   };
 
-  boot.kernelModules = [ "i2c-dev" ];
+  boot = {
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "nvme"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+    ];
+    kernelModules = lib.lists.singleton "i2c-dev";
+  };
 
   environment.systemPackages = with pkgs; [
     ddcutil

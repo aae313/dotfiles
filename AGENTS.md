@@ -4,7 +4,7 @@ Do not revert unrelated local changes. Inspect `git status --short` before modif
 
 Never run real build or compile commands by default, including `nix build`, `just switch`, `just boot`, or similar activation/build tests. Searching packages, checking options, reading docs, and evaluating snippets is encouraged; the restriction is only on direct compiling, building, or activating.
 
-Only run tests when explicitly instructed to do so.
+Do not run any tests except when you are explicitly told to do it.
 
 # Nix Style Rules
 

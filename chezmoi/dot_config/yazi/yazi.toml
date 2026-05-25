@@ -17,4 +17,4 @@ ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
-edit = [{ run = 'nv "$@"', block = true, for = "unix" }]
+edit = [{ run = 'hx "$@"', block = true, for = "unix" }]

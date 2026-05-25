@@ -1,12 +1,13 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a foot xdg-terminal-exec"
-    }
+        spawn-sh "nirius focus-or-spawn -a foot  env START_ZELLIJ=1 foot"
+           }
+
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "xdg-terminal-exec"
     }
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a neovide nv"
+        spawn-sh "nirius focus-or-spawn -a helix foot --app-id helix hx"
     }
     Mod+Shift+B hotkey-overlay-title="OpenBook" {
         spawn "openbook"
@@ -44,7 +45,7 @@ binds {
     Mod+C repeat=false {
         spawn "vicinae" "vicinae://launch/clipboard/history"
     }
-    Mod+Shift+C {
+    Mod+z {
         center-column
     }
     Mod+Backslash {
@@ -367,4 +368,3 @@ binds {
  // Mod+Shift+P {
     //     power-off-monitors
     // }
-

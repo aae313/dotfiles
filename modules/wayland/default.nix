@@ -12,12 +12,10 @@
   ];
 
   environment.systemPackages = [
-    pkgs.brightnessctl
     pkgs.cliphist
     pkgs.libnotify
     pkgs.fuzzel
     pkgs.grim
-    pkgs.pyprland
     pkgs.python3
     pkgs.satty
     pkgs.slurp

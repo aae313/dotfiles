@@ -10,6 +10,11 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,17 +22,17 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    pyprland = {
+      url = "github:hyprland-community/pyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
-    claude-desktop = {
-      url = "github:patrickjaja/claude-desktop-bin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";

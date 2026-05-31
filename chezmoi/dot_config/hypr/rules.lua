@@ -38,14 +38,24 @@ hl.window_rule({
 hl.window_rule({ match = { title = "^(.*is sharing (your screen|a window).)$" }, workspace = "special silent" })
 
 hl.window_rule({ match = { title = "^(.*(Disc|WebC)ord.*)$" }, workspace = 6 })
-hl.window_rule({ match = { class = "foot" }, workspace = 1 })
-hl.window_rule({ match = { class = "neovide" }, workspace = 1 })
+hl.window_rule({
+    match = {
+        class = "foot",
+    },
+    workspace = 1,
+    border_size = 0,
+})hl.window_rule({ match = { class = "neovide" }, workspace = 1 })
 hl.window_rule({ match = { class = "^(obsidian)$" }, workspace = 2 })
 hl.window_rule({ match = { class = "^(firefox.*)$" }, opacity = "1.0 override" })
 
 hl.window_rule({ match = { class = "footclient" }, float = true, size = { 1000, 1000 }, center = true })
-hl.window_rule({ match = { class = "^(chrome-.*__-Default)$" }, float = true, center = true })
-hl.window_rule({ match = { class = "^(claude)$" }, float = true, center = true })
+
+hl.window_rule({
+	match = { class = "^(chrome-.*__-Default)$" },
+	float = true,
+	size = { "40%", "40%" },
+	center = true,
+})
 
 hl.window_rule({ match = { class = ".*(confirm|pavucontrol|cpupower|xdg-desktop-portal-gtk).*" }, tag = "+dialog" })
 hl.window_rule({ match = { title = ".*(Extension.*Bitwarden).*" }, tag = "+dialog" })

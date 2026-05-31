@@ -2,21 +2,9 @@
 let
   inherit (lib.attrsets) mapAttrs;
   inherit (lib.generators) toINI;
-  inherit (lib.meta) getExe;
   inherit (lib.strings) concatStringsSep;
 
   browser = [ "firefox-nightly.desktop" ];
-
-  helixDesktop = pkgs.makeDesktopItem {
-    name = "helix";
-    desktopName = "Helix";
-    exec = "${getExe pkgs.foot} --app-id helix ${getExe pkgs.helix} %F";
-    mimeTypes = [ "text/plain" ];
-    categories = [
-      "Utility"
-      "TextEditor"
-    ];
-  };
 
   associations = {
     "text/html" = browser;
@@ -35,14 +23,13 @@ let
     "video/*" = [ "mpv.desktop" ];
     "image/*" = [ "imv.desktop" ];
     "application/json" = browser;
-    "text/plain" = [ "helix.desktop" ];
+    "text/plain" = [ "nvim.desktop" ];
     "inode/directory" = [ "yazi" ];
   };
 in
 {
   environment.systemPackages = [
     pkgs.shared-mime-info
-    helixDesktop
     pkgs.xdg-desktop-portal
     pkgs.xdg-user-dirs
     pkgs.xdg-utils

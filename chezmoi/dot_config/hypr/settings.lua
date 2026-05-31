@@ -28,10 +28,10 @@ hl.config({
 		gaps_out = 5,
 		border_size = 2,
 		col = {
-			active_border = { colors = { "rgba(ca9ee6ff)", "rgba(f2d5cfff)" }, angle = 45 },
-			inactive_border = { colors = { "rgba(b4befecc)", "rgba(6c7086cc)" }, angle = 45 },
-			nogroup_border = "rgba(282a36dd)",
-			nogroup_border_active = { colors = { "rgb(bd93f9)", "rgb(44475a)" }, angle = 90 },
+			active_border = { colors = { "rgb(ff00ff)", "rgb(ff3333)" }, angle = 45 },
+			inactive_border = "rgb(4a2020)",
+			nogroup_border = "rgba(1d2235dd)",
+			nogroup_border_active = { colors = { "rgb(b6a0ff)", "rgb(484d67)" }, angle = 90 },
 		},
 		resize_on_border = true,
 		layout = "master",
@@ -44,14 +44,13 @@ hl.config({
 	},
 
 	master = {
-		orientation = "right",
 	},
 
 	group = {
 		groupbar = {
 			col = {
-				active = { colors = { "rgb(bd93f9)", "rgb(44475a)" }, angle = 90 },
-				inactive = "rgba(282a36dd)",
+				active = { colors = { "rgb(b6a0ff)", "rgb(484d67)" }, angle = 90 },
+				inactive = "rgba(1d2235dd)",
 			},
 		},
 	},

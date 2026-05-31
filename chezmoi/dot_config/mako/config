@@ -6,26 +6,23 @@ border-size=2
 border-radius=5
 anchor=top-right
 default-timeout=5000
-ignore-timeout=1
-
 # Modus colors
 
-background-color=#0d0e1c
-text-color=#ffffff
-border-color=#79a8ff
-progress-color=over #79a8ff
+text-color=#ff9999
+border-color=#ff00ff
+background-color=#0a0a0aee
+progress-color=#ff3333
 
 [urgency=low]
-background-color=#0d0e1c
-text-color=#ffffff
-border-color=#79a8ff
+border-color=#cc00ff
 
 [urgency=normal]
-background-color=#0d0e1c
-text-color=#ffffff
-border-color=#79a8ff
+border-color=#ff00ff
 
 [urgency=high]
-background-color=#0d0e1c
-text-color=#ff7f9f
-border-color=#ff7f9f
+border-color=#ff3333
+background-color=#1a0a0aee
+text-color=#ffcccc
+
+[mode=do-not-disturb]
+invisible=1

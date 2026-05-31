@@ -1,0 +1,30 @@
+[pyprland]
+plugins = [
+  "fetch_client_menu",
+  "lost_windows",
+  "magnify",
+  "scratchpads",
+  "toggle_special",
+]
+
+[fetch_client_menu]
+engine = "fuzzel"
+separator = ""
+center_on_fetch = false
+
+[scratchpads.chatgpt]
+command = "app2unit chatgpt-webapp"
+class = "chrome-chatgpt.com__-Default"
+match_by = "class"
+multi = false
+process_tracking = false
+size = "40% 40%"
+max_size = "2560px 100%"
+preserve_aspect = true
+animation = ""
+
+[scratchpads.chatgpt.monitor.eDP-1]
+max_size = "1920px 100%"
+
+[scratchpads.chatgpt.monitor.HDMI-A-1]
+max_size = "1920px 100%"

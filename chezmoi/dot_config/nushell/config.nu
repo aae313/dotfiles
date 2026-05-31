@@ -13,7 +13,7 @@ def start_zellij [] {
 
 start_zellij
 
-$env.config.buffer_editor = "hx"
+$env.config.buffer_editor = "nvim"
 $env.config.history.file_format = "sqlite"
 $env.config.history.isolation = false
 $env.config.history.max_size = 10_000_000
@@ -288,9 +288,9 @@ alias cp = cp -rv
 alias mv = mv -v
 alias rm = rm -rvft
 alias cat = bat
-alias n = hx
-alias e = hx
-alias x = hx .
+alias n = nv
+alias e = nv
+alias x = nv
 alias j = just
 alias calc = numbat --pretty-print=always -e
 alias xc = chezmoi edit --verbose --apply

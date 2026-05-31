@@ -37,6 +37,7 @@ in
       pkgs.just
       pkgs.just-lsp
       pkgs.jujutsu
+      pkgs.gh
       pkgs.jjui
       pkgs.mergiraf
       pkgs.kdlfmt
@@ -47,7 +48,6 @@ in
       pkgs.shellcheck
       pkgs.nil
       pkgs.nixd
-      pkgs.helix
       pkgs.nix-index
       pkgs.nirius
       pkgs.nix-direnv
@@ -86,11 +86,11 @@ in
     SHELL = getExe pkgs.nushell;
     XDG_STATE_HOME = "/home/wasd/.local/state";
     CARGO_HOME = "/home/wasd/.local/share/cargo";
-    RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
+    RUSTUP_HOME = "/home/wasd/.local/share/rustup";
     HISTFILE = "/home/wasd/.local/state/bash/history";
-    EDITOR = getExe pkgs.helix;
-    VISUAL = getExe pkgs.helix;
-    SUDO_EDITOR = getExe pkgs.helix;
+    EDITOR = "nv";
+    VISUAL = "nv";
+    SUDO_EDITOR = "env -u NVIM_LISTEN_ADDRESS nvim";
     PAGER = "bat";
     BAT_PAGER = "ov -F -H3";
     MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";

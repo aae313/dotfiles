@@ -18,13 +18,26 @@ keybinds clear-defaults=true {
         bind "Alt Shift d" {
             Detach
         }
+        bind "Alt Shift m" {
+            MovePane "Left"
+        }
+        bind "Alt Shift =" {
+            MoveFocus "left"
+            MoveFocus "up"
+            Resize "Increase"
+        }
+        bind "Alt Shift -" {
+            MoveFocus "left"
+            MoveFocus "up"
+            Resize "Decrease"
+        }
         bind "Alt f" {
             ToggleFocusFullscreen
         }
         bind "Alt v" {
             TogglePaneEmbedOrFloating
         }
-        bind "Alt e" {
+        bind "Alt o" {
             NextSwapLayout
         }
         bind "Alt w" {
@@ -111,15 +124,6 @@ keybinds clear-defaults=true {
         }
         bind "Alt right" {
             MoveFocusOrTab "right"
-        }
-        bind "Ctrl +" {
-            Resize "Increase"
-        }
-        bind "Ctrl -" {
-            Resize "Decrease"
-        }
-        bind "Alt =" {
-            Resize "Increase"
         }
         bind "Alt [" {
             MoveFocusOrTab "left"
@@ -619,7 +623,6 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
-
 }
 web_client {
     font "monospace"
@@ -646,7 +649,7 @@ theme "modus_vivendi_tinted"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "compact-tabs-top"
+default_layout "compact-tabs-bottom"
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 //
@@ -668,7 +671,7 @@ default_layout "compact-tabs-top"
 //   - true (default, enabled)
 //   - false
 //
-pane_frames false
+// pane_frames false
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
 // or should each user have their own cursor (false)
@@ -916,7 +919,7 @@ themes {
             emphasis_3 "#feacd0"
         }
         frame_unselected {
-            base "#2fafff"
+            base "#6a6a6a"
             background "#0d0e1c"
             emphasis_0 "#fec43f"
             emphasis_1 "#2fafff"
@@ -924,7 +927,7 @@ themes {
             emphasis_3 "#feacd0"
         }
         frame_selected {
-            base "#44bc44"
+            base "#5cb85c"
             background "#0d0e1c"
             emphasis_0 "#fec43f"
             emphasis_1 "#2fafff"

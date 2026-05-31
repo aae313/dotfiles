@@ -1,6 +1,7 @@
 {
   imports = [
     ./nix.nix
+    ./neovim.nix
     ./locale.nix
     ./user.nix
     ./impermanence.nix

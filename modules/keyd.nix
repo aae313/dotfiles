@@ -11,7 +11,15 @@ in
         settings = {
           main = {
             capslock = "esc";
-            rightalt = "toggle(symbols)";
+            rightalt = "layer(navigation)";
+            rightcontrol = "toggle(symbols)";
+          };
+
+          navigation = {
+            w = "up";
+            a = "left";
+            s = "down";
+            d = "right";
           };
 
           symbols = {

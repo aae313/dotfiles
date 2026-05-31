@@ -41,14 +41,35 @@ hl.bind(mod .. " + G", hl.dsp.group.toggle())
 hl.bind(mod .. " + N", hl.dsp.group.next())
 hl.bind(mod .. " + P", hl.dsp.group.prev())
 
+local function group_or_master_monocle_cycle(direction)
+	local group_direction = direction == "next" and "next" or "prev"
+	local cycle_direction = direction == "next" and "cyclenext" or "cycleprev"
+
+	hl.dispatch(hl.dsp.exec_cmd(
+		"if hyprctl activewindow -j | jq -e '(.grouped // []) | length > 0' >/dev/null; then "
+			.. "hyprctl dispatch 'hl.dsp.group."
+			.. group_direction
+			.. "()'; else "
+			.. "layout=$(hyprctl activeworkspace -j | jq -r '.tiledLayout // empty'); "
+			.. "if [ \"$layout\" = master ] || [ \"$layout\" = monocle ]; then "
+			.. "hyprctl dispatch 'hl.dsp.layout(\""
+			.. cycle_direction
+			.. "\")'; fi; fi"
+	))
+end
+
 hl.bind(mod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + SHIFT + P", hl.dsp.window.pin())
 
 hl.bind(mod .. " + O", hl.dsp.layout("orientationnext"))
 hl.bind(mod .. " + SHIFT + O", hl.dsp.layout("orientationprev"))
 
-hl.bind(mod .. " + bracketleft", hl.dsp.focus({ direction = "l" }))
-hl.bind(mod .. " + bracketright", hl.dsp.focus({ direction = "r" }))
+hl.bind(mod .. " + bracketleft", function()
+	group_or_master_monocle_cycle("prev")
+end)
+hl.bind(mod .. " + bracketright", function()
+	group_or_master_monocle_cycle("next")
+end)
 
 -- cycle workspaces
 hl.bind(mod .. " + SHIFT + bracketleft", hl.dsp.focus({ workspace = "m-1" }))
@@ -63,8 +84,7 @@ hl.bind(mod .. " + Z", hl.dsp.window.center())
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("pypr toggle_special special"))
 hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("special"))
 
-hl.bind(mod .. " + A", hl.dsp.exec_cmd("pypr toggle claude"))
-hl.bind(mod .. " + SHIFT + A", hl.dsp.exec_cmd("pypr toggle chatgpt"))
+hl.bind(mod .. " + A", hl.dsp.exec_cmd("pypr toggle chatgpt"))
 
 hl.bind(mod .. " + Return", function()
 	focus_or_exec("foot", "env START_ZELLIJ=1 app2unit-term")
@@ -73,7 +93,7 @@ end)
 hl.bind(mod .. " + SHIFT + Return", function()
 	focus_or_exec("neovide", "neovide")
 end)
-hl.bind(mod .. " + CTRL + Return", hl.dsp.exec_cmd("app2unit footclient"))
+hl.bind(mod .. " + CTRL + Return", hl.dsp.exec_cmd("footclient"))
 hl.bind(mod .. " + Y", hl.dsp.exec_cmd("footclient -a foot.yazi ynv"))
 hl.bind(mod .. " + Q", hl.dsp.window.close())
 hl.bind(mod .. " + C", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))

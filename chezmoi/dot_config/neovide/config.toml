@@ -1,0 +1,12 @@
+fork = true
+frame = "full"
+idle = true
+no-multigrid = false
+theme = "auto"
+title-hidden = true
+vsync = true
+wsl = false
+
+[font]
+normal = ["JetBrainsMono Nerd Font", "Noto Color Emoji"]
+size = 14

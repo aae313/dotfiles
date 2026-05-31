@@ -309,7 +309,7 @@ def --env mcg [path: path]: nothing -> nothing {
     jj git init
 }
 def jjc []: nothing -> nothing {
-    let timestamp = date now | format date "%Y-%m-%dT%H:%M:%S%.3f%:z"
+    let timestamp = date now | format date "%Y-%m-%d %H:%M"
     let extra = input "Details: " | str trim
     let message = if ($extra | is-empty) {
         $timestamp

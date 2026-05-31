@@ -44,7 +44,6 @@ in
       pkgs.libqalculate
       pkgs.lsof
       pkgs.shellcheck
-      pkgs.lua-language-server
       pkgs.nil
       pkgs.nixd
       pkgs.helix
@@ -60,7 +59,6 @@ in
       pkgs.rsync
       pkgs.shfmt
       pkgs.statix
-      pkgs.stylua
       pkgs.sysstat
       pkgs.app2unit
       pkgs.taplo

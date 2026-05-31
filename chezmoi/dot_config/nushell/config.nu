@@ -308,6 +308,20 @@ def --env mcg [path: path]: nothing -> nothing {
     cd $path
     jj git init
 }
+def jjc []: nothing -> nothing {
+    let timestamp = date now | format date "%Y-%m-%dT%H:%M:%S%.3f%:z"
+    let extra = input "Details: " | str trim
+    let message = if ($extra | is-empty) {
+        $timestamp
+    } else {
+        $"($timestamp): ($extra)"
+    }
+
+    jj --no-pager commit --message $message
+    if $env.LAST_EXIT_CODE == 0 {
+        jj --no-pager bookmark move main --to @-
+    }
+}
 def --env "nu-complete jc" [commandline: string] {
     let stor = stor open
     # FIXME

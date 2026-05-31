@@ -43,6 +43,7 @@ in
       pkgs.ov
       pkgs.libqalculate
       pkgs.lsof
+      pkgs.socat
       pkgs.shellcheck
       pkgs.nil
       pkgs.nixd
@@ -62,6 +63,7 @@ in
       pkgs.sysstat
       pkgs.app2unit
       pkgs.taplo
+      pkgs.tlrc
       pkgs.tombi
       pkgs.tree-sitter
       pkgs.usbutils
@@ -74,7 +76,8 @@ in
       pkgs.zellij
       pkgs.python3
       pkgs.carapace
-
+      pkgs.lua-language-server
+      pkgs.stylua
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };

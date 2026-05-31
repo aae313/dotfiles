@@ -24,6 +24,9 @@ keybinds clear-defaults=true {
         bind "Alt v" {
             TogglePaneEmbedOrFloating
         }
+        bind "Alt e" {
+            NextSwapLayout
+        }
         bind "Alt w" {
             FocusNextPane
         }
@@ -966,4 +969,3 @@ themes {
         }
     }
 }
-

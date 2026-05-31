@@ -10,7 +10,6 @@
     pkgs.pwvucontrol
     pkgs.ticktick
     pkgs.vesktop
-    pkgs.vicinae
     pkgs.zathura
   ];
 }

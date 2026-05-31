@@ -11,6 +11,7 @@
     ./theme
     ./audio
     ./logging.nix
+    ./systemd.nix
     ./ssh.nix
     ./keyd.nix
     ./btrfs.nix

@@ -3,9 +3,9 @@ let
   inherit (lib.strings) fileContents;
 in
 {
-  environment = {
-    variables.SDL_AUDIODRIVER = "pipewire";
-    variables.ALSOFT_DRIVERS = "pipewire";
+  environment.variables = {
+    SDL_AUDIODRIVER = "pipewire";
+    ALSOFT_DRIVERS = "pipewire";
   };
 
   services.pipewire = {

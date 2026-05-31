@@ -49,7 +49,7 @@ def main []: nothing -> nothing {
     $rows
     | each {|row| $"($row.title)\t($row.url)"}
     | str join "\n"
-    | ^vicinae dmenu --placeholder "Open Bookmark: "
+    | ^fuzzel --dmenu --prompt="Open Bookmark: " --width=80 --lines=24
     | str trim
   )
 

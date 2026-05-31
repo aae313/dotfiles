@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 let
+  inherit (lib.attrsets) mapAttrs;
+  inherit (lib.generators) toINI;
   inherit (lib.meta) getExe;
+  inherit (lib.strings) concatStringsSep;
 
   browser = [ "firefox-nightly.desktop" ];
 
@@ -48,14 +51,13 @@ in
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    config.common.default = [ "gnome" "gtk" ];
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
+    config.common.default = [
+      "hyprland"
+      "gtk"
     ];
   };
 
-  environment.etc."xdg/mimeapps.list".text = lib.generators.toINI { } {
-    "Default Applications" = lib.mapAttrs (_: v: lib.concatStringsSep ";" v + ";") associations;
+  environment.etc."xdg/mimeapps.list".text = toINI { } {
+    "Default Applications" = mapAttrs (_: v: concatStringsSep ";" v + ";") associations;
   };
 }

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   inherit (lib.lists) singleton;
   inherit (lib.meta) getExe;
@@ -7,17 +7,14 @@ let
     url = "https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png";
     hash = "sha256-4nFo0PPlESqoFWZhEtA9JvFnOChOIxxcZq/FqiYNfCw=";
   };
+
+  wallpaperCommand = pkgs.writeShellApplication {
+    name = "wallpaper";
+    text = /* bash */ ''
+      exec ${getExe pkgs.swaybg} -i ${wallpaper} -m fill
+    '';
+  };
 in
 {
-  systemd.user.services.swaybg = {
-    description = "Wallpaper";
-    after = singleton "graphical-session.target";
-    partOf = singleton "graphical-session.target";
-    wantedBy = singleton "graphical-session.target";
-
-    serviceConfig = {
-      ExecStart = "${getExe pkgs.swaybg} -i ${wallpaper} -m fill";
-      Restart = "on-failure";
-    };
-  };
+  environment.systemPackages = singleton wallpaperCommand;
 }

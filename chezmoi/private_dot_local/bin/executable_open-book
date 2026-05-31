@@ -4,7 +4,7 @@ set -euo pipefail
 BOOK_DIR="$HOME/misc/books"
 cd "$BOOK_DIR" || exit 1
 
-selection=$(fd -t f -e pdf -e epub | vicinae dmenu --placeholder 'Open Book: ')
+selection=$(fd -t f -e pdf -e epub | fuzzel --dmenu --prompt='Open Book: ' --width=80 --lines=24)
 
 if [ -n "$selection" ]; then
   zathura "$selection" &

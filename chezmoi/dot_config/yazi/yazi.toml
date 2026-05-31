@@ -1,7 +1,7 @@
 [mgr]
 ratio = [1, 2, 2]
 linemode = "none"
-show_hidden = false
+show_hidden = true
 show_symlink = true
 sort_by = "mtime"
 sort_dir_first = true
@@ -15,6 +15,3 @@ max_height = 4000
 cache_dir = ""
 ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
-
-[opener]
-edit = [{ run = 'hx "$@"', block = true, for = "unix" }]

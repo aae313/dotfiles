@@ -10,11 +10,12 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vicinae-extensions.url = "github:vicinaehq/extensions";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
@@ -25,11 +26,6 @@
 
     claude-desktop = {
       url = "github:patrickjaja/claude-desktop-bin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    codex-desktop = {
-      url = "github:ilysenko/codex-desktop-linux";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

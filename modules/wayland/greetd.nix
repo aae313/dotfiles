@@ -3,23 +3,22 @@
   lib,
   ...
 }:
-{
-  services.greetd =
-    let
-      inherit (lib.meta) getExe';
+let
+  inherit (lib.meta) getExe';
 
-      session = {
-        command = getExe' config.programs.niri.package "niri-session";
-        user = "wasd";
-      };
-    in
-    {
-      enable = true;
-      restart = false;
-      settings = {
-        terminal.vt = 1;
-        default_session = session;
-        initial_session = session;
-      };
+  session = {
+    command = getExe' config.programs.hyprland.package "start-hyprland";
+    user = "wasd";
+  };
+in
+{
+  services.greetd = {
+    enable = true;
+    restart = false;
+    settings = {
+      terminal.vt = 1;
+      default_session = session;
+      initial_session = session;
     };
+  };
 }

@@ -1,2 +1,0 @@
-spawn-sh-at-startup "app2unit -t service niriusd"
-spawn-at-startup "vicinae" "server"

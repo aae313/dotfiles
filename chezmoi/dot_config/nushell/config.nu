@@ -290,7 +290,7 @@ alias rm = rm -rvft
 alias cat = bat
 alias n = hx
 alias e = hx
-alias x = hx
+alias x = hx .
 alias j = just
 alias calc = numbat --pretty-print=always -e
 alias xc = chezmoi edit --verbose --apply

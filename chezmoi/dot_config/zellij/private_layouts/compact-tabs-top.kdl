@@ -1,35 +1,31 @@
 layout {
     pane size=1 borderless=true {
-        plugin location="file:~/.config/zellij/zjstatus.wasm" {
-            format_left "{mode}#[fg=#79a8ff,bg=#0d0e1c,bold] {session}#[bg=#0d0e1c] {tabs}"
+        plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+            format_left "{mode} #[fg=#2fafff,bg=#0d0e1c,bold]{session}#[bg=#0d0e1c] {tabs}"
             format_space "#[bg=#0d0e1c]"
-
-            mode_normal "#[bg=#79a8ff,fg=#0d0e1c,bold] NORMAL "
-            mode_locked "#[fg=#0d0e1c,bg=#ff5f59,bold] LOCK "
-            mode_resize "#[fg=#0d0e1c,bg=#d0bc00,bold] RESIZE "
-            mode_pane "#[fg=#0d0e1c,bg=#44bc44,bold] PANE "
-            mode_tab "#[fg=#0d0e1c,bg=#00d3d0,bold] TAB "
-            mode_scroll "#[fg=#0d0e1c,bg=#ef8b50,bold] SCROLL "
-            mode_enter_search "#[fg=#0d0e1c,bg=#b6a0ff,bold] SEARCH "
-            mode_search "#[fg=#0d0e1c,bg=#b6a0ff,bold] SEARCH "
-            mode_rename_tab "#[fg=#0d0e1c,bg=#f78fe7,bold] RENAME TAB "
-            mode_rename_pane "#[fg=#0d0e1c,bg=#f78fe7,bold] RENAME PANE "
-            mode_session "#[fg=#0d0e1c,bg=#79a8ff,bold] SESSION "
-            mode_move "#[fg=#0d0e1c,bg=#b6a0ff,bold] MOVE "
-
-            tab_normal "#[fg=#989898,bg=#0d0e1c] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-            tab_active "#[fg=#ffffff,bg=#0d0e1c,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-
-            tab_fullscreen_indicator "□ "
-            tab_sync_indicator " "
+            mode_normal "#[bg=#2fafff,fg=#0d0e1c,bold] NORMAL "
+            mode_locked "#[bg=#ff5f59,fg=#0d0e1c,bold] LOCKED "
+            mode_resize "#[bg=#d0bc00,fg=#0d0e1c,bold] RESIZE "
+            mode_pane "#[bg=#44bc44,fg=#0d0e1c,bold] PANE "
+            mode_tab "#[bg=#00d3d0,fg=#0d0e1c,bold] TAB "
+            mode_scroll "#[bg=#ef8b50,fg=#0d0e1c,bold] SCROLL "
+            mode_enter_search "#[bg=#b6a0ff,fg=#0d0e1c,bold] SEARCH "
+            mode_search "#[bg=#b6a0ff,fg=#0d0e1c,bold] SEARCH "
+            mode_rename_tab "#[bg=#f78fe7,fg=#0d0e1c,bold] RENAME TAB "
+            mode_rename_pane "#[bg=#f78fe7,fg=#0d0e1c,bold] RENAME PANE "
+            mode_session "#[bg=#79a8ff,fg=#0d0e1c,bold] SESSION "
+            mode_move "#[bg=#feacd0,fg=#0d0e1c,bold] MOVE "
+            tab_normal "#[fg=#989898,bg=#0d0e1c] {index}·{name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_active "#[fg=#ffffff,bg=#0d0e1c,bold] {index}·{name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_fullscreen_indicator "󰊓 "
+            tab_sync_indicator "󰓦 "
             tab_floating_indicator "󰉈 "
-
-            swap_layout_format "#[fg=#989898] {name} "
+            swap_layout_format "#[fg=#989898,bg=#0d0e1c] {name} "
             swap_layout_hide_if_empty "true"
         }
     }
-
     pane split_direction="vertical" {
         pane
     }
 }
+

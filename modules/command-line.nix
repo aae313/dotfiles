@@ -46,6 +46,7 @@ in
       pkgs.shellcheck
       pkgs.lua-language-server
       pkgs.nil
+      pkgs.nixd
       pkgs.helix
       pkgs.nix-index
       pkgs.nirius
@@ -62,6 +63,8 @@ in
       pkgs.stylua
       pkgs.sysstat
       pkgs.app2unit
+      pkgs.taplo
+      pkgs.tombi
       pkgs.tree-sitter
       pkgs.usbutils
       pkgs.util-linux
@@ -82,6 +85,7 @@ in
     SHELL = getExe pkgs.nushell;
     XDG_STATE_HOME = "/home/wasd/.local/state";
     CARGO_HOME = "/home/wasd/.local/share/cargo";
+    RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
     HISTFILE = "/home/wasd/.local/state/bash/history";
     EDITOR = getExe pkgs.helix;
     VISUAL = getExe pkgs.helix;

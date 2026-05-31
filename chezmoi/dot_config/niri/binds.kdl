@@ -1,8 +1,7 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a foot  env START_ZELLIJ=1 foot"
-           }
-
+    }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "xdg-terminal-exec"
     }
@@ -57,7 +56,7 @@ binds {
     Mod+O repeat=false {
         toggle-overview
     }
-    Mod+Q {
+    Mod+Shift+Q {
         close-window
     }
     Mod+Left {

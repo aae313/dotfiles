@@ -1,25 +1,34 @@
 keybinds clear-defaults=true {
     normal {
-        bind "Alt d" {
+        bind "Ctrl Alt [" {
+            MoveTab "left"
+        }
+        bind "Ctrl Alt ]" {
+            MoveTab "right"
+        }
+        bind "Ctrl Alt left" {
+            BreakPaneLeft
+        }
+        bind "Ctrl Alt right" {
+            BreakPaneRight
+        }
+        bind "Ctrl Alt b" {
+            BreakPane
+        }
+        bind "Alt Shift d" {
             Detach
         }
-        bind "Alt /" {
-            FocusNextPane
+        bind "Alt f" {
+            ToggleFocusFullscreen
         }
-        bind "Alt Tab" {
-            GoToNextTab
-        }
-        bind "Alt Shift Tab" {
-            GoToPreviousTab
+        bind "Alt v" {
+            TogglePaneEmbedOrFloating
         }
         bind "Alt w" {
             FocusNextPane
         }
-        bind "Alt q" {
-            CloseFocus
-        }
         bind "Alt Shift q" {
-            CloseTab
+            CloseFocus
         }
         bind "Ctrl /" {
             ToggleFloatingPanes
@@ -27,15 +36,36 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt /" {
             SwitchToMode "entersearch"
         }
-        bind "Ctrl Tab" {
-            GoToNextTab
-        }
         bind "Ctrl Enter" {
             NewTab
             SwitchToMode "normal"
         }
         bind "Alt Enter" {
             NewPane
+        }
+        bind "Alt H" {
+            Resize "Left"
+        }
+        bind "Alt J" {
+            Resize "Down"
+        }
+        bind "Alt K" {
+            Resize "Up"
+        }
+        bind "Alt L" {
+            Resize "Right"
+        }
+        bind "Ctrl Alt h" {
+            MovePane "Left"
+        }
+        bind "Ctrl Alt j" {
+            MovePane "Down"
+        }
+        bind "Ctrl Alt k" {
+            MovePane "Up"
+        }
+        bind "Ctrl Alt l" {
+            MovePane "Right"
         }
         bind "Alt 1" {
             GoToTab 1
@@ -66,8 +96,62 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
     }
+    shared_except "locked" {
+        bind "Alt left" {
+            MoveFocusOrTab "left"
+        }
+        bind "Alt down" {
+            MoveFocus "down"
+        }
+        bind "Alt up" {
+            MoveFocus "up"
+        }
+        bind "Alt right" {
+            MoveFocusOrTab "right"
+        }
+        bind "Ctrl +" {
+            Resize "Increase"
+        }
+        bind "Ctrl -" {
+            Resize "Decrease"
+        }
+        bind "Alt =" {
+            Resize "Increase"
+        }
+        bind "Alt [" {
+            MoveFocusOrTab "left"
+        }
+        bind "Alt ]" {
+            MoveFocusOrTab "right"
+        }
+        bind "Ctrl g" {
+            SwitchToMode "locked"
+        }
+        bind "Alt Esc" {
+            SwitchToMode "locked"
+        }
+        bind "Ctrl Alt left" {
+            MoveFocus "left"
+        }
+        bind "Ctrl Alt down" {
+            MoveFocus "down"
+        }
+        bind "Ctrl Alt up" {
+            MoveFocus "up"
+        }
+        bind "Ctrl Alt right" {
+            MoveFocus "right"
+        }
+        // bind "Alt p" { TogglePaneInGroup; }
+        bind "Alt Shift p" {
+            ToggleGroupMarking
+        }
+    }
     locked {
         bind "Ctrl g" {
+            SwitchToMode "normal"
+        }
+        bind "Alt Esc" {
             SwitchToMode "normal"
         }
     }
@@ -340,7 +424,6 @@ keybinds clear-defaults=true {
         bind "o" {
             SearchToggleOption "WholeWord"
         }
-
         bind "w" {
             SearchToggleOption "Wrap"
         }
@@ -385,74 +468,6 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
     }
-    shared_except "locked" {
-        bind "Ctrl [" {
-            MoveTab "left"
-        }
-        bind "Ctrl ]" {
-            MoveTab "right"
-        }
-        bind "Alt Shift [" {
-            BreakPaneLeft
-        }
-        bind "Alt Shift ]" {
-            BreakPaneRight
-        }
-        bind "Ctrl Alt ]" {
-            BreakPane
-        }
-        bind "Alt left" {
-            MoveFocusOrTab "left"
-        }
-        bind "Alt down" {
-            MoveFocus "down"
-        }
-        bind "Alt up" {
-            MoveFocus "up"
-        }
-        bind "Alt right" {
-            MoveFocusOrTab "right"
-        }
-        bind "Ctrl +" {
-            Resize "Increase"
-        }
-        bind "Ctrl -" {
-            Resize "Decrease"
-        }
-        bind "Alt =" {
-            Resize "Increase"
-        }
-        bind "Alt [" {
-            MoveFocusOrTab "left"
-        }
-        bind "Alt ]" {
-            MoveFocusOrTab "right"
-        }
-        bind "Ctrl g" {
-            SwitchToMode "locked"
-        }
-        bind "Ctrl Alt left" {
-            MoveFocus "left"
-        }
-        bind "Ctrl Alt down" {
-            MoveFocus "down"
-        }
-        bind "Ctrl Alt up" {
-            MoveFocus "up"
-        }
-        bind "Ctrl Alt right" {
-            MoveFocus "right"
-        }
-        // bind "Alt p" { TogglePaneInGroup; }
-        bind "Alt Shift p" {
-            ToggleGroupMarking
-        }
-    }
-    shared_except "locked" "move" {
-        bind "Ctrl Alt h" {
-            SwitchToMode "move"
-        }
-    }
     shared_except "locked" "session" {
         bind "Ctrl Alt o" {
             SwitchToMode "session"
@@ -467,7 +482,7 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" "tab" {
-        bind "Ctrl t" {
+        bind "Ctrl Shift t" {
             SwitchToMode "tab"
         }
     }
@@ -477,7 +492,7 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" "resize" {
-        bind "Ctrl n" {
+        bind "Ctrl Shift n" {
             SwitchToMode "resize"
         }
     }
@@ -615,10 +630,7 @@ web_client {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "ao"
-//
-// Choose the base input mode of zellij.
-// Default: normal
+theme "modus_vivendi_tinted"
 //
 // default_mode "locked"
 // Choose the path to the default shell that zellij will use for opening new panes
@@ -699,7 +711,7 @@ copy_command "wl-copy"
 // Enable automatic copying (and clearing) of selection when releasing mouse
 // Default: true
 //
-copy_on_select true
+// copy_on_select false
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 // A fixed name to always give the Zellij session.
@@ -826,3 +838,132 @@ show_release_notes false
 // (Requires restart)
 // web_server_port 8082
 focus_follows_mouse true
+themes {
+    modus_vivendi_tinted {
+        text_unselected {
+            base "#ffffff"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        text_selected {
+            base "#ffffff"
+            background "#303a6f"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        ribbon_unselected {
+            base "#0d0e1c"
+            background "#ffffff"
+            emphasis_0 "#ff5f59"
+            emphasis_1 "#fec43f"
+            emphasis_2 "#feacd0"
+            emphasis_3 "#2fafff"
+        }
+        ribbon_selected {
+            base "#0d0e1c"
+            background "#44bc44"
+            emphasis_0 "#ff5f59"
+            emphasis_1 "#fec43f"
+            emphasis_2 "#feacd0"
+            emphasis_3 "#2fafff"
+        }
+        table_title {
+            base "#2fafff"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        table_cell_unselected {
+            base "#ffffff"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        table_cell_selected {
+            base "#ffffff"
+            background "#303a6f"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        list_unselected {
+            base "#ffffff"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        list_selected {
+            base "#ffffff"
+            background "#303a6f"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        frame_unselected {
+            base "#2fafff"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#44bc44"
+            emphasis_3 "#feacd0"
+        }
+        frame_selected {
+            base "#44bc44"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#feacd0"
+            emphasis_3 "#ff5f59"
+        }
+        frame_highlight {
+            base "#fec43f"
+            background "#0d0e1c"
+            emphasis_0 "#feacd0"
+            emphasis_1 "#fec43f"
+            emphasis_2 "#2fafff"
+            emphasis_3 "#ff5f59"
+        }
+        exit_code_success {
+            base "#44bc44"
+            background "#0d0e1c"
+            emphasis_0 "#fec43f"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#feacd0"
+            emphasis_3 "#ff5f59"
+        }
+        exit_code_error {
+            base "#ff5f59"
+            background "#0d0e1c"
+            emphasis_0 "#d0bc00"
+            emphasis_1 "#2fafff"
+            emphasis_2 "#feacd0"
+            emphasis_3 "#44bc44"
+        }
+        multiplayer_user_colors {
+            player_1 "#feacd0"
+            player_2 "#00d3d0"
+            player_3 "#fec43f"
+            player_4 "#44bc44"
+            player_5 "#2fafff"
+            player_6 "#ff5f59"
+            player_7 "#d0bc00"
+            player_8 "#feacd0"
+            player_9 "#00d3d0"
+            player_10 "#fec43f"
+        }
+    }
+}
+

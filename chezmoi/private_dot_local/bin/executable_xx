@@ -20,21 +20,7 @@ def socket-path [arguments: list<string>]: nothing -> string {
 }
 
 def focus-neovide []: nothing -> nothing {
-  let window_id = try {
-    ^niri msg --json windows
-    | from json
-    | where app_id? == "neovide"
-    | get 0?.id?
-  } catch {
-    null
-  }
-
-  if $window_id == null {
-    print-error "Failed to focus neovide"
-    return
-  }
-
-  let focus = ^niri msg action focus-window --id $window_id | complete
+  let focus = ^hyprctl dispatch 'hl.dsp.focus({ window = hl.get_window("class:neovide") })' | complete
   if $focus.exit_code != 0 {
     print-error "Failed to focus neovide"
   }

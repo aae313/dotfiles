@@ -1,5 +1,5 @@
 hl.window_rule({ match = { float = true }, decorate = false })
-hl.window_rule({ match = { xwayland = true }, border_color = "rgb(ff5555)" })
+hl.window_rule({ match = { xwayland = true }, border_color = "rgb(f38ba8)" })
 
 local dialog_titles = {
 	"^(Open File)(.*)$",
@@ -39,12 +39,12 @@ hl.window_rule({ match = { title = "^(.*is sharing (your screen|a window).)$" },
 
 hl.window_rule({ match = { title = "^(.*(Disc|WebC)ord.*)$" }, workspace = 6 })
 hl.window_rule({
-    match = {
-        class = "foot",
-    },
-    workspace = 1,
-    border_size = 0,
-})hl.window_rule({ match = { class = "neovide" }, workspace = 1 })
+	match = {
+		class = "foot",
+	},
+	workspace = 1,
+})
+hl.window_rule({ match = { class = "neovide" }, workspace = 1 })
 hl.window_rule({ match = { class = "^(obsidian)$" }, workspace = 2 })
 hl.window_rule({ match = { class = "^(firefox.*)$" }, opacity = "1.0 override" })
 

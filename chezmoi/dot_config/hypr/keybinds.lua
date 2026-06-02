@@ -1,15 +1,14 @@
 local mod = "SUPER"
 
 local function focus_or_exec(class, cmd)
-	local w = hl.get_active_window()
-	if w and w.class == class then
+	local win = hl.get_window("class:" .. class)
+
+	if win then
+		hl.dispatch(hl.dsp.focus({ window = win }))
 		return
 	end
-	hl.dispatch(hl.dsp.focus({ window = "class:" .. class }))
-	local after = hl.get_active_window()
-	if not after or after.class ~= class then
-		hl.dispatch(hl.dsp.exec_cmd(cmd))
-	end
+
+	hl.exec_cmd(cmd)
 end
 
 hl.bind(mod .. " + h", hl.dsp.focus({ direction = "l" }))
@@ -41,21 +40,34 @@ hl.bind(mod .. " + G", hl.dsp.group.toggle())
 hl.bind(mod .. " + N", hl.dsp.group.next())
 hl.bind(mod .. " + P", hl.dsp.group.prev())
 
-local function group_or_master_monocle_cycle(direction)
-	local group_direction = direction == "next" and "next" or "prev"
-	local cycle_direction = direction == "next" and "cyclenext" or "cycleprev"
+local function move_into_any_group()
+	for _, dir in ipairs({ "l", "r", "u", "d" }) do
+		hl.dispatch(hl.dsp.window.move({ into_group = dir }))
+	end
+end
 
-	hl.dispatch(hl.dsp.exec_cmd(
-		"if hyprctl activewindow -j | jq -e '(.grouped // []) | length > 0' >/dev/null; then "
-			.. "hyprctl dispatch 'hl.dsp.group."
-			.. group_direction
-			.. "()'; else "
-			.. "layout=$(hyprctl activeworkspace -j | jq -r '.tiledLayout // empty'); "
-			.. "if [ \"$layout\" = master ] || [ \"$layout\" = monocle ]; then "
-			.. "hyprctl dispatch 'hl.dsp.layout(\""
-			.. cycle_direction
-			.. "\")'; fi; fi"
-	))
+hl.bind(mod .. " + SHIFT + g", move_into_any_group)
+
+local function group_or_master_monocle_cycle(direction)
+	local win = hl.get_active_window()
+
+	if win and win.group then
+		if direction == "next" then
+			hl.dispatch(hl.dsp.group.next())
+		else
+			hl.dispatch(hl.dsp.group.prev())
+		end
+		return
+	end
+
+	local ws = hl.get_active_workspace()
+	if not ws then
+		return
+	end
+
+	if ws.tiled_layout == "master" or ws.tiled_layout == "monocle" then
+		hl.dispatch(hl.dsp.layout(direction == "next" and "cyclenext" or "cycleprev"))
+	end
 end
 
 hl.bind(mod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
@@ -95,22 +107,21 @@ hl.bind(mod .. " + SHIFT + Return", function()
 end)
 hl.bind(mod .. " + CTRL + Return", hl.dsp.exec_cmd("footclient"))
 hl.bind(mod .. " + Y", hl.dsp.exec_cmd("footclient -a foot.yazi ynv"))
-hl.bind(mod .. " + Q", hl.dsp.window.close())
+hl.bind(mod .. "+ SHIFT + Q", hl.dsp.window.close())
 hl.bind(mod .. " + C", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
 hl.bind(
 	mod .. " + Print",
 	hl.dsp.exec_cmd(
-		"grim -g \"$(slurp -c '##2BD2FF')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/misc/screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"
+		"grim -g \"$(slurp -c '##89dceb')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/misc/screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"
 	)
 )
 hl.bind(
 	mod .. " + SHIFT + Print",
 	hl.dsp.exec_cmd(
-		"grim -g \"$(slurp -o -r -c '##2BD2FF')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"
+		"grim -g \"$(slurp -o -r -c '##89dceb')\" -t ppm - | satty --filename - --fullscreen --output-filename ~/Pictures/satty-$(date '+%Y%m%d-%H:%M:%S').png"
 	)
 )
 hl.bind(mod .. " + D", hl.dsp.exec_cmd("fuzzel"))
-hl.bind(mod .. " + SHIFT + D", hl.dsp.exec_cmd("~/architect/scripts/launch-webapp"))
 hl.bind(mod .. " + Backspace", function()
 	focus_or_exec("firefox-developer-edition", "firefox-developer-edition")
 end)
@@ -139,8 +150,6 @@ hl.bind(mod .. " + ALT + left", hl.dsp.window.move({ x = -20, y = 0, relative = 
 hl.bind(mod .. " + ALT + right", hl.dsp.window.move({ x = 20, y = 0, relative = true }), { repeating = true })
 hl.bind(mod .. " + ALT + up", hl.dsp.window.move({ x = 0, y = -20, relative = true }), { repeating = true })
 hl.bind(mod .. " + ALT + down", hl.dsp.window.move({ x = 0, y = 20, relative = true }), { repeating = true })
-
-hl.bind(mod .. " + slash", hl.dsp.exec_cmd("~/.config/hypr/scripts/select-window.py"))
 
 hl.bind(mod .. " + f", hl.dsp.exec_cmd("pypr fetch_client_menu"))
 hl.bind(mod .. " + SHIFT + f", hl.dsp.exec_cmd("pypr unfetch_client"))
@@ -179,27 +188,19 @@ hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-hl.bind("ALT + mouse:276", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind("ALT + mouse:275", hl.dsp.focus({ workspace = "e-1" }))
-
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("volume -n mute toggle"), { locked = true })
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("volume -n volume up"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("volume -n volume down"), { locked = true, repeating = true })
-
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
-
-hl.bind(mod .. " + CTRL + equal", hl.dsp.exec_cmd("~/.config/hypr/scripts/mfact.fish"))
-
 local function toggle_master_monocle()
 	local ws = hl.get_active_workspace()
-	if ws == nil then
+	if not ws then
+		return
+	end
+
+	if ws.tiled_layout ~= "master" and ws.tiled_layout ~= "monocle" then
 		return
 	end
 
 	hl.workspace_rule({
 		workspace = ws.id,
-		layout = (ws.tiled_layout == "master" and "monocle" or "master"),
+		layout = ws.tiled_layout == "master" and "monocle" or "master",
 	})
 end
 

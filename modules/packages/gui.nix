@@ -35,7 +35,6 @@ let
 in
 {
   environment.systemPackages = [
-    inputs.claude-desktop.packages.x86_64-linux.default
     pkgs.anki
     chatgptDesktop
     chatgptWebapp

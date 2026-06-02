@@ -28,10 +28,10 @@ hl.config({
 		gaps_out = 5,
 		border_size = 2,
 		col = {
-			active_border = { colors = { "rgb(ff00ff)", "rgb(ff3333)" }, angle = 45 },
-			inactive_border = "rgb(4a2020)",
-			nogroup_border = "rgba(1d2235dd)",
-			nogroup_border_active = { colors = { "rgb(b6a0ff)", "rgb(484d67)" }, angle = 90 },
+			active_border = { colors = { "rgb(89b4fa)", "rgb(cba6f7)" }, angle = 45 },
+			inactive_border = "rgb(313244)",
+			nogroup_border = "rgba(313244dd)",
+			nogroup_border_active = { colors = { "rgb(cba6f7)", "rgb(45475a)" }, angle = 90 },
 		},
 		resize_on_border = true,
 		layout = "master",
@@ -43,14 +43,21 @@ hl.config({
 		},
 	},
 
-	master = {
-	},
+	master = {},
 
 	group = {
 		groupbar = {
+			font_family = "Inter",
+			font_size = 13,
+			rounding = 3,
+			keep_upper_gap = false,
+			blur = true,
+			gradients = true,
+			text_color = "rgb(cdd6f4)",
+			text_color_inactive = "rgb(9399b2)",
 			col = {
-				active = { colors = { "rgb(b6a0ff)", "rgb(484d67)" }, angle = 90 },
-				inactive = "rgba(1d2235dd)",
+				active = "rgb(11111b)",
+				inactive = "rgb(181825)",
 			},
 		},
 	},
@@ -65,7 +72,7 @@ hl.config({
 
 		shadow = {
 			enabled = true,
-			color = "rgba(00000055)",
+			color = "rgba(11111b55)",
 			offset = { 0, 15 },
 			range = 100,
 			render_power = 2,
@@ -121,7 +128,7 @@ hl.config({
 	},
 
 	misc = {
-		background_color = "rgb(000000)",
+		background_color = "rgb(1e1e2e)",
 		focus_on_activate = true,
 		animate_manual_resizes = false,
 		enable_swallow = true,

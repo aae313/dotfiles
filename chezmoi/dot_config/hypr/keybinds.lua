@@ -1,4 +1,5 @@
 local mod = "SUPER"
+local layout_specific_cycle
 
 local function focus_or_exec(class, cmd)
 	local win = hl.get_window("class:" .. class)
@@ -36,7 +37,7 @@ hl.bind(mod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster master"))
 
 hl.bind(mod .. " + mouse:276", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
-hl.bind(mod .. " + G", hl.dsp.group.toggle())
+hl.bind(mod .. " + S", hl.dsp.group.toggle())
 hl.bind(mod .. " + N", hl.dsp.group.next())
 hl.bind(mod .. " + P", hl.dsp.group.prev())
 
@@ -77,10 +78,10 @@ hl.bind(mod .. " + O", hl.dsp.layout("orientationnext"))
 hl.bind(mod .. " + SHIFT + O", hl.dsp.layout("orientationprev"))
 
 hl.bind(mod .. " + bracketleft", function()
-	group_or_master_monocle_cycle("prev")
+	layout_specific_cycle("prev")
 end)
 hl.bind(mod .. " + bracketright", function()
-	group_or_master_monocle_cycle("next")
+	layout_specific_cycle("next")
 end)
 
 -- cycle workspaces
@@ -93,8 +94,8 @@ hl.bind(mod .. " + SHIFT + ALT + bracketright", hl.dsp.workspace.move({ monitor 
 
 hl.bind(mod .. " + Z", hl.dsp.window.center())
 
-hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("pypr toggle_special special"))
-hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("special"))
+-- hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("pypr toggle_special special"))
+-- hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("special"))
 
 hl.bind(mod .. " + A", hl.dsp.exec_cmd("pypr toggle chatgpt"))
 
@@ -155,7 +156,7 @@ hl.bind(mod .. " + f", hl.dsp.exec_cmd("pypr fetch_client_menu"))
 hl.bind(mod .. " + SHIFT + f", hl.dsp.exec_cmd("pypr unfetch_client"))
 hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 
-local function layout_specific_cycle(direction)
+function layout_specific_cycle(direction)
 	local ws = hl.get_active_workspace()
 	if ws == nil then
 		return
@@ -173,11 +174,11 @@ local function layout_specific_cycle(direction)
 end
 
 hl.bind(mod .. " + Tab", function()
-	layout_specific_cycle("next")
+	group_or_master_monocle_cycle("next")
 end)
 
 hl.bind(mod .. " + SHIFT + Tab", function()
-	layout_specific_cycle("prev")
+	group_or_master_monocle_cycle("prev")
 end)
 
 hl.bind(mod .. " + W", hl.dsp.window.cycle_next({ floating = true }))
@@ -199,7 +200,7 @@ local function toggle_master_monocle()
 	end
 
 	hl.workspace_rule({
-		workspace = ws.id,
+		workspace = tostring(ws.id),
 		layout = ws.tiled_layout == "master" and "monocle" or "master",
 	})
 end

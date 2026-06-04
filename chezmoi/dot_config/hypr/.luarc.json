@@ -1,15 +1,5 @@
 {
-  "workspace": {
-    "library": [
-      "/usr/share/hypr/stubs"
-    ]
-  },
-  "diagnostics": {
-    "globals": [
-      "hl"
-    ],
-    "disable": [
-      "assign-type-mismatch"
-    ]
-  }
+  "workspace.library": [
+    "/run/current-system/sw/share/hypr/stubs"
+  ]
 }

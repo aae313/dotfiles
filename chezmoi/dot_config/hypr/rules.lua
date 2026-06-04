@@ -75,8 +75,8 @@ end
 hl.workspace_rule({ workspace = "special:special", gaps_out = 20 })
 
 for i = 1, 5 do
-	hl.workspace_rule({ workspace = i, monitor = "DP-1", default = true })
+	hl.workspace_rule({ workspace = tostring(i), monitor = "DP-1", default = true })
 end
 for i = 6, 9 do
-	hl.workspace_rule({ workspace = i, monitor = "HDMI-A-1", default = true })
+	hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1", default = true })
 end

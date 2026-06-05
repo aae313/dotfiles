@@ -4,8 +4,8 @@ let
   inherit (lib.meta) getExe;
 
   wallpaper = pkgs.fetchurl {
-    url = "https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png";
-    hash = "sha256-4nFo0PPlESqoFWZhEtA9JvFnOChOIxxcZq/FqiYNfCw=";
+    url = "https://w.wallhaven.cc/full/2y/wallhaven-2y2wg6.png";
+    hash = "sha256-nFoNfk7Y/CGKWtscOE5GOxshI5eFmppWvhxHzOJ6mCA=";
   };
 
   wallpaperCommand = pkgs.writeShellApplication {

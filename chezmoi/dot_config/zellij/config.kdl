@@ -650,7 +650,7 @@ web_client {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "catppuccin"
+theme "tokyo-night-dark"
 //
 // default_mode "locked"
 // Choose the path to the default shell that zellij will use for opening new panes

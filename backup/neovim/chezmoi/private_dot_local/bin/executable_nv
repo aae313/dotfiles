@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+socket_path() {
+  if [[ -n "${NVIM_LISTEN_ADDRESS:-}" ]]; then
+    printf '%s\n' "$NVIM_LISTEN_ADDRESS"
+    return
+  fi
+
+  if [[ -z "${XDG_RUNTIME_DIR:-}" ]]; then
+    return 1
+  fi
+
+  printf '%s\n' "$XDG_RUNTIME_DIR/nvim.sock"
+}
+
+expand_path() {
+  local path="$1"
+  local home_prefix="~"
+
+  if [[ "$path" == "$home_prefix" ]]; then
+    printf '%s\n' "$HOME"
+  elif [[ "${path:0:2}" == "$home_prefix/" ]]; then
+    printf '%s\n' "$HOME/${path#~/}"
+  elif [[ "$path" = /* ]]; then
+    printf '%s\n' "$path"
+  else
+    printf '%s\n' "$PWD/$path"
+  fi
+}
+
+focus_neovide() {
+  nirius focus --app-id neovide >/dev/null 2>&1 || true
+}
+
+open_with_new_server() {
+  local socket="$1"
+  shift
+
+  app2unit -- neovide "$@" -- --listen "$socket"
+}
+
+open_remote() {
+  local socket="$1"
+  local path="$2"
+
+  nvim --server "$socket" --remote "$path"
+  focus_neovide
+}
+
+pick_file() {
+  local directory="$1"
+  local extension="${2:-}"
+
+  if [[ -n "$extension" ]]; then
+    fd . "$directory" --type f --extension "$extension" | fzf
+  else
+    fd . "$directory" --type f | fzf
+  fi
+}
+
+select_file() {
+  local target="$1"
+  local extension="${2:-}"
+  local selection
+
+  if [[ -f "$target" ]]; then
+    printf '%s\n' "$target"
+    return
+  fi
+
+  [[ -d "$target" ]] || die "nv: not a directory: $target"
+
+  selection="$(pick_file "$target" "$extension")" || die "nv: no file selected/found"
+  [[ -n "$selection" ]] || die "nv: no file selected/found"
+  printf '%s\n' "$selection"
+}
+
+open_path() {
+  local socket="$1"
+  local target="$2"
+  local path
+
+  path="$(expand_path "$target")"
+
+  if [[ -d "$path" ]]; then
+    path="$(select_file "$path")"
+    path="$(expand_path "$path")"
+  fi
+
+  open_remote "$socket" "$path"
+}
+
+main() {
+  local socket
+
+  if ! socket="$(socket_path)"; then
+    printf '%s\n' "XDG_RUNTIME_DIR not set" >&2
+    exec nvim "$@"
+  fi
+
+  if [[ ! -S "$socket" ]]; then
+    if [[ $# -eq 1 && -d "$1" ]]; then
+      local selection
+      selection="$(select_file "$(expand_path "$1")")"
+      open_with_new_server "$socket" "$(expand_path "$selection")"
+    else
+      open_with_new_server "$socket" "$@"
+    fi
+    return
+  fi
+
+  if [[ $# -eq 0 ]]; then
+    local selection
+    selection="$(select_file ".")"
+    open_path "$socket" "$selection"
+    return
+  fi
+
+  local argument
+  for argument in "$@"; do
+    open_path "$socket" "$argument"
+  done
+}
+
+main "$@"

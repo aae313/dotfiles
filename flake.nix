@@ -10,22 +10,17 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    pyprland = {
-      url = "github:hyprland-community/pyprland";
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri-scratchpad.url = "github:argosnothing/niri-scratchpad";
 
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
@@ -36,6 +31,11 @@
 
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    jj-starship = {
+      url = "github:dmmulroy/jj-starship";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

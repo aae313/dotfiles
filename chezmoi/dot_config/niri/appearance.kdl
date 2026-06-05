@@ -1,0 +1,159 @@
+prefer-no-csd
+
+layout {
+    background-color "#1e1e2e"
+    gaps 10
+    default-column-display "tabbed"
+    always-center-single-column
+    center-focused-column "on-overflow"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width {
+        proportion 0.5
+    }
+    focus-ring {
+        // off
+        width 1
+        // width 8
+        active-color "#f9e2af"
+        // catppuccin-mocha Surface2
+        // inactive-color "#585b70"
+        // inactive-color "green"
+        inactive-color "transparent"
+
+        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // active-gradient from="#f38ba8" to="#f9e2af" angle=45 relative-to="workspace-view"
+        // active-gradient from="#f00" to="#fc0" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        active-gradient from="red" to="orange" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        // active-gradient from="red" to="orange" angle=45 in="oklch longer hue"
+        // active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+    }
+
+    border {
+        on
+        width 1
+        active-color "#6c7086aa"
+        inactive-color "#6c7086aa"
+    }
+
+    tab-indicator {
+        width 2
+        // width 4
+        // width 8
+        // width 64
+        // width 128
+
+        // gap -8
+        // gap -2
+        // gap -0.1
+        // gap 0
+        // gap 0.1
+        // gap 2
+        // gap 3
+        gap 4
+
+        // gaps-between-tabs 0.1
+        gaps-between-tabs 2
+        // gaps-between-tabs 64
+
+        // corner-radius 8
+        // corner-radius 64
+
+        hide-when-single-tab
+
+        // place-within-column
+
+        // position "right"
+        position "top"
+        // position "bottom"
+
+        // length total-proportion=0.0
+        // length total-proportion=1.0
+        // length total-proportion=1.3
+
+        // active-color "#f9e2af"
+        active-gradient from="red" to="orange" angle=45 relative-to="workspace-view" in="oklch longer hue"
+
+        // inactive-color "red"
+        // inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
+        // inactive-gradient from="#f007" to="#fc07" angle=45 relative-to="workspace-view" in="oklch longer hue"
+
+        // inactive-color "#f9e2af90"
+        inactive-color "#585b70"
+    }
+    insert-hint {
+        gradient from="#89dceb70" to="#cba6f770" angle=45
+    }
+    shadow {
+        on
+        draw-behind-window false
+        softness 40
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+}
+overview {
+    backdrop-color "#1a1b26"
+    workspace-shadow {
+        softness 50
+        spread 20
+        offset x=0 y=10
+        color "#0007"
+    }
+  }
+screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
+animations {
+    slowdown 0.7
+
+    window-open {
+        duration-ms 300
+    }
+
+    window-close {
+        duration-ms 300
+    }
+}
+blur {
+    passes 4
+    offset 2
+    noise 0.02
+    saturation 1.5
+}
+recent-windows {
+    open-delay-ms 250
+    binds {
+        Mod+Tab {
+            next-window scope="workspace"
+        }
+        Mod+Shift+Tab {
+            previous-window scope="workspace"
+        }
+        Mod+grave {
+            next-window scope="output" filter="app-id"
+        }
+        Mod+Shift+grave {
+            previous-window scope="output" filter="app-id"
+        }
+    }
+    highlight {
+        padding 32
+        corner-radius 8
+        active-color "#89b4fa"
+        urgent-color "#f38ba8"
+    }
+}
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+}
+hotkey-overlay {
+    skip-at-startup
+}
+xwayland-satellite {
+ // off
+
+}

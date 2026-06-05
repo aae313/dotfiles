@@ -13,6 +13,7 @@ in
         "ssh"
         # "NetworkManager/system-connections"
       ] (x: "/etc/${x}")
+      ++ singleton "/var/cache/ccache"
       ++ forEach [
         "nixos"
         "systemd/coredump"

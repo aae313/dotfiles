@@ -1,124 +1,72 @@
-#!/usr/bin/env nu
+#!/usr/bin/env bash
+set -euo pipefail
 
-def print-error [message: string]: nothing -> nothing {
-  print --stderr $message
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
 }
 
-def socket-path [arguments: list<string>]: nothing -> string {
-  let existing_socket = $env.NVIM_LISTEN_ADDRESS? | default ""
-  if ($existing_socket | is-not-empty) {
-    return $existing_socket
-  }
+pick_file() {
+  local directory="$1"
+  local extension="${2:-}"
 
-  let runtime_dir = $env.XDG_RUNTIME_DIR? | default ""
-  if ($runtime_dir | is-empty) {
-    print-error "XDG_RUNTIME_DIR not set"
-    exec nvim ...$arguments
-  }
-
-  $runtime_dir | path join "nvim.sock"
+  if [[ -n "$extension" ]]; then
+    fd . "$directory" --type f --extension "$extension" | fzf
+  else
+    fd . "$directory" --type f | fzf
+  fi
 }
 
-def focus-neovide []: nothing -> nothing {
-  let focus = ^hyprctl dispatch 'hl.dsp.focus({ window = hl.get_window("class:neovide") })' | complete
-  if $focus.exit_code != 0 {
-    print-error "Failed to focus neovide"
-  }
-}
+select_file() {
+  local target="$1"
+  local extension="$2"
+  local selection
 
-def expand-path [path: string]: nothing -> string {
-  $path | path expand
-}
-
-def path-kind [path: string]: nothing -> any {
-  $path | path type
-}
-
-def open-with-new-server [arguments: list<string> socket: string]: nothing -> nothing {
-  ^app2unit -- neovide ...$arguments -- --listen $socket
-}
-
-def open-file [path: string socket: string]: nothing -> nothing {
-  let absolute_path = expand-path $path
-
-  let socket_exists = (path-kind $socket) == "socket"
-  if not $socket_exists {
-    open-with-new-server [$absolute_path] $socket
+  if [[ -f "$target" ]]; then
+    printf '%s\n' "$target"
     return
-  }
+  fi
 
-  ^nvim --server $socket --remote $absolute_path
-  focus-neovide
+  [[ -d "$target" ]] || die "xx: not a directory: $target"
+
+  selection="$(pick_file "$target" "$extension")" || die "xx: no file selected/found"
+  [[ -n "$selection" ]] || die "xx: no file selected/found"
+  printf '%s\n' "$selection"
 }
 
-def pick-file [directory: string extension: string]: nothing -> string {
-  let fd_output = if ($extension | is-empty) {
-    ^fd . $directory --type f
-  } else {
-    ^fd . $directory --type f --extension $extension
-  }
+main() {
+  local extension=""
+  local target="."
 
-  try {
-    $fd_output | ^fzf | str trim
-  } catch {
-    ""
-  }
+  while (($# > 0)); do
+    case "$1" in
+      -e)
+        shift
+        (($# > 0)) || die "xx: -e requires argument"
+        extension="$1"
+        ;;
+      --)
+        shift
+        if (($# > 0)); then
+          target="$1"
+        fi
+        break
+        ;;
+      -*)
+        die "xx: unknown option $1"
+        ;;
+      *)
+        target="$1"
+        break
+        ;;
+    esac
+
+    shift
+  done
+
+  local selection
+  selection="$(select_file "$target" "$extension")"
+  nv "$selection"
 }
 
-def select-file [directory: string extension: string]: nothing -> string {
-  let kind = path-kind $directory
-  if $kind == "file" {
-    return $directory
-  }
-
-  if $kind != "dir" {
-    print-error $"xx: not a directory: ($directory)"
-    exit 1
-  }
-
-  let selection = pick-file $directory $extension
-  if ($selection | is-empty) {
-    print-error "xx: no file selected/found"
-    exit 1
-  }
-
-  $selection
-}
-
-def main [...arguments: string]: nothing -> nothing {
-  mut extension = ""
-  mut target = "."
-  mut index = 0
-
-  while $index < ($arguments | length) {
-    let argument = $arguments | get $index
-
-    if $argument == "-e" {
-      $index = $index + 1
-      if $index >= ($arguments | length) {
-        print-error "xx: -e requires argument"
-        exit 1
-      }
-
-      $extension = $arguments | get $index
-    } else if $argument == "--" {
-      $index = $index + 1
-      if $index < ($arguments | length) {
-        $target = $arguments | get $index
-      }
-      break
-    } else if ($argument | str starts-with "-") {
-      print-error $"xx: unknown option ($argument)"
-      exit 1
-    } else {
-      $target = $argument
-      break
-    }
-
-    $index = $index + 1
-  }
-
-  let selection = select-file $target $extension
-  let socket = socket-path [$selection]
-  open-file $selection $socket
-}
+main "$@"

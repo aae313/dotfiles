@@ -1,26 +1,35 @@
 {
+  inputs,
   pkgs,
+  lib,
   ...
 }:
+let
+  inherit (lib.lists) singleton;
+in
 {
   imports = [
+    inputs.niri.nixosModules.niri
     ./greetd.nix
-    ./hyprland.nix
-    ./wallpaper.nix
     ./notifications.nix
+    ./wallpaper.nix
     ./xdg.nix
   ];
+
+  nixpkgs.overlays = singleton inputs.niri.overlays.niri;
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   environment.systemPackages = [
     pkgs.cliphist
     pkgs.libnotify
     pkgs.fuzzel
-    pkgs.grim
-    pkgs.python3
-    pkgs.satty
-    pkgs.slurp
     pkgs.wl-clipboard
-    pkgs.eww
+    pkgs.xwayland-satellite-unstable
+    inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   environment.sessionVariables = {

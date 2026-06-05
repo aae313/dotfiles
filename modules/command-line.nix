@@ -18,7 +18,6 @@ in
       pkgs.bash-language-server
       pkgs.bat
       pkgs.btop
-      pkgs.claude-code
       pkgs.scooter
       pkgs.direnv
       pkgs.difftastic
@@ -27,10 +26,12 @@ in
       pkgs.ffmpeg
       pkgs.file
       pkgs.fish
+      pkgs.fish-lsp
       pkgs.fzf
       pkgs.gcc
       pkgs.gitMinimal
       pkgs.glow
+      pkgs.helix
       pkgs.hexyl
       pkgs.hyperfine
       pkgs.jq
@@ -60,6 +61,7 @@ in
       pkgs.rsync
       pkgs.shfmt
       pkgs.statix
+      pkgs.starship
       pkgs.sysstat
       pkgs.app2unit
       pkgs.taplo
@@ -78,19 +80,21 @@ in
       pkgs.carapace
       pkgs.lua-language-server
       pkgs.stylua
+      pkgs.antigravity
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 
   environment.sessionVariables = {
-    SHELL = getExe pkgs.nushell;
+    SHELL = getExe pkgs.fish;
     XDG_STATE_HOME = "/home/wasd/.local/state";
     CARGO_HOME = "/home/wasd/.local/share/cargo";
     RUSTUP_HOME = "/home/wasd/.local/share/rustup";
     HISTFILE = "/home/wasd/.local/state/bash/history";
-    EDITOR = "nv";
-    VISUAL = "nv";
-    SUDO_EDITOR = "env -u NVIM_LISTEN_ADDRESS nvim";
+    EDITOR = "hx";
+    VISUAL = "hx";
+    SUDO_EDITOR = "hx";
     PAGER = "bat";
     BAT_PAGER = "ov -F -H3";
     MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";

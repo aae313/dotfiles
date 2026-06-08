@@ -1,6 +1,9 @@
-# Author: Matous Dzivjak <matousdzivjak@gmail.com>
+# Author: Matous Dzivjak [matousdzivjak@gmail.com](mailto:matousdzivjak@gmail.com)
+
 # Adapted from: https://protesilaos.com/emacs/modus-themes, by Protesilaos Stavrou
+
 # Source: https://github.com/protesilaos/modus-themes/blob/main/modus-vivendi-tinted-theme.el
+
 # Version 4.6.0
 
 inherits = "modus_vivendi"
@@ -8,12 +11,27 @@ inherits = "modus_vivendi"
 "comment" = { fg = "fg-dim", modifiers = ["italic"] }
 "ui.virtual.jump-label" = { fg = "yellow-warmer", modifiers = ["bold"] }
 
-"ui.cursor.primary" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor.normal" = { fg = "bg-main", bg = "green-intense" }
 "ui.cursor.insert" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor.select" = { fg = "bg-main", bg = "green-intense" }
 
-"ui.cursor.match" = { fg = "green-intense", modifiers = ["bold"], underline = { style = "dashed" } }
+"ui.cursor.primary" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor.primary.normal" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor.primary.insert" = { fg = "bg-main", bg = "green-intense" }
+"ui.cursor.primary.select" = { fg = "bg-main", bg = "green-intense" }
+
+"ui.cursor.match" = { fg = "green-intense", modifiers = [
+  "bold",
+], underline = { style = "dashed" } }
+
+"ui.selection" = { bg = "bg-magenta-subtle" }
+"ui.selection.primary" = { bg = "bg-magenta-intense" }
+
 [palette]
+
 # Basic values
+
 bg-main = "#0d0e1c"
 bg-dim = "#1d2235"
 fg-main = "#ffffff"
@@ -24,6 +42,7 @@ bg-inactive = "#2b3045"
 border = "#61647a"
 
 # Common accent foregrounds
+
 red = "#ff5f59"
 red-warmer = "#ff6b55"
 red-cooler = "#ff7f86"
@@ -56,6 +75,7 @@ cyan-faint = "#9ac8e0"
 cyan-intense = "#00eff0"
 
 # Uncommon accent foregrounds
+
 rust = "#db8b3f"
 gold = "#c0965b"
 olive = "#9cbd6f"
@@ -65,6 +85,7 @@ maroon = "#cf7fa7"
 pink = "#d09dc0"
 
 # Common accent backgrounds
+
 bg-red-intense = "#9d1f1f"
 bg-green-intense = "#2f822f"
 bg-yellow-intense = "#7a6100"
@@ -87,6 +108,7 @@ bg-magenta-nuanced = "#2f0c3f"
 bg-cyan-nuanced = "#042837"
 
 # Special purpose
+
 bg-completion = "#483d8a"
 bg-hover = "#45605e"
 bg-hover-secondary = "#64404f"
@@ -114,6 +136,7 @@ bg-tab-current = "#0d0e1c"
 bg-tab-other = "#4a4f6a"
 
 # Diffs
+
 bg-added = "#003a2f"
 bg-added-faint = "#002922"
 bg-added-refine = "#035542"
@@ -138,10 +161,12 @@ fg-removed-intense = "#ff9095"
 bg-diff-context = "#1a1f30"
 
 # Uncommon accent backgrounds
+
 bg-ochre = "#462f20"
 bg-lavender = "#38325c"
 bg-sage = "#143e32"
 
 # Paren match
+
 bg-paren-match = "#4f7f9f"
 bg-paren-expression = "#453040"

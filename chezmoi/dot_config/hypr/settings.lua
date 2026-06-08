@@ -13,7 +13,7 @@ hl.monitor({
 	reserved_area = {
 		top = 0,
 		bottom = 0,
-		left = 500,
+		left = 550,
 		right = 0,
 	},
 })

@@ -31,7 +31,7 @@ keybinds clear-defaults=true {
             MoveFocus "up"
             Resize "Decrease"
         }
-        bind "Alt f" {
+        bind "Alt Space" {
             ToggleFocusFullscreen
         }
         bind "Alt v" {
@@ -118,12 +118,6 @@ keybinds clear-defaults=true {
         bind "Alt 9" {
             GoToTab 9
             SwitchToMode "normal"
-        }
-        bind "Alt tab" {
-            GoToNextTab
-        }
-        bind "Alt Shift tab" {
-            GoToPreviousTab
         }
     }
     shared_except "locked" {
@@ -494,9 +488,6 @@ keybinds clear-defaults=true {
             SwitchToMode "session"
         }
     }
-    // shared_except "locked" "scroll" "search" "tmux" {
-    //     bind "Ctrl b" { SwitchToMode "tmux"; }
-    // }
     shared_except "locked" "scroll" "search" {
         bind "Ctrl Alt s" {
             SwitchToMode "scroll"
@@ -637,6 +628,7 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+
 }
 web_client {
     font "monospace"
@@ -646,11 +638,10 @@ web_client {
 //   - true
 //   - false (Default)
 //
-// simplified_ui     nvim-nav location="file:/home/youruser/some_dir/zellij-nvim-nav-plugin.wasm"true
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "tokyo-night-dark"
+theme "catppuccin"
 //
 // default_mode "locked"
 // Choose the path to the default shell that zellij will use for opening new panes
@@ -756,7 +747,7 @@ attach_to_session true
 //   - true (default)
 //   - false
 //
-session_serialization true
+session_serialization false
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true
@@ -933,7 +924,7 @@ themes {
             emphasis_3 245 194 231
         }
         frame_selected {
-            base 166 227 161
+            base 137 180 250
             background 0
             emphasis_0 250 179 135
             emphasis_1 137 220 235

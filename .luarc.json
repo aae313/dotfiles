@@ -1,4 +1,7 @@
 {
+  "diagnostics.disable": [
+    "param-type-mismatch"
+  ],
   "workspace.library": [
     "/run/current-system/sw/share/hypr/stubs"
   ]

@@ -7,7 +7,6 @@ use-grammars = { only = [
   "c",
   "cpp",
   "bash",
-  "nu",
   "python",
   "json",
   "jsonc",

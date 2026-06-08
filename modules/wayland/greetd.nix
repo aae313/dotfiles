@@ -1,9 +1,13 @@
 {
+  config,
+  lib,
   ...
 }:
 let
+  inherit (lib.meta) getExe';
+
   session = {
-    command = "start-hyprland";
+    command = getExe' config.programs.hyprland.package "start-hyprland";
     user = "wasd";
   };
 in

@@ -7,20 +7,22 @@
 let
   inherit (lib.attrsets) filterAttrs mapAttrs;
   inherit (lib.lists) singleton;
-  inherit (lib.modules) mkDefault mkForce;
+  inherit (lib.modules) mkForce;
   inherit (lib.types) isType;
 in
 {
   documentation = {
-    enable = false;
+    enable = true;
     dev.enable = true;
     doc.enable = false;
     nixos.enable = false;
     info.enable = false;
     man = {
-      enable = mkDefault false;
+      enable = true;
     };
   };
+
+  environment.systemPackages = singleton pkgs.man-pages;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -85,6 +87,7 @@ in
         "https://attic.xuyh0120.win/lantian"
         "https://nixpkgs-wayland.cachix.org"
         "https://hyprland.cachix.org"
+        "https://claude-code.cachix.org"
       ];
 
       trusted-substituters = [
@@ -98,6 +101,7 @@ in
         "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
       ];
     };
   };
@@ -105,5 +109,10 @@ in
   programs.nix-ld = {
     enable = true;
     libraries = [ ];
+  };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/wasd/.local/share/nixos";
   };
 }

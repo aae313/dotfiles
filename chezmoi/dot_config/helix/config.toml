@@ -1,13 +1,17 @@
-theme = "modus"
+theme = "cat"
 
 [editor]
+insecure = true
+# shell = ["nu", "--commands"]
 color-modes = true
 completion-replace = true
+completion-trigger-len = 1
 cursorline = true
 file-picker.hidden = false
 indent-guides.render = true
 line-number = "relative"
 lsp.display-inlay-hints = true
+lsp.inlay-hints-length-limit = 20
 soft-wrap.enable = true
 trim-final-newlines = true
 trim-trailing-whitespace = true
@@ -30,17 +34,17 @@ tab = "⇥"
 
 
 [keys.normal]
+backspace = "rotate_view"
+S-backspace = "rotate_view_reverse"
 D = "kill_to_line_end"
 X = "select_line_above"
 ret = "goto_word"
-tab = "rotate_view"
 S-tab = "rotate_view_reverse"
 "A-tab" = "goto_next_buffer"
 "A-S-tab" = "goto_previous_buffer"
 esc = ["collapse_selection", "keep_primary_selection"]
-
 [keys.normal.space]
-X = "extend_to_line_bounds"
+x = "extend_to_line_bounds"
 q = ":bc"
 
 [keys.normal.space.t]
@@ -49,14 +53,19 @@ W = ":set whitespace.render none"
 
 [keys.normal.space.c]
 f = ":format"
+y = ":yank-diagnostic"
 
 [keys.normal.space.space]
-f = """:sh zellij run -c -f -x 10%% -y 10%% --width 80%% --height 80%% --name yazi -- \
-      nu ~/.config/helix/scripts/yazi.nu hi %{buffer_name} >/dev/null"""
-
+f = """:sh nu ~/.config/helix/scripts/yazi.nu "%{file_path_absolute}" "%{workspace_directory}" "%{current_working_directory}" > /dev/null"""
 r = ":sh bash ~/.config/helix/scripts/scooter.sh"
 j = ":sh bash ~/.config/helix/scripts/jjui.sh"
 a = ":reload-all"
+
+[keys.select]
+ret = "goto_word"
+
+[keys.select.space.space]
+u = ":pipe-to nu ~/.config/helix/scripts/function-usages.nu --selection --lang %{language}"
 
 [keys.select.space.space.r]
 r = ":pipe-to bash ~/.config/helix/scripts/scooter.sh --selection"

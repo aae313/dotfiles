@@ -15,6 +15,10 @@ for _, title in ipairs(dialog_titles) do
 	hl.window_rule({ match = { title = title }, center = true, float = true })
 end
 
+
+hl.window_rule({ match = { title = "^(Media viewer)$" }, float = true })
+hl.window_rule({ match = { class = "chrome-nngceckbapebfimnlniiiahkandclblb-Profile_1" }, float = true })
+
 hl.window_rule({
 	match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol)$" },
 	float = true,
@@ -32,7 +36,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { title = "^(firefox-nightly — Sharing Indicator)$" },
+	match = { title = "^(firefox — Sharing Indicator)$" },
 	workspace = "special silent",
 })
 hl.window_rule({ match = { title = "^(.*is sharing (your screen|a window).)$" }, workspace = "special silent" })
@@ -44,7 +48,6 @@ hl.window_rule({
 	},
 	workspace = 1,
 })
-hl.window_rule({ match = { class = "neovide" }, workspace = 1 })
 hl.window_rule({ match = { class = "^(obsidian)$" }, workspace = 2 })
 hl.window_rule({ match = { class = "^(firefox.*)$" }, opacity = "1.0 override" })
 
@@ -57,8 +60,7 @@ hl.window_rule({
 	center = true,
 })
 
-hl.window_rule({ match = { class = ".*(confirm|pavucontrol|cpupower|xdg-desktop-portal-gtk).*" }, tag = "+dialog" })
-hl.window_rule({ match = { title = ".*(Extension.*Bitwarden).*" }, tag = "+dialog" })
+hl.window_rule({ match = { class = ".*(confirm|pwvucontrol|xdg-desktop-portal-gtk).*" }, tag = "+dialog" })
 hl.window_rule({ match = { tag = "dialog" }, float = true, size = { "45%", "45%" }, center = true })
 
 hl.window_rule({ match = { class = "^(xdg-desktop-portal-gtk)$" }, dim_around = true })
@@ -71,8 +73,6 @@ hl.layer_rule({ match = { namespace = "notifications" }, blur = true, ignore_alp
 for _, ns in ipairs({ "launcher", "selection", "overview", "noanim" }) do
 	hl.layer_rule({ match = { namespace = ns }, no_anim = true })
 end
-
-hl.workspace_rule({ workspace = "special:special", gaps_out = 20 })
 
 for i = 1, 5 do
 	hl.workspace_rule({ workspace = tostring(i), monitor = "DP-1", default = true })

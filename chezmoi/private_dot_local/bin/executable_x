@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+if [[ -z ${ZELLIJ_PANE_ID:-} ]]
+then
+    echo "x: not running inside Zellij" >&2
+    exit 1
+fi
+
+pane_id=${ZELLIJ_PANE_ID#terminal_}
+session=${ZELLIJ_SESSION_NAME:-default}
+lock="${XDG_RUNTIME_DIR:-/tmp}/x-helix-${session//\//_}.lock"
+
+exec 9>>"$lock"
+
+if ! flock -n 9
+then
+    holder=$(<"$lock")
+    printf 'x: Helix already running in this Zellij session (%s)\n' "${holder:-unknown pane}" > /dev/tty
+    printf 'x: press Enter to open regular hx...' > /dev/tty
+    read -r _ < /dev/tty
+    exec hx "$@" 9>&-
+fi
+
+printf 'terminal_%s\n' "$pane_id" >"$lock"
+
+zellij action rename-pane --pane-id "$pane_id" x || exit 1
+
+trap 'zellij action undo-rename-pane --pane-id "$pane_id" 2>/dev/null' EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+hx "$@" 9>&-
+exit $?

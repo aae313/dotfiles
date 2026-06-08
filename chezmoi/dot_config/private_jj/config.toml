@@ -47,6 +47,7 @@ allowed-signers = "/home/wasd/.config/git/allowed_signers"
 conflict-marker-style = "snapshot"
 default-command = "log"
 diff-editor = ":builtin"
+diff-formatter = ["difft", "--color", "always", "$left", "$right"]
 merge-editor = "mergiraf"
 
 

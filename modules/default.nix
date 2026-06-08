@@ -1,24 +1,32 @@
+{ inputs, ... }:
 {
   imports = [
-    ./nix.nix
-    ./locale.nix
-    ./user.nix
-    ./impermanence.nix
-    ./hardware
-    ./network
-    ./kernel
-    ./wayland
-    ./theme
+    inputs.chaotic.nixosModules.default
+    ./ai-tools.nix
     ./audio
-    ./logging.nix
-    ./systemd.nix
-    ./ssh.nix
-    ./keyd.nix
     ./btrfs.nix
-    ./firefox.nix
-    ./command-line.nix
     ./chezmoi.nix
+    ./cli-tools.nix
+    ./dev-tools.nix
+    ./hardware
+    ./impermanence.nix
+    ./kernel
+    ./keyd.nix
+    ./locale.nix
+    ./logging.nix
+    ./network
+    ./nix.nix
     ./packages/gui.nix
+    ./security.nix
+    ./shell.nix
+    ./ssh.nix
+    ./system-services.nix
+    ./system-tools.nix
+    ./systemd.nix
     ./terminals.nix
+    ./theme
+    ./user.nix
+    ./version-control.nix
+    ./wayland
   ];
 }

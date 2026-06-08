@@ -1,62 +1,105 @@
-#!/usr/bin/env nu
+#!/usr/bin/env python3
 
-def firefox-places []: nothing -> string {
-  $env.HOME | path join ".config/mozilla/firefox/hey/places.sqlite"
-}
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
 
-def copy-places [source: string destination: string]: nothing -> nothing {
-  cp $source $destination
 
-  for extension in ["-wal" "-shm"] {
-    let sidecar = $"($source)($extension)"
-    if ($sidecar | path exists) {
-      cp $sidecar $"($destination)($extension)"
-    }
-  }
-}
+BOOKMARKS_PATH = Path.home() / ".config/net.imput.helium/Profile 1/Bookmarks"
 
-def bookmark-rows [database: string]: nothing -> table<title: string, url: string> {
-  open $database | query db "
-    SELECT COALESCE(MAX(b.title), p.title, p.url) AS title, p.url AS url
-    FROM moz_bookmarks b JOIN moz_places p ON b.fk = p.id
-    WHERE b.type = 1 AND p.url NOT LIKE 'place:%'
-    GROUP BY p.url
-    ORDER BY MAX(b.dateAdded) DESC
-  "
-}
 
-def main []: nothing -> nothing {
-  let source = firefox-places
-  if not ($source | path exists) {
-    print --stderr $"open-bookmark: missing Firefox places database: ($source)"
-    exit 1
-  }
+def iter_bookmarks(node):
+    if node.get("type") == "url":
+        title = node.get("name") or node.get("url")
+        url = node.get("url")
 
-  let temporary = ^mktemp -d | str trim
-  let database = $temporary | path join "places.sqlite"
+        if url:
+            yield title, url
 
-  let rows = try {
-    copy-places $source $database
-    bookmark-rows $database
-  } catch {|error|
-    rm --recursive --force $temporary
-    error make { msg: $error.msg }
-  }
+        return
 
-  rm --recursive --force $temporary
+    for child in node.get("children", []):
+        yield from iter_bookmarks(child)
 
-  let selection = (
-    $rows
-    | each {|row| $"($row.title)\t($row.url)"}
-    | str join "\n"
-    | ^fuzzel --dmenu --prompt="Open Bookmark: " --width=80 --lines=24
-    | str trim
-  )
 
-  if ($selection | is-empty) {
-    return
-  }
+def load_bookmarks(path):
+    with path.open("r", encoding="utf-8") as file:
+        data = json.load(file)
 
-  let url = $selection | split row "\t" | last
-  ^firefox-nightly --new-window $url
-}
+    seen = set()
+    rows = []
+
+    for root in data.get("roots", {}).values():
+        for title, url in iter_bookmarks(root):
+            if url in seen:
+                continue
+
+            seen.add(url)
+            rows.append((title, url))
+
+    return rows
+
+
+def choose_bookmark(rows):
+    menu_input = "\n".join(f"{title}\t{url}" for title, url in rows)
+
+    result = subprocess.run(
+        [
+            "fuzzel",
+            "--dmenu",
+            "--prompt=Open Bookmark: ",
+            "--width=80",
+            "--lines=24",
+        ],
+        input=menu_input,
+        text=True,
+        stdout=subprocess.PIPE,
+    )
+
+    if result.returncode != 0:
+        return None
+
+    selection = result.stdout.strip()
+
+    if not selection:
+        return None
+
+    return selection.rsplit("\t", 1)[-1]
+
+
+def main():
+    if not BOOKMARKS_PATH.exists():
+        print(
+            f"open-bookmark: missing Helium bookmarks file: {BOOKMARKS_PATH}",
+            file=sys.stderr,
+        )
+        return 1
+
+    try:
+        rows = load_bookmarks(BOOKMARKS_PATH)
+    except Exception as error:
+        print(f"open-bookmark: failed to read bookmarks: {error}", file=sys.stderr)
+        return 1
+
+    if not rows:
+        print("open-bookmark: no bookmarks found", file=sys.stderr)
+        return 1
+
+    url = choose_bookmark(rows)
+
+    if not url:
+        return 0
+
+    try:
+        subprocess.Popen(["helium", url])
+    except FileNotFoundError:
+        print("open-bookmark: helium executable not found", file=sys.stderr)
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

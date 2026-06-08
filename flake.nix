@@ -2,6 +2,7 @@
   description = "nix config";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -15,25 +16,35 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # pyprland = {
-    #   url = "github:hyprland-community/pyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    firefox = {
-      url = "github:nix-community/flake-firefox-nightly";
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    pyprland = {
+      url = "github:hyprland-community/pyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    jj-starship = {
-      url = "github:dmmulroy/jj-starship";
+    claude-code-nix = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hunk = {
+      url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

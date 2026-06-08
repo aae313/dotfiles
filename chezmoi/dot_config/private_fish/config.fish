@@ -22,8 +22,8 @@ if status is-interactive
     abbr -a rm 'rm -rvf'
     abbr -a mkdir 'mkdir -p'
     abbr -a cat bat
-    abbr -a n nv
-    abbr -a x nv
+    abbr -a n hx
+    abbr -a x hx
     abbr -a j just
     abbr -a calc numbat --pretty-print=always -e
     abbr -a xc chezmoi edit --verbose

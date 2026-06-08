@@ -124,7 +124,7 @@ hl.bind(
 )
 hl.bind(mod .. " + D", hl.dsp.exec_cmd("fuzzel"))
 hl.bind(mod .. " + Backspace", function()
-	focus_or_exec("firefox-developer-edition", "firefox-developer-edition")
+	focus_or_exec("firefox-nightly", "firefox-nightly")
 end)
 
 hl.bind(mod .. " + B", hl.dsp.exec_cmd("open-bookmark"))

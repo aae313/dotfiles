@@ -15,12 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    niri-scratchpad.url = "github:argosnothing/niri-scratchpad";
+    # pyprland = {
+    #   url = "github:hyprland-community/pyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";

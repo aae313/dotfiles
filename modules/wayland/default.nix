@@ -1,35 +1,17 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
 }:
 let
-  inherit (lib.lists) singleton;
+  inherit (pkgs.stdenv.hostPlatform) system;
 in
 {
   imports = [
-    inputs.niri.nixosModules.niri
     ./greetd.nix
     ./notifications.nix
     ./wallpaper.nix
     ./xdg.nix
-  ];
-
-  nixpkgs.overlays = singleton inputs.niri.overlays.niri;
-
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
-
-  environment.systemPackages = [
-    pkgs.cliphist
-    pkgs.libnotify
-    pkgs.fuzzel
-    pkgs.wl-clipboard
-    pkgs.xwayland-satellite-unstable
-    inputs.niri-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   environment.sessionVariables = {
@@ -45,5 +27,23 @@ in
     _JAVA_AWT_WM_NONEREPARENTING = "1";
     GTK2_RC_FILES = "/home/wasd/.config/gtk-2.0/gtkrc";
     NIXOS_XDG_OPEN_USE_PORTAL = "1";
+  };
+
+  environment.systemPackages = [
+    pkgs.cliphist
+    pkgs.eww
+    pkgs.fuzzel
+    pkgs.grim
+    pkgs.libnotify
+    pkgs.satty
+    pkgs.slurp
+    pkgs.wl-clipboard
+    # inputs.pyprland.packages.${system}.pyprland
+  ];
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = false;
+    xwayland.enable = false;
   };
 }

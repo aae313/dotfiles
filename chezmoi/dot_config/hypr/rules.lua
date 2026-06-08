@@ -32,7 +32,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { title = "^(firefox-developer-edition — Sharing Indicator)$" },
+	match = { title = "^(firefox-nightly — Sharing Indicator)$" },
 	workspace = "special silent",
 })
 hl.window_rule({ match = { title = "^(.*is sharing (your screen|a window).)$" }, workspace = "special silent" })

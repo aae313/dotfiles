@@ -50,9 +50,9 @@ in
       pkgs.nil
       pkgs.nixd
       pkgs.nix-index
-      pkgs.nirius
       pkgs.nix-direnv
       pkgs.nixfmt
+      pkgs.nushell
       pkgs.pciutils
       pkgs.prettier
       pkgs.procs

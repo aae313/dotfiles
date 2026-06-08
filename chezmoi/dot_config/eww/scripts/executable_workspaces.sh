@@ -1,20 +1,21 @@
 #!/bin/sh
 
 render() {
-  focused_output="$(niri msg --json focused-output | jq -r '.name // empty')"
+  active="$(hyprctl -j activeworkspace | jq -r '.id // 0')"
 
-  niri msg --json workspaces | jq -r --arg output "$focused_output" '
-    map(select(.output == $output and .idx > 0 and .idx <= 5))
-    | sort_by(.idx)
-    | map(if .is_focused then "[\(.idx)]" else " \(.idx) " end)
+  hyprctl -j workspaces | jq -r --argjson active "$active" '
+    map(select(.id > 0 and .id <= 5))
+    | sort_by(.id)
+    | map(if .id == $active then "[\(.id)]" else " \(.id) " end)
     | join(" ")
   '
 }
 
 render
-niri msg --json event-stream | while IFS= read -r line; do
+hyprctl -j activeworkspace >/dev/null 2>&1 || exit 0
+socat -U - "UNIX-CONNECT:${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock" | while IFS= read -r line; do
   case "$line" in
-  *'"WorkspacesChanged"'*)
+  workspace* | focusedmon*)
     render
     ;;
   esac

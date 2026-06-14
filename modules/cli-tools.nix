@@ -1,7 +1,10 @@
 { pkgs, inputs, ... }:
+let
+  inherit (pkgs.stdenv.hostPlatform) system;
+in
 {
   environment.systemPackages = [
-    inputs.hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
+    inputs.hunk.packages.${system}.hunk
     pkgs.bat
     pkgs.btop
     pkgs.eza
@@ -24,5 +27,7 @@
     pkgs.zellij
     pkgs.zoxide
     pkgs.difftastic
+    pkgs.starship
+    inputs.jj-starship.packages.${system}.default
   ];
 }

@@ -4,7 +4,7 @@ let
   inherit (lib.generators) toINI;
   inherit (lib.strings) concatStringsSep;
 
-  browser = [ "helium.desktop" ];
+  browser = [ "firefox-nightly.desktop" ];
 
   associations = {
     "text/html" = browser;

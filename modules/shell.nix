@@ -17,14 +17,13 @@ in
     shellAliases = genAttrs [ "ls" "ll" "l" ] (_: null);
 
     sessionVariables = {
-      SHELL = getExe pkgs.nushell;
+      SHELL = getExe pkgs.fish;
       XDG_CONFIG_HOME = "/home/wasd/.config";
       XDG_CACHE_HOME = "/home/wasd/.cache";
       XDG_STATE_HOME = "/home/wasd/.local/state";
 
-      EDITOR = "x";
-      VISUAL = "x";
-      SUDO_EDITOR = "hx";
+      EDITOR = "nv";
+      VISUAL = "nv";
       PAGER = "bat";
       BAT_PAGER = "ov -F -H3";
       MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";

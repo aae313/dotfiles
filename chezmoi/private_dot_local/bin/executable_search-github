@@ -21,5 +21,4 @@ while [ $# -gt 0 ]; do
 done
 
 url="https://github.com/search?q=$(printf '%s' "$query" | sed 's/ /+/g')$lang&type=$mode"
-helium "$url"
-nirius focus -a helium >/dev/null 2>&1 || true
+firefox-nightly "$url"

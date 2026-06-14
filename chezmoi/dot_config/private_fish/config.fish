@@ -14,6 +14,7 @@ if status is-interactive
     set -g fish_greeting
     set fish_key_bindings fish_vi_key_bindings
     fzf --fish | source
+    starship init fish | source
     zoxide init fish --cmd cd | source
 
     abbr -a cp 'cp -rv'

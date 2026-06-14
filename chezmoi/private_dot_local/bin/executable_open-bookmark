@@ -1,45 +1,42 @@
 #!/usr/bin/env python3
 
-import json
-import os
 import subprocess
 import sys
+import sqlite3
 from pathlib import Path
 
 
-BOOKMARKS_PATH = Path.home() / ".config/net.imput.helium/Profile 1/Bookmarks"
-
-
-def iter_bookmarks(node):
-    if node.get("type") == "url":
-        title = node.get("name") or node.get("url")
-        url = node.get("url")
-
-        if url:
-            yield title, url
-
-        return
-
-    for child in node.get("children", []):
-        yield from iter_bookmarks(child)
+PROFILE_PATH = Path.home() / ".config/mozilla/firefox/hey"
+BOOKMARKS_PATH = PROFILE_PATH / "places.sqlite"
 
 
 def load_bookmarks(path):
-    with path.open("r", encoding="utf-8") as file:
-        data = json.load(file)
+    connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
 
-    seen = set()
-    rows = []
-
-    for root in data.get("roots", {}).values():
-        for title, url in iter_bookmarks(root):
-            if url in seen:
-                continue
-
-            seen.add(url)
-            rows.append((title, url))
-
-    return rows
+    try:
+        return connection.execute(
+            """
+            select title, url
+            from (
+              select
+                coalesce(nullif(b.title, ''), p.title, p.url) as title,
+                p.url as url,
+                b.dateAdded as date_added,
+                row_number() over (
+                  partition by p.url
+                  order by b.dateAdded desc
+                ) as url_rank
+              from moz_bookmarks b
+              join moz_places p on p.id = b.fk
+              where b.type = 1
+                and p.url like 'http%'
+            )
+            where url_rank = 1
+            order by date_added desc
+            """
+        ).fetchall()
+    finally:
+        connection.close()
 
 
 def choose_bookmark(rows):
@@ -72,7 +69,7 @@ def choose_bookmark(rows):
 def main():
     if not BOOKMARKS_PATH.exists():
         print(
-            f"open-bookmark: missing Helium bookmarks file: {BOOKMARKS_PATH}",
+            f"open-bookmark: missing Firefox bookmarks database: {BOOKMARKS_PATH}",
             file=sys.stderr,
         )
         return 1
@@ -93,9 +90,9 @@ def main():
         return 0
 
     try:
-        subprocess.Popen(["helium", url])
+        subprocess.Popen(["firefox-nightly", "-profile", str(PROFILE_PATH), url])
     except FileNotFoundError:
-        print("open-bookmark: helium executable not found", file=sys.stderr)
+        print("open-bookmark: firefox-nightly executable not found", file=sys.stderr)
         return 1
 
     return 0

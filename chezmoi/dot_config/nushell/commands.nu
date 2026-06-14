@@ -12,12 +12,9 @@ export alias xc = chezmoi edit --apply
 export alias py = python
 export alias wl = wl-copy
 export alias che = chezmoi
+export alias apply = chezmoi apply
 
 export def _ []: nothing -> any { $env.last? }
-
-export def --wrapped apply [...args]: nothing -> any {
-    chezmoi apply --verbose ...$args
-}
 
 export def --env mc [path: path]: nothing -> nothing {
     mkdir $path

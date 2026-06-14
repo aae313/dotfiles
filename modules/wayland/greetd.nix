@@ -7,7 +7,7 @@ let
   inherit (lib.meta) getExe';
 
   session = {
-    command = getExe' config.programs.hyprland.package "start-hyprland";
+    command = getExe' config.programs.mango.package "mango";
     user = "wasd";
   };
 in

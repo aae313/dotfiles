@@ -1,8 +1,8 @@
-{ inputs, ... }:
+{ ... }:
 {
   imports = [
-    inputs.chaotic.nixosModules.default
     ./ai-tools.nix
+    ./firefox.nix
     ./audio
     ./btrfs.nix
     ./chezmoi.nix
@@ -15,6 +15,7 @@
     ./locale.nix
     ./logging.nix
     ./network
+    ./neovim.nix
     ./nix.nix
     ./packages/gui.nix
     ./security.nix

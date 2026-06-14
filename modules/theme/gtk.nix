@@ -16,6 +16,11 @@ in
     pkgs.tela-icon-theme
   ];
 
+  environment.variables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
+
   programs.dconf = {
     enable = true;
     profiles.user.databases = [

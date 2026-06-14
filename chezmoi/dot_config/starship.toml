@@ -1,0 +1,129 @@
+add_newline = false
+command_timeout = 100
+format = "$status$hostname$directory${custom.jj}$nix_shell$package$c$python$lua$rust$cmd_duration$jobs$container\n$character"
+palette = "catppuccin_mocha"
+scan_timeout = 2
+
+[c]
+detect_files = ["Makefile"]
+format = "[$symbol$version]($style) "
+style = "bold context"
+
+[character]
+error_symbol = "[󰴔](red) [❯](red)"
+success_symbol = "[](green) [❯](mauve)"
+vimcmd_replace_one_symbol = "[](subtext1) [❮](pink)"
+vimcmd_replace_symbol = "[](subtext1) [❮](pink)"
+vimcmd_symbol = "[](subtext1) [❮](mauve)"
+vimcmd_visual_symbol = "[](subtext1) [❮](peach)"
+
+[cmd_duration]
+format = "[$duration](duration) "
+min_time = 2000
+show_milliseconds = false
+
+[container]
+format = "[$symbol$name]($style) "
+style = "bold context"
+
+[custom.jj]
+format = "$output "
+shell = ["jj-starship"]
+when = "jj-starship detect"
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+home_symbol = "~"
+read_only = " "
+read_only_style = "warning"
+style = "bold path"
+truncate_to_repo = false
+truncation_length = 100
+
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_status]
+disabled = true
+
+[hostname]
+disabled = false
+format = "[@$hostname](bold remote) "
+ssh_only = true
+
+[jobs]
+format = "[$symbol$number]($style) "
+style = "bold context"
+
+[lua]
+format = "[$symbol$version]($style) "
+style = "bold context"
+
+[nix_shell]
+format = "[via](muted) [$symbol$name]($style) "
+heuristic = true
+style = "bold context"
+symbol = " "
+
+[package]
+format = "[$symbol$version]($style) "
+style = "bold context"
+symbol = " "
+
+[python]
+format = "[$symbol$pyenv_prefix($version )(($virtualenv) )]($style)"
+style = "bold context"
+
+[rust]
+format = "[$symbol$version]($style) "
+style = "bold context"
+
+[status]
+disabled = false
+format = "[exit $status](error) "
+
+[palettes.catppuccin_mocha]
+context = "#89b4fa"
+duration = "#f5c2e7"
+error = "#f38ba8"
+frame = "#585b70"
+muted = "#6c7086"
+path = "#94e2d5"
+prompt = "#cba6f7"
+remote = "#a6e3a1"
+replace = "#f5c2e7"
+success = "#a6e3a1"
+visual = "#fab387"
+warning = "#fab387"
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

@@ -6,7 +6,6 @@
     pkgs.bash-language-server
     pkgs.fish-lsp
     pkgs.gcc
-    pkgs.helix_git
     pkgs.just
     pkgs.just-lsp
     pkgs.kdlfmt

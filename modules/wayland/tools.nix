@@ -11,4 +11,6 @@
     pkgs.slurp
     pkgs.satty
   ];
+
+  programs.waybar.enable = true;
 }

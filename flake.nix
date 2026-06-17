@@ -46,7 +46,7 @@
     };
 
     mangowm = {
-      url = "github:mangowm/mango/24fb167ae6ffc0272b2feb0c293b3c8a9a2125ae";
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

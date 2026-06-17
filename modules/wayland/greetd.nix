@@ -7,7 +7,7 @@ let
   inherit (lib.meta) getExe';
 
   session = {
-    command = getExe' config.programs.mango.package "mango";
+    command = getExe' config.programs.niri.package "niri-session";
     user = "wasd";
   };
 in

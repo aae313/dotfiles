@@ -1,0 +1,101 @@
+#!/run/current-system/sw/bin/bash
+set -euo pipefail
+
+niri=/run/current-system/sw/bin/niri
+jq=/run/current-system/sw/bin/jq
+sleep=/run/current-system/sw/bin/sleep
+
+while true; do
+  if "$niri" msg -j event-stream | "$jq" --unbuffered --compact-output --null-input '
+  def icon:
+      (.app_id // "" | ascii_downcase) as $a
+      | if ($a | test("^foot")) then ""
+      elif ($a | test("firefox")) then ""
+      elif $a | test("discord|vesktop") then ""
+      elif $a | test("nvim|neovide") then ""
+      elif $a | test("nautilus|files") then ""
+      elif $a | test("mpv|vlc") then ""
+      else ""
+      end;
+
+  def window_label:
+    icon as $icon
+    | if .is_focused then "<span fgcolor=\"#7287fd\" weight=\"bold\">\($icon)</span>"
+      else "<span fgcolor=\"#cdd6f4\">\($icon)</span>"
+      end;
+
+  def group_windows:
+    map(window_label) | join(" ");
+
+  def render:
+    (.workspaces // [] | map(select(.is_focused)) | first | .id) as $workspace_id
+    | if $workspace_id == null then
+        {"text": "", "class": ["empty"]}
+      else
+        (.windows // [] | map(select(.workspace_id == $workspace_id))) as $windows
+        | ($windows
+            | map(select(.layout.pos_in_scrolling_layout != null))
+            | sort_by(.layout.pos_in_scrolling_layout[0], .layout.pos_in_scrolling_layout[1])
+            | group_by(.layout.pos_in_scrolling_layout[0])
+            | map(group_windows)) as $tiled_groups
+        | ($windows
+            | map(select(.layout.tile_pos_in_workspace_view != null))
+            | sort_by(.layout.tile_pos_in_workspace_view[0], .layout.tile_pos_in_workspace_view[1])
+            | map(window_label)) as $floating_windows
+        | ($tiled_groups | join(" <span fgcolor=\"#585b70\">│</span> ")) as $tiled_text
+        | ($floating_windows | join(" ")) as $floating_text
+        | (if $tiled_text != "" and $floating_text != "" then
+            "\($tiled_text) <span fgcolor=\"#585b70\">│</span> \($floating_text)"
+          else
+            "\($tiled_text)\($floating_text)"
+          end) as $text
+        | {
+            "text": $text,
+            "class": (if $text == "" then ["empty"] else [] end)
+          }
+      end;
+
+  def update($event):
+    if $event.WorkspacesChanged then
+      .workspaces = $event.WorkspacesChanged.workspaces
+    elif $event.WorkspaceActivated then
+      if $event.WorkspaceActivated.focused then
+        .workspaces = ((.workspaces // []) | map(.is_focused = (.id == $event.WorkspaceActivated.id)))
+      else
+        .
+      end
+    elif $event.WindowsChanged then
+      .windows = $event.WindowsChanged.windows
+    elif $event.WindowOpenedOrChanged then
+      $event.WindowOpenedOrChanged.window as $window
+      | .windows = (((.windows // [])
+          | map(select(.id != $window.id) | if $window.is_focused then .is_focused = false else . end)) + [$window])
+    elif $event.WindowClosed then
+      .windows = ((.windows // []) | map(select(.id != $event.WindowClosed.id)))
+    elif $event.WindowFocusChanged then
+      .windows = ((.windows // []) | map(.is_focused = (.id == $event.WindowFocusChanged.id)))
+    elif $event.WindowLayoutsChanged then
+      .windows = ((.windows // []) as $windows
+        | $event.WindowLayoutsChanged.changes as $changes
+        | $windows
+        | map(. as $window
+          | (first($changes[]? | select(.[0] == $window.id) | .[1]) // null) as $layout
+          | if $layout then .layout = $layout else . end))
+    else
+      .
+    end;
+
+  foreach inputs as $event (
+    {"workspaces": [], "windows": [], "last_render": null, "emit": null};
+    update($event)
+      | (render) as $rendered
+      | .emit = (if $rendered == .last_render then null else $rendered end)
+      | .last_render = $rendered;
+    .emit // empty
+  )
+  '; then
+    exit 0
+  fi
+
+  "$sleep" 1
+done

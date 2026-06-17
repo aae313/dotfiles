@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,11 +47,6 @@
 
     jj-starship = {
       url = "github:dmmulroy/jj-starship";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    mangowm = {
-      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

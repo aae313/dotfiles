@@ -1,127 +1,36 @@
-// -*- mode: jsonc -*-
 {
-    "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 42, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-        "ext/workspaces",
-        "wlr/taskbar"
-    ],
+    "layer": "top",
+    "output": "DP-1",
+    "height": 22,
+    "spacing": 2,
+
+    "modules-left": [],
     "modules-center": [
+        "custom/niri-taskbar"
     ],
     "modules-right": [
-        "tray",
-        "temperature",
-        "backlight",
-        // "battery",
         "clock",
-        "custom/power"
+        "image#nixos"
     ],
-    "ext/workspaces": {
-      "format": "{icon}",
-      "ignore-hidden": true,
-      // "active-only":true,
-      "on-click": "activate",
-      "on-click-right": "deactivate",
-      "on-scroll-up":"mmsg dispatch viewtoleft_have_client",
-      "on-scroll-down":"mmsg dispatch viewtoright_have_client",
-      "sort-by-id": true,
-      // "format-icons": {
-      //   "1": "",
-      //   "2": "",
-      //   "3": "",
-      //   "4": "",
-      //   "5": "",
-      //   "urgent": "",
-      //   "active": "",
-      //   "default": ""
-      // },
-    },
-    "wlr/taskbar": {
-      "format": "{icon}",
-      "icon-size": 20,
-      "all-outputs": false,
-      "tooltip-format": "{title}",
-      "markup": true,
-      "on-click": "activate",
-      "on-click-right": "close",
-      "ignore-list": [
-        "Rofi",
-        "wofi",
-        "org.mozilla.firefox.webapp-f1a423e1-22ba-401c-840f-7036c59c0ecb",
-        "org.mozilla.firefox.webapp-8053b1f8-d16e-4299-8076-4be37f0fe8ab"
-      ]
-    },
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
-    "clock": {
-      "format": " {:%H:%M}",
-      "format-alt": " {:L%A, %b %d}",
-      "tooltip-format": "{:%Y}",
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 90,
-        // "format-critical": "{temperatureF}°F {icon}",
-        "format": "{icon} {temperatureC}°C",
-        "tooltip": true,
-        "tooltip-format": "{temperatureF}°F",
-        "format-icons": ["", "", ""]
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{icon} {percent}%",
-        "format-icons": ["󰖔", "󰖨"],
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-    "custom/power": {
-        "format": "󰣇",
-        "tooltip": false,
-        "on-click": "wlogout -C ~/.config/mango/wlogout/style.css -l  ~/.config/mango/wlogout/layout  -b 6 --protocol layer-shell",
-        "on-click-right": "sleep 0.1s && swaync-client -t -sw",
 
+    "custom/niri-taskbar": {
+        "exec": "$HOME/.config/waybar/waybar-niri-taskbar",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": false,
+        "escape": false,
+        "hide-empty-text": true,
     },
-    "custom/notification": {
-      "tooltip": false,
-      "format": "{icon}",
-      "format-icons": {
-        "notification": "<span foreground='red'><sup></sup></span>",
-        "none": "  ",
-        "dnd-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-none": "",
-        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "inhibited-none": "",
-        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-inhibited-none": ""
-      },
-      "return-type": "json",
-      "exec-if": "which swaync-client",
-      "exec": "swaync-client -swb",
-      "on-click": "sleep 0.1s && swaync-client -t -sw",
-      "on-click-right": "swaync-client -d -sw",
-      "escape": true
+
+    "clock": {
+        "format": " {:%H:%M}",
+        "format-alt": " {:L%A, %b %d}",
+        "tooltip-format": "{:%Y}"
     },
+
+    "image#nixos": {
+        "path": "/home/wasd/.config/waybar/nixos.svg",
+        "size": 17,
+        "tooltip": false
+    }
 }

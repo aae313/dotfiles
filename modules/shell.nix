@@ -20,6 +20,7 @@ in
       SHELL = getExe pkgs.fish;
       XDG_CONFIG_HOME = "/home/wasd/.config";
       XDG_CACHE_HOME = "/home/wasd/.cache";
+      XDG_DATA_HOME = "/home/wasd/.local/share";
       XDG_STATE_HOME = "/home/wasd/.local/state";
 
       EDITOR = "nv";
@@ -32,12 +33,12 @@ in
     };
 
     variables = {
-      CARGO_HOME = "$XDG_DATA_HOME/cargo";
-      RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
-      NPM_CONFIG_INIT_MODULE = "$XDG_CONFIG_HOME/npm/config/npm-init.js";
-      NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
+      CARGO_HOME = "/home/wasd/.local/share/cargo";
+      RUSTUP_HOME = "/home/wasd/.local/share/rustup";
+      NPM_CONFIG_INIT_MODULE = "/home/wasd/.config/npm/config/npm-init.js";
+      NPM_CONFIG_CACHE = "/home/wasd/.cache/npm";
       NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
-      RIPGREP_CONFIG_PATH = "$XDG_CONFIG_HOME/ripgrep/config";
+      RIPGREP_CONFIG_PATH = "/home/wasd/.config/ripgrep/config";
     };
   };
 

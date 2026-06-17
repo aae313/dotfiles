@@ -4,6 +4,8 @@ Never run real build or compile commands by default, including `nix build`, `jus
 
 Do not run any tests except when you are explicitly told to do it.
 
+Never edit flake.lock file by hand.
+
 # Nix Style Rules
 
 - Prefer `lib.lists.singleton` over a single item list.

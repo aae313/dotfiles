@@ -30,7 +30,7 @@ if status is-interactive
     abbr -a che chezmoi
     abbr -a xc chezmoi edit
     abbr -a apply chezmoi apply --verbose
-    set -gx FZF_DEFAULT_OPTS "--highlight-line --cycle --layout=reverse --height=80% \
+    set -gx FZF_DEFAULT_OPTS "--multi --highlight-line --cycle --layout=reverse --height=80% \
     --highlight-line \
     --info=inline-right \
     --ansi \

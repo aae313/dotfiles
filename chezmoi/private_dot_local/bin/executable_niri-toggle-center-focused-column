@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+appearance_file="$config_home/niri/appearance.kdl"
+
+if [[ ! -f "$appearance_file" ]]; then
+  printf 'niri-toggle-center-focused-column: missing config file: %s\n' "$appearance_file" >&2
+  exit 1
+fi
+
+setting_pattern='^[[:space:]]*center-focused-column[[:space:]]+"(never|always)"[[:space:]]*$'
+matches="$(grep -Ec "$setting_pattern" "$appearance_file" || true)"
+
+if [[ "$matches" -ne 1 ]]; then
+  printf 'niri-toggle-center-focused-column: expected exactly one supported center-focused-column setting in %s, found %s\n' "$appearance_file" "$matches" >&2
+  exit 1
+fi
+
+current="$(
+  sed -nE "s/$setting_pattern/\\1/p" "$appearance_file"
+)"
+
+case "$current" in
+  never)
+    next_value=always
+    ;;
+  always)
+    next_value=never
+    ;;
+  *)
+    printf 'niri-toggle-center-focused-column: unsupported value: %s\n' "$current" >&2
+    exit 1
+    ;;
+esac
+
+tmp="$(mktemp "${appearance_file}.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+
+awk -v current="$current" -v next_value="$next_value" '
+  /^[[:space:]]*center-focused-column[[:space:]]+"(never|always)"[[:space:]]*$/ {
+    sub("\"" current "\"", "\"" next_value "\"")
+  }
+  { print }
+' "$appearance_file" > "$tmp"
+
+mv "$tmp" "$appearance_file"
+trap - EXIT
+
+niri msg action load-config-file
+notify-send -t 1000 "center-focused-column: $next_value" || true

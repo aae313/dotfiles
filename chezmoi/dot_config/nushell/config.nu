@@ -114,7 +114,7 @@ $env.config.hooks.display_output = {||
     }
 }
 $env.FZF_DEFAULT_OPTS = (
-  "--highlight-line --cycle --layout=reverse --height=80% " +
+  "--multi --highlight-line --cycle --layout=reverse --height=80% " +
   "--highlight-line " +
   "--info=inline-right " +
   "--ansi " +

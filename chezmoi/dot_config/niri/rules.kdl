@@ -17,11 +17,9 @@ window-rule {
 }
 
 window-rule {
-    exclude app-id="(?i)^firefox-nightly$"
-    exclude app-id=r#"^org\.mozilla\.firefox\.webapp-.*$"#
     match is-active=false
 
-    opacity 0.9
+    opacity 0.95
 }
 
 window-rule {

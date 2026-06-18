@@ -23,8 +23,8 @@ in
       XDG_DATA_HOME = "/home/wasd/.local/share";
       XDG_STATE_HOME = "/home/wasd/.local/state";
 
-      EDITOR = "nv";
-      VISUAL = "nv";
+      EDITOR = "x";
+      VISUAL = "x";
       PAGER = "bat";
       BAT_PAGER = "ov -F -H3";
       MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";

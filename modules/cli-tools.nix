@@ -29,5 +29,6 @@ in
     pkgs.difftastic
     pkgs.starship
     inputs.jj-starship.packages.${system}.default
+    inputs.helix.packages.${system}.default
   ];
 }

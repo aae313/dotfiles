@@ -15,7 +15,6 @@
     ./locale.nix
     ./logging.nix
     ./network
-    ./neovim.nix
     ./nix.nix
     ./packages/gui.nix
     ./security.nix

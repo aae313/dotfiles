@@ -1,4 +1,0 @@
-workspace "main"
-workspace "2"
-workspace "stash" { }
-

@@ -17,6 +17,7 @@
           "input"
           "i2c-dev"
           "libvirtd"
+          "networkmanager"
           "video"
           "wheel"
           "systemd-journal"

@@ -44,5 +44,8 @@ in
 {
   environment.systemPackages = singleton pkgs.chezmoi;
 
-  system.activationScripts.chezmoiConfig.text = getExe configureChezmoi;
+  system.activationScripts.chezmoiConfig = {
+    deps = singleton "users";
+    text = getExe configureChezmoi;
+  };
 }

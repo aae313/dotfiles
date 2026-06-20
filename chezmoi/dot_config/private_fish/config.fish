@@ -12,7 +12,9 @@ end
 if status is-interactive
 
     set -g fish_greeting
-    set fish_key_bindings fish_vi_key_bindings
+    set -g fish_key_bindings fish_helix_key_bindings
+    fish_helix_key_bindings
+    fish_user_key_bindings
     fzf --fish | source
     starship init fish | source
     zoxide init fish --cmd cd | source
@@ -28,7 +30,7 @@ if status is-interactive
     abbr -a py python
     abbr -a wl wl-copy
     abbr -a che chezmoi
-    abbr -a xc chezmoi edit
+    abbr -a xc chezmoi edit --apply --verbose
     abbr -a apply chezmoi apply --verbose
     set -gx FZF_DEFAULT_OPTS "--multi --highlight-line --cycle --layout=reverse --height=80% \
     --highlight-line \

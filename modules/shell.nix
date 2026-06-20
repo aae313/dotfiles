@@ -25,6 +25,7 @@ in
 
       EDITOR = "x";
       VISUAL = "x";
+      SUDO_EDITOR = "hx";
       PAGER = "bat";
       BAT_PAGER = "ov -F -H3";
       MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";

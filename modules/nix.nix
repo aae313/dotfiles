@@ -31,11 +31,33 @@ in
 
   nixpkgs.overlays = [
     inputs.nixpkgs-wayland.overlay
+    inputs.niri.overlays.niri
+    (final: previous: {
+      nirius = previous.nirius.overrideAttrs (
+        finalAttrs: _previousAttrs: {
+          version = "0.7.3-unstable-2026-06-22";
+
+          src = final.fetchFromSourcehut {
+            owner = "~tsdh";
+            repo = "nirius";
+            rev = "f924d407c01b3f12e630d2d07ec281e203efc341";
+            hash = "sha256-UYfY/ogIUuk9+qhPfky9jjLONY7otF+2msP2pY/Fruk=";
+          };
+
+          cargoDeps = final.rustPlatform.fetchCargoVendor {
+            inherit (finalAttrs) pname src version;
+            hash = "sha256-jLT+RGOdI5L3UEc+z71WhS+mo9OlBPLauyj7Sv/25hE=";
+          };
+        }
+      );
+    })
   ];
 
   nix = {
     package = pkgs.lixPackageSets.git.lix;
-    registry = mapAttrs (_: flake: { inherit flake; }) <| filterAttrs (name: flake: name != "self" && isType "flake" flake) inputs;
+    registry =
+      mapAttrs (_: flake: { inherit flake; })
+      <| filterAttrs (name: flake: name != "self" && isType "flake" flake) inputs;
 
     settings = {
       sandbox = false;
@@ -90,7 +112,9 @@ in
         "https://helix.cachix.org"
       ];
 
-      trusted-substituters = singleton "https://nixpkgs-wayland.cachix.org";
+      trusted-substituters = [
+        "https://nixpkgs-wayland.cachix.org"
+      ];
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="

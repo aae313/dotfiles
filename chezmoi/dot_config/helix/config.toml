@@ -1,7 +1,6 @@
 theme = "cat"
 
 [editor]
-insecure = true
 # shell = ["nu", "--commands"]
 color-modes = true
 completion-replace = true

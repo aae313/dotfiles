@@ -1,13 +1,7 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ ... }:
 let
-  inherit (lib.meta) getExe';
-
   session = {
-    command = getExe' config.programs.niri.package "niri-session";
+    command = "/run/current-system/sw/bin/niri-session";
     user = "wasd";
   };
 in

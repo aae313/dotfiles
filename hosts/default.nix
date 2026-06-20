@@ -16,6 +16,7 @@ in
     ];
     specialArgs = {
       inherit inputs;
+      system = "x86_64-linux";
     };
   };
 
@@ -28,6 +29,7 @@ in
     ];
     specialArgs = {
       inherit inputs;
+      system = "x86_64-linux";
     };
   };
 }

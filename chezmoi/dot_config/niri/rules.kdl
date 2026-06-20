@@ -1,3 +1,4 @@
+// === Global defaults ===
 window-rule {
     open-maximized false
     open-maximized-to-edges false
@@ -5,6 +6,12 @@ window-rule {
     geometry-corner-radius 8
     clip-to-geometry true
     draw-border-with-background false
+}
+
+window-rule {
+    match is-active=false
+
+    opacity 0.95
 }
 
 window-rule {
@@ -17,17 +24,22 @@ window-rule {
 }
 
 window-rule {
-    match is-active=false
-
-    opacity 0.95
-}
-
-window-rule {
     match is-floating=true
 
     background-effect {
         xray false
     }
+}
+
+// === Firefox ===
+window-rule {
+    match app-id="(?i)^firefox-nightly$"
+
+    default-column-width {
+        proportion 0.5
+    }
+
+    geometry-corner-radius 8 8 0 0
 }
 
 window-rule {
@@ -46,26 +58,7 @@ window-rule {
     }
 }
 
-window-rule {
-    match app-id="(?i)^firefox-nightly$"
-
-    default-column-width {
-        proportion 0.5
-    }
-
-    geometry-corner-radius 8 8 0 0
-}
-
-window-rule {
-    match app-id="^com.saivert.pwvucontrol$"
-    match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
-    match app-id=r#"^org\.gnome\.Nautilus$"#
-
-    open-floating true
-    min-width 900
-    min-height 700
-}
-
+// === App-specific ===
 window-rule {
     match app-id="^footclient$"
 
@@ -80,7 +73,17 @@ window-rule {
     }
 }
 
+window-rule {
+    match app-id="^com.saivert.pwvucontrol$"
+    match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
+    match app-id=r#"^org\.gnome\.Nautilus$"#
 
+    open-floating true
+    min-width 900
+    min-height 700
+}
+
+// === Auto-float ===
 window-rule {
     match app-id="(?i)^firefox-nightly$" title="^Picture-in-Picture$"
     match title=".*Extension.*Bitwarden.*"
@@ -89,6 +92,7 @@ window-rule {
     open-floating true
 }
 
+// === Screencasting ===
 window-rule {
     match is-window-cast-target=true
 
@@ -98,6 +102,7 @@ window-rule {
     }
 }
 
+// === Layer rules ===
 layer-rule {
     match namespace="^launcher$"
 

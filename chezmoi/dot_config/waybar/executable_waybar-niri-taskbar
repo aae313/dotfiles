@@ -12,7 +12,6 @@ while true; do
       | if ($a | test("^foot")) then ""
       elif ($a | test("firefox")) then ""
       elif $a | test("discord|vesktop") then ""
-      elif $a | test("nvim|neovide") then ""
       elif $a | test("nautilus|files") then ""
       elif $a | test("mpv|vlc") then ""
       else ""

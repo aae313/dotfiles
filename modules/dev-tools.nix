@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 
 {
   environment.systemPackages = [
@@ -6,6 +11,7 @@
     pkgs.bash-language-server
     pkgs.fish-lsp
     pkgs.gcc
+    inputs.helix.packages.${system}.default
     pkgs.just
     pkgs.just-lsp
     pkgs.kdlfmt

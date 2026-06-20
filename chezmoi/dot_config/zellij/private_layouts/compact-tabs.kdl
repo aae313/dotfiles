@@ -31,6 +31,9 @@ layout {
             }
         }
         children
+        pane size=2 borderless=true {
+            plugin location="status-bar"
+        }
     }
 
     swap_tiled_layout name="splits" {

@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -6,12 +7,14 @@
 
 let
   inherit (pkgs.stdenv.hostPlatform) system;
+
+  inherit (config.local) user;
 in
 
 {
   environment.sessionVariables = {
-    CLAUDE_CONFIG_DIR = "/home/wasd/.config/claude";
-    CODEX_HOME = "/home/wasd/.config/codex";
+    CLAUDE_CONFIG_DIR = "${user.home}/.config/claude";
+    CODEX_HOME = "${user.home}/.config/codex";
   };
 
   environment.systemPackages = [

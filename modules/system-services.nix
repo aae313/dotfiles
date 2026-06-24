@@ -1,7 +1,11 @@
+{ config, ... }:
+let
+  inherit (config.local) user;
+in
 {
   services = {
     dbus.implementation = "broker";
-    getty.autologinUser = "wasd";
+    getty.autologinUser = user.name;
     syslogd.tty = "tty4";
   };
 }

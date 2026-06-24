@@ -1,8 +1,11 @@
-{ ... }:
+{ config, lib, ... }:
 let
+  inherit (lib.meta) getExe';
+  inherit (config.local) user;
+
   session = {
-    command = "/run/current-system/sw/bin/niri-session";
-    user = "wasd";
+    command = getExe' config.programs.hyprland.package "start-hyprland";
+    user = user.name;
   };
 in
 {

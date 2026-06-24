@@ -1,32 +1,6 @@
 { ... }:
 {
   imports = [
-    ./ai-tools.nix
-    ./firefox.nix
-    ./audio
-    ./btrfs.nix
-    ./chezmoi.nix
-    ./cli-tools.nix
-    ./dev-tools.nix
-    ./hardware
-    ./impermanence.nix
-    ./kernel
-    ./keyd.nix
-    ./locale.nix
-    ./logging.nix
-    ./network
-    ./nix.nix
-    ./packages/gui.nix
-    ./security.nix
-    ./shell.nix
-    ./ssh.nix
-    ./system-services.nix
-    ./system-tools.nix
-    ./systemd.nix
-    ./terminals.nix
-    ./theme
-    ./user.nix
-    ./version-control.nix
-    ./wayland
+    ./local-user.nix
   ];
 }

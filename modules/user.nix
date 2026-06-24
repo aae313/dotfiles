@@ -1,12 +1,16 @@
 {
+  config,
   pkgs,
   ...
 }:
+let
+  inherit (config.local) user;
+in
 {
   users = {
     mutableUsers = false;
     users = {
-      wasd = {
+      ${user.name} = {
         isNormalUser = true;
         hashedPasswordFile = "/persist/passwd";
         shell = pkgs.fish;

@@ -12,7 +12,7 @@ in
           main = {
             capslock = "esc";
             rightshift = "layer(navigation)";
-            rightcontrol = "toggle(symbols)";
+            f12 = "toggle(symbols)";
           };
 
           navigation = {
@@ -22,18 +22,19 @@ in
             d = "right";
           };
 
-          # symbols = {
-          #   "1" = "S-1";
-          #   "2" = "S-2";
-          #   "3" = "S-3";
-          #   "4" = "S-4";
-          #   "5" = "S-5";
-          #   "6" = "S-6";
-          #   "7" = "S-7";
-          #   "8" = "S-8";
-          #   "9" = "S-9";
-          #   "0" = "S-0";
-          # };
+          symbols = {
+            grave = "M-tab";
+            # "1" = "S-1";
+            # "2" = "S-2";
+            # "3" = "S-3";
+            # "4" = "S-4";
+            # "5" = "S-5";
+            # "6" = "S-6";
+            # "7" = "S-7";
+            # "8" = "S-8";
+            # "9" = "S-9";
+            # "0" = "S-0";
+          };
         };
       };
     };

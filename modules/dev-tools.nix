@@ -1,17 +1,13 @@
-{
-  inputs,
-  pkgs,
-  system,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = [
+
     pkgs.ast-grep
     pkgs.bash-language-server
     pkgs.fish-lsp
     pkgs.gcc
-    inputs.helix.packages.${system}.default
+    pkgs.gnumake
     pkgs.just
     pkgs.just-lsp
     pkgs.kdlfmt

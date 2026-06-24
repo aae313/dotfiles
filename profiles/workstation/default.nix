@@ -1,0 +1,33 @@
+{ ... }:
+{
+  imports = [
+    ../../modules/ai-tools.nix
+    ../../modules/firefox.nix
+    ../../modules/audio
+    ../../modules/btrfs.nix
+    ../../modules/chezmoi.nix
+    ../../modules/cli-tools.nix
+    ../../modules/dev-tools.nix
+    ../../modules/hardware
+    ../../modules/impermanence.nix
+    ../../modules/kernel
+    ../../modules/keyd.nix
+    ../../modules/locale.nix
+    ../../modules/logging.nix
+    ../../modules/network
+    ../../modules/neovim.nix
+    ../../modules/nix.nix
+    ../../modules/packages/gui.nix
+    ../../modules/security.nix
+    ../../modules/shell.nix
+    ../../modules/ssh.nix
+    ../../modules/system-services.nix
+    ../../modules/system-tools.nix
+    ../../modules/systemd.nix
+    ../../modules/terminals.nix
+    ../../modules/theme
+    ../../modules/user.nix
+    ../../modules/version-control.nix
+    ../../modules/wayland
+  ];
+}

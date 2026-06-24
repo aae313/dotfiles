@@ -1,0 +1,49 @@
+[pyprland]
+plugins = [
+  "fetch_client_menu",
+  "lost_windows",
+  "magnify",
+  "scratchpads",
+  "toggle_special",
+]
+
+[fetch_client_menu]
+engine = "fuzzel"
+separator = ""
+center_on_fetch = false
+
+[scratchpads.chatgpt]
+command = "dex /home/wasd/.local/share/applications/org.mozilla.firefox.webapp-f1a423e1-22ba-401c-840f-7036c59c0ecb.desktop"
+class = "org.mozilla.firefox.webapp-f1a423e1-22ba-401c-840f-7036c59c0ecb"
+match_by = "class"
+multi = false
+process_tracking = false
+lazy = true
+size = "40% 60%"
+max_size = "2560px 100%"
+preserve_aspect = true
+animation = ""
+
+[scratchpads.chatgpt.monitor.eDP-1]
+max_size = "1920px 100%"
+
+[scratchpads.chatgpt.monitor.HDMI-A-1]
+max_size = "1920px 100%"
+
+[scratchpads.claude]
+command = "dex /home/wasd/.local/share/applications/org.mozilla.firefox.webapp-8053b1f8-d16e-4299-8076-4be37f0fe8ab.desktop"
+class = "org.mozilla.firefox.webapp-8053b1f8-d16e-4299-8076-4be37f0fe8ab"
+match_by = "class"
+multi = false
+process_tracking = false
+lazy = true
+size = "40% 60%"
+max_size = "2560px 100%"
+preserve_aspect = true
+animation = ""
+
+[scratchpads.claude.monitor.eDP-1]
+max_size = "1920px 100%"
+
+[scratchpads.claude.monitor.HDMI-A-1]
+max_size = "1920px 100%"

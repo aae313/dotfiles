@@ -4,4 +4,6 @@
     xdg.serverAutostart = true;
   };
 
+  environment.systemPackages = [
+  ];
 }

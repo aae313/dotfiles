@@ -66,7 +66,7 @@ main() {
 
   local selection
   selection="$(select_file "$target" "$extension")"
-  x "$selection"
+  nv "$selection"
 }
 
 main "$@"

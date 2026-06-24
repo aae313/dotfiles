@@ -12,8 +12,8 @@ end
 if status is-interactive
 
     set -g fish_greeting
-    set -g fish_key_bindings fish_helix_key_bindings
-    fish_helix_key_bindings
+    set -g fish_key_bindings fish_vi_key_bindings
+    fish_vi_key_bindings
     fish_user_key_bindings
     fzf --fish | source
     starship init fish | source
@@ -23,7 +23,6 @@ if status is-interactive
     abbr -a mv 'mv -v'
     abbr -a rm 'rm -rvf'
     abbr -a mkdir 'mkdir -p'
-    abbr -a cat bat
     abbr -a j just
     abbr -a za zellij action
     abbr -a calc numbat --pretty-print=always -e

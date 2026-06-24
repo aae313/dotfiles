@@ -7,7 +7,6 @@
     pkgs.direnv
     pkgs.ffmpeg
     pkgs.file
-    pkgs.fish
     pkgs.libqalculate
     pkgs.nushell
     pkgs.pciutils

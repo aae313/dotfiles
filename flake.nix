@@ -11,24 +11,22 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    pyprland.url = "github:hyprland-community/pyprland";
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    snappy-switcher = {
+      url = "github:OpalAayan/snappy-switcher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
-    helix = {
-      url = "github:helix-editor/helix";
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix.url = "github:helix-editor/helix";
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";

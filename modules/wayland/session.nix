@@ -1,3 +1,7 @@
+{ config, ... }:
+let
+  inherit (config.local) user;
+in
 {
   environment.sessionVariables = {
     DISABLE_QT_COMPAT = "0";
@@ -10,7 +14,7 @@
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
     _JAVA_AWT_WM_NONEREPARENTING = "1";
-    GTK2_RC_FILES = "/home/wasd/.config/gtk-2.0/gtkrc";
+    GTK2_RC_FILES = "${user.home}/.config/gtk-2.0/gtkrc";
     NIXOS_XDG_OPEN_USE_PORTAL = "1";
   };
 }

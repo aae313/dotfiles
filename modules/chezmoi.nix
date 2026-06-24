@@ -8,7 +8,9 @@ let
   inherit (lib.lists) singleton;
   inherit (lib.meta) getExe;
 
-  home = config.users.users.wasd.home;
+  inherit (config.local) user;
+
+  home = user.home;
 
   configureChezmoi = pkgs.writeShellApplication {
     name = "configure-chezmoi";
@@ -22,10 +24,10 @@ let
       config="$configDir/chezmoi.toml"
       sourceLine='sourceDir = "${home}/.local/share/nixos"'
 
-      install -d -m0755 -o wasd -g users "$configDir"
+      install -d -m0755 -o ${user.name} -g users "$configDir"
 
       if ! test -e "$config"; then
-        install -Dm0644 -o wasd -g users /dev/null "$config"
+        install -Dm0644 -o ${user.name} -g users /dev/null "$config"
       fi
 
       if grep -qxF "$sourceLine" "$config"; then
@@ -36,7 +38,7 @@ let
         printf '\n%s\n' "$sourceLine" >> "$config"
       fi
 
-      chown wasd:users "$config"
+      chown ${user.name}:users "$config"
       chmod 0644 "$config"
     '';
   };

@@ -2,9 +2,10 @@
 let
   inherit (lib.attrsets) mapAttrs;
   inherit (lib.generators) toINI;
+  inherit (lib.lists) singleton;
   inherit (lib.strings) concatStringsSep;
 
-  browser = [ "firefox-nightly.desktop" ];
+  browser = singleton "firefox-nightly.desktop";
 
   associations = {
     "text/html" = browser;
@@ -19,15 +20,16 @@ let
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
-    "audio/*" = [ "mpv.desktop" ];
-    "video/*" = [ "mpv.desktop" ];
-    "image/*" = [ "imv.desktop" ];
+    "audio/*" = singleton "mpv.desktop";
+    "video/*" = singleton "mpv.desktop";
+    "image/*" = singleton "imv.desktop";
     "application/json" = browser;
-    "inode/directory" = [ "yazi" ];
+    "inode/directory" = singleton "yazi.desktop";
   };
 in
 {
   environment.systemPackages = [
+    pkgs.mpv
     pkgs.shared-mime-info
     pkgs.xdg-desktop-portal
     pkgs.xdg-user-dirs

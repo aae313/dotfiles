@@ -1,70 +1,79 @@
-@define-color rosewater #f5e0dc;
-@define-color red #f38ba8;
-@define-color blue #89b4fa;
-@define-color sapphire #74c7ec;
-@define-color text #cdd6f4;
-@define-color subtext0 #a6adc8;
-@define-color overlay0 #6c7086;
-@define-color surface1 #45475a;
-@define-color surface0 #313244;
-@define-color base #1e1e2e;
-@define-color mantle #181825;
-@define-color crust #11111b;
-
-@define-color bar-bg rgba(17, 17, 27, 0.82);
-@define-color workspace-bg @surface0;
-@define-color workspace-empty @mantle;
-@define-color workspace-fg @subtext0;
-@define-color workspace-active-bg @blue;
-@define-color workspace-active-fg @crust;
-@define-color workspace-hover-bg @sapphire;
-@define-color workspace-urgent-bg @red;
+@define-color color-bg          rgba(0,0,0,0.82);
+@define-color color-fg          #ffffff;
+@define-color color-tooltip-bg  #1e1e1e;
+@define-color color-tooltip-fg  #ffffff;
 
 * {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  font-family: JetBrainsMono Nerd Font, monospace;
-  font-size: 13px;
-  min-height: 0;
+    font-family: "Inter", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    min-height: 0;
 }
 
 window#waybar {
-  background: @bar-bg;
+    background-color: @color-bg;
+    border: none;
+    margin: 5px;
 }
 
-#workspaces {
-  margin: 3px 0;
-  padding: 0 6px;
+window#waybar > * {
+    margin: 4px 4px 0px 4px;
 }
 
-#workspaces button {
-  background: @workspace-bg;
-  border-radius: 999px;
-  color: @workspace-fg;
-  margin: 0 3px;
-  padding: 0 9px;
+window#waybar.hidden {
+    opacity: 0.2;
 }
 
-#workspaces button.empty {
-  background: @workspace-empty;
-  color: transparent;
-  min-width: 8px;
-  padding: 0 4px;
+#clock,
+#custom-niri-taskbar {
+    border-radius: 100px;
+    color: @color-fg;
+    min-height: 0;
 }
 
-#workspaces button.active {
-  background: @workspace-active-bg;
-  color: @workspace-active-fg;
-  padding: 0 11px;
+#clock {
+    padding: 0px 8px;
 }
 
-#workspaces button:hover {
-  background: @workspace-hover-bg;
-  color: @workspace-active-fg;
+#image {
+    margin-left: 6px;
+    margin-right: 2px;
+    padding: 0px;
+    min-height: 0;
 }
 
-#workspaces button.urgent {
-  background: @workspace-urgent-bg;
-  color: @workspace-active-fg;
+#custom-niri-taskbar {
+    font-family: "Symbols Nerd Font", "Inter", sans-serif;
+    font-size: 14px;
+    padding: 0px 6px;
+    margin: 0px;
+    background: none;
+}
+
+#custom-niri-taskbar.empty {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    border: none;
+    background-color: transparent;
+}
+
+tooltip {
+    background-color: @color-tooltip-bg;
+    border: none;
+    border-radius: 20px;
+}
+
+tooltip decoration,
+tooltip decoration:backdrop {
+    box-shadow: none;
+}
+
+tooltip label {
+    color: @color-tooltip-fg;
+    padding: 3px 7px;
 }

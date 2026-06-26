@@ -1,0 +1,20 @@
+input {
+    mouse {
+        accel-speed 0.6
+        accel-profile "flat"
+    }
+
+    keyboard {
+        xkb {
+            layout "de"
+            variant "us"
+        }
+        numlock
+    }
+
+    tablet {
+        map-to-output "ASUSTek COMPUTER INC PA278QV SCLMQS108511"
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+    workspace-auto-back-and-forth
+}

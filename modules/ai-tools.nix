@@ -12,11 +12,6 @@ let
 in
 
 {
-  environment.sessionVariables = {
-    CLAUDE_CONFIG_DIR = "${user.home}/.config/claude";
-    CODEX_HOME = "${user.home}/.config/codex";
-  };
-
   environment.systemPackages = [
     pkgs.antigravity
     pkgs.opencode

@@ -12,8 +12,8 @@ end
 if status is-interactive
 
     set -g fish_greeting
-    set -g fish_key_bindings fish_vi_key_bindings
-    fish_vi_key_bindings
+    set -g fish_key_bindings fish_helix_key_bindings
+    fish_helix_key_bindings
     fish_user_key_bindings
     fzf --fish | source
     starship init fish | source
@@ -36,11 +36,11 @@ if status is-interactive
     --info=inline-right \
     --ansi \
     --layout=reverse \
-    --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
-    --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
-    --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-    --color=selected-bg:#45475A \
-    --color=border:#6C7086,label:#CDD6F4"
+    --color=bg+:#2f447f,bg:#000000,spinner:#00d3d0,hl:#d0bc00 \
+    --color=fg:#ffffff,header:#c6daff,info:#989898,pointer:#2fafff \
+    --color=marker:#00d3d0,fg+:#ffffff,prompt:#2fafff,hl+:#d0bc00 \
+    --color=selected-bg:#303030 \
+    --color=border:#646464,label:#ffffff"
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
     abbr -a .... 'cd ../../..'

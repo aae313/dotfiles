@@ -4,7 +4,7 @@ let
   inherit (config.local) user;
 
   session = {
-    command = getExe' config.programs.hyprland.package "start-hyprland";
+    command = getExe' config.programs.niri.package "niri-session";
     user = user.name;
   };
 in

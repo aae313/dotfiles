@@ -15,7 +15,6 @@
     ../../modules/locale.nix
     ../../modules/logging.nix
     ../../modules/network
-    ../../modules/neovim.nix
     ../../modules/nix.nix
     ../../modules/packages/gui.nix
     ../../modules/security.nix

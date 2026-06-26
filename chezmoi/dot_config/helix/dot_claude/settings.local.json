@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v ast-grep jq fzf bat shellcheck hx zellij)",
+      "Bash(fzf --version)",
+      "Bash(ast-grep --version)",
+      "Bash(hx --version)",
+      "Bash(zellij --version)",
+      "Bash(grep -iE 'open.{0,40}\\(line|location\\)|file\\\\[:line')",
+      "Bash(echo \"exit: $?\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//tmp/cfu-test/**)",
+      "Bash(ast-grep run *)",
+      "Bash(echo \"bad-pattern exit: $?\")",
+      "Bash(echo \"bad-lang exit: $?\")",
+      "Bash(shellcheck /home/wasd/.config/helix/scripts/c-function-usages.sh)",
+      "Bash(cat)",
+      "Bash(env -u ZELLIJ_PANE_ID bash /home/wasd/.config/helix/scripts/c-function-usages.sh no_such_function_xyz)",
+      "Bash(echo \"no-match exit: $?\")",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

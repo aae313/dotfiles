@@ -11,19 +11,13 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    pyprland.url = "github:hyprland-community/pyprland";
-
-    snappy-switcher = {
-      url = "github:OpalAayan/snappy-switcher";
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
 
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     helix.url = "github:helix-editor/helix";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";

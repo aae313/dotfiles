@@ -1,11 +1,18 @@
 _: {
   flake.nixosModules.xdg =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       inherit (lib.attrsets) mapAttrs;
       inherit (lib.generators) toINI;
       inherit (lib.lists) singleton;
       inherit (lib.strings) concatStringsSep;
+
+      inherit (config.local) user;
 
       browser = singleton "firefox-nightly.desktop";
 
@@ -46,6 +53,28 @@ _: {
 
       environment.etc."xdg/mimeapps.list".text = toINI { } {
         "Default Applications" = mapAttrs (_: v: concatStringsSep ";" v + ";") associations;
+      };
+
+      hjem.users.${user.name}.xdg.config.files = {
+        "user-dirs.conf".text = ''
+          enabled=False
+        '';
+
+        "user-dirs.dirs".text = ''
+          XDG_DESKTOP_DIR="${config.local.user.home}/misc"
+          XDG_DOCUMENTS_DIR="${config.local.user.home}/misc"
+          XDG_DOWNLOAD_DIR="${config.local.user.home}/Downloads"
+          XDG_MUSIC_DIR="${config.local.user.home}/misc"
+          XDG_PICTURES_DIR="${config.local.user.home}/misc"
+          XDG_PUBLICSHARE_DIR="${config.local.user.home}/misc"
+          XDG_TEMPLATES_DIR="${config.local.user.home}/misc"
+          XDG_VIDEOS_DIR="${config.local.user.home}/misc"
+          XDG_BOOKS_DIR="${config.local.user.home}/misc/books"
+          XDG_DEV_DIR="${config.local.user.home}/dev"        '';
+
+        "xdg-terminals.list".text = ''
+          foot.desktop
+        '';
       };
     };
 }

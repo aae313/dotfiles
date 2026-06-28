@@ -9,7 +9,6 @@ _: {
         pkgs.pwvucontrol
         pkgs.ticktick
         # pkgs.vesktop
-        pkgs.zathura
       ];
     };
 }

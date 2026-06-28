@@ -1,7 +1,30 @@
 { inputs, ... }:
 {
   flake.nixosModules.niri =
-    { pkgs, ... }:
+    {
+      config,
+      lib,
+      linkConfigDir,
+      pkgs,
+      ...
+    }:
+    let
+      inherit (lib.strings) optionalString;
+
+      inherit (config.local) user;
+
+      # The niri entrypoint is the only host-dependent file: on `light` it also
+      # pulls in the external-display layout. Generated here so the include set
+      # follows `networking.hostName`.
+      niriConfig = /* kdl */ ''
+        include "input.kdl"
+        ${optionalString (config.networking.hostName == "light") ''include "outputs.kdl"''}
+        include "appearance.kdl"
+        include "binds.kdl"
+        include "rules.kdl"
+        include "misc.kdl"
+      '';
+    in
     {
       imports = [ inputs.niri.nixosModules.niri ];
 
@@ -36,6 +59,10 @@
       programs.niri = {
         enable = true;
         package = pkgs.niri-unstable;
+      };
+
+      hjem.users.${user.name}.xdg.config.files = linkConfigDir "niri" // {
+        "niri/config.kdl".text = niriConfig;
       };
     };
 }

@@ -33,9 +33,6 @@ _: {
           EDITOR = "x";
           VISUAL = "x";
           SUDO_EDITOR = "x";
-          PAGER = "bat";
-          BAT_PAGER = "ov -F -H3";
-          MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";
           SYSTEMD_PAGER = "bat -l syslog -p --strip-ansi=auto";
           SYSTEMD_PAGERSECURE = "false";
         };
@@ -46,13 +43,9 @@ _: {
           NPM_CONFIG_INIT_MODULE = "${user.home}/.config/npm/config/npm-init.js";
           NPM_CONFIG_CACHE = "${user.home}/.cache/npm";
           NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
-          RIPGREP_CONFIG_PATH = "${user.home}/.config/ripgrep/config";
         };
       };
 
-      programs = {
-        fish.enable = true;
-        nano.enable = false;
-      };
+      programs.nano.enable = false;
     };
 }

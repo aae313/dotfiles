@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hjem for NixOS"
+  short_description: "Manage NixOS home files with Hjem"
+  default_prompt: "Use $hjem to configure my NixOS home files and user environment safely."

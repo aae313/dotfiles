@@ -41,8 +41,5 @@ gitgc:
     git reflog expire --expire-unreachable=now --all
     git gc --prune=now
 
-chezmoi:
-    chezmoi init --apply --ssh git@github.com:aae313/dotfiles.git
-
 push:
     set -l timestamp (date "+%Y-%m-%d %H:%M:%S"); read --prompt-str "Details: " extra; set -l extra (string trim -- "$extra"); set -l message; if test -z "$extra"; set message "$timestamp"; else; set message "$timestamp: $extra"; end; jj describe --message "$message"; and jj bookmark move main --to @; and jj git push --bookmark main

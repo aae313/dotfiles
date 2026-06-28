@@ -1,8 +1,10 @@
 _: {
   flake.nixosModules.fonts =
-    { lib, pkgs, ... }:
+    { config, lib, pkgs, ... }:
     let
       inherit (lib.lists) singleton;
+
+      inherit (config.local.theme) fonts;
     in
     {
       fonts = {
@@ -21,10 +23,10 @@ _: {
         enableDefaultPackages = false;
 
         fontconfig.defaultFonts = {
-          serif = singleton "Inter";
-          sansSerif = singleton "Inter";
-          monospace = singleton "JetBrains Mono Nerd Font";
-          emoji = singleton "Noto Color Emoji";
+          serif = singleton fonts.sans;
+          sansSerif = singleton fonts.sans;
+          monospace = singleton fonts.mono;
+          emoji = singleton fonts.emoji;
         };
       };
     };

@@ -7,10 +7,7 @@ _: {
       ...
     }:
     let
-      inherit (lib.attrsets) mapAttrs;
-      inherit (lib.generators) toINI;
       inherit (lib.lists) singleton;
-      inherit (lib.strings) concatStringsSep;
 
       inherit (config.local) user;
 
@@ -38,7 +35,6 @@ _: {
     in
     {
       environment.systemPackages = [
-        pkgs.mpv
         pkgs.shared-mime-info
         pkgs.xdg-desktop-portal
         pkgs.xdg-user-dirs
@@ -51,30 +47,32 @@ _: {
         config.common.default = "*";
       };
 
-      environment.etc."xdg/mimeapps.list".text = toINI { } {
-        "Default Applications" = mapAttrs (_: v: concatStringsSep ";" v + ";") associations;
-      };
+      hjem.users.${user.name} = {
+        packages = singleton pkgs.mpv;
 
-      hjem.users.${user.name}.xdg.config.files = {
-        "user-dirs.conf".text = ''
-          enabled=False
-        '';
+        xdg.mime-apps.default-applications = associations;
 
-        "user-dirs.dirs".text = ''
-          XDG_DESKTOP_DIR="${config.local.user.home}/misc"
-          XDG_DOCUMENTS_DIR="${config.local.user.home}/misc"
-          XDG_DOWNLOAD_DIR="${config.local.user.home}/Downloads"
-          XDG_MUSIC_DIR="${config.local.user.home}/misc"
-          XDG_PICTURES_DIR="${config.local.user.home}/misc"
-          XDG_PUBLICSHARE_DIR="${config.local.user.home}/misc"
-          XDG_TEMPLATES_DIR="${config.local.user.home}/misc"
-          XDG_VIDEOS_DIR="${config.local.user.home}/misc"
-          XDG_BOOKS_DIR="${config.local.user.home}/misc/books"
-          XDG_DEV_DIR="${config.local.user.home}/dev"        '';
+        xdg.config.files = {
+          "user-dirs.conf".text = ''
+            enabled=False
+          '';
 
-        "xdg-terminals.list".text = ''
-          foot.desktop
-        '';
+          "user-dirs.dirs".text = ''
+            XDG_DESKTOP_DIR="${config.local.user.home}/misc"
+            XDG_DOCUMENTS_DIR="${config.local.user.home}/misc"
+            XDG_DOWNLOAD_DIR="${config.local.user.home}/Downloads"
+            XDG_MUSIC_DIR="${config.local.user.home}/misc"
+            XDG_PICTURES_DIR="${config.local.user.home}/misc"
+            XDG_PUBLICSHARE_DIR="${config.local.user.home}/misc"
+            XDG_TEMPLATES_DIR="${config.local.user.home}/misc"
+            XDG_VIDEOS_DIR="${config.local.user.home}/misc"
+            XDG_BOOKS_DIR="${config.local.user.home}/misc/books"
+            XDG_DEV_DIR="${config.local.user.home}/dev"        '';
+
+          "xdg-terminals.list".text = ''
+            kitty.desktop
+          '';
+        };
       };
     };
 }

@@ -2,17 +2,18 @@ _: {
   flake.nixosModules.starship =
     {
       config,
+      lib,
       pkgs,
       ...
     }:
     let
+      inherit (lib.lists) singleton;
+
       inherit (config.local) user;
     in
     {
       hjem.users.${user.name} = {
-        packages = [
-          pkgs.starship
-        ];
+        packages = singleton pkgs.starship;
 
         xdg.config.files."starship.toml".generator = pkgs.writers.writeTOML "starship.toml";
         xdg.config.files."starship.toml".value = {

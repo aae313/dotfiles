@@ -1,12 +1,14 @@
 { inputs, ... }:
 {
   flake.nixosModules.ai-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       inherit (pkgs.stdenv.hostPlatform) system;
+
+      inherit (config.local) user;
     in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         pkgs.antigravity
         pkgs.opencode
         inputs.claude-code-nix.packages.${system}.default

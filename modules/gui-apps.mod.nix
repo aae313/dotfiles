@@ -1,8 +1,11 @@
 _: {
   flake.nixosModules.gui-apps =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.local) user;
+    in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         pkgs.anki
         pkgs.imv
         # pkgs.obsidian

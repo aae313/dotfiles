@@ -1,9 +1,17 @@
 _: {
   flake.nixosModules.gtk =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       inherit (lib.gvariant) mkInt32;
       inherit (lib.lists) singleton;
+
+      inherit (config.local) user;
+      inherit (config.local.theme) fonts;
 
       colloid = pkgs.colloid-gtk-theme.override {
         themeVariants = singleton "purple";
@@ -11,7 +19,7 @@ _: {
       };
     in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         pkgs.bibata-cursors
         colloid
         pkgs.tela-circle-icon-theme
@@ -30,9 +38,9 @@ _: {
             settings = {
               "org/gnome/desktop/interface" = {
                 color-scheme = "prefer-dark";
-                font-name = "Inter 11";
-                document-font-name = "Inter 11";
-                monospace-font-name = "JetBrainsMono Nerd Font 12";
+                font-name = "${fonts.sans} 11";
+                document-font-name = "${fonts.sans} 11";
+                monospace-font-name = "${fonts.mono} 12";
                 cursor-theme = "Bibata-Modern-Classic";
                 cursor-size = mkInt32 24;
                 gtk-theme = "Colloid-Purple-Dark-Nord";

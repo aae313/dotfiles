@@ -6,6 +6,7 @@ _: {
     }:
     let
       inherit (config.local) user;
+      inherit (config.local.theme) fonts;
     in
     {
       programs.foot = {
@@ -18,7 +19,7 @@ _: {
         box-drawings-uses-font-glyphs=yes
         locked-title=no
         shell=fish
-        font=JetBrainsMono Nerd Font:size=13
+        font=${fonts.mono}:size=13
 
         [cursor]
         style=beam

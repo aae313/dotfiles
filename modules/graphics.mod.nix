@@ -1,11 +1,18 @@
 _: {
   flake.nixosModules.graphics =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       inherit (lib.lists) singleton;
+
+      inherit (config.local) user;
     in
     {
-      environment.systemPackages = singleton pkgs.ddcutil;
+      hjem.users.${user.name}.packages = singleton pkgs.ddcutil;
 
       hardware.graphics.enable = true;
     };

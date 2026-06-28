@@ -20,8 +20,8 @@ _: {
 
         xdg.config.files."jj/config.toml".generator = pkgs.writers.writeTOML "jj-config.toml";
         xdg.config.files."jj/config.toml".value = {
-          user.email = "230780735+aae313@users.noreply.github.com";
-          user.name = "aae313";
+          user.email = user.email;
+          user.name = user.handle;
 
           aliases.",," = [
             "edit"
@@ -98,7 +98,7 @@ _: {
 
           merge-tools.mergiraf.program = getExe pkgs.mergiraf;
 
-          remotes."*".auto-track-bookmarks = "aae313/*";
+          remotes."*".auto-track-bookmarks = "${user.handle}/*";
 
           revsets.bookmark-advance-to = ''
             heads(::@ & ~description(exact:"") & (~empty() | merges()))
@@ -110,7 +110,7 @@ _: {
 
           signing.backend = "ssh";
           signing.behavior = "drop";
-          signing.key = "~/.ssh/id_ed25519.pub";
+          signing.key = "${user.home}/.ssh/id_ed25519.pub";
 
           ui.conflict-marker-style = "snapshot";
           ui.default-command = "log";

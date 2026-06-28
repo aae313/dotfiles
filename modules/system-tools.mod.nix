@@ -1,8 +1,11 @@
 _: {
   flake.nixosModules.system-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.local) user;
+    in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         pkgs.app2unit
         pkgs.carapace
         pkgs.direnv
@@ -10,13 +13,16 @@ _: {
         pkgs.file
         pkgs.libqalculate
         pkgs.nushell
+        pkgs.socat
+        pkgs.xdg-terminal-exec
+      ];
+
+      environment.systemPackages = [
         pkgs.pciutils
         pkgs.psmisc
-        pkgs.socat
         pkgs.sysstat
         pkgs.usbutils
         pkgs.util-linux
-        pkgs.xdg-terminal-exec
       ];
     };
 }

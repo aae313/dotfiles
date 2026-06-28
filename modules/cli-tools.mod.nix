@@ -1,12 +1,14 @@
 { inputs, ... }:
 {
   flake.nixosModules.cli-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       inherit (pkgs.stdenv.hostPlatform) system;
+
+      inherit (config.local) user;
     in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         inputs.hunk.packages.${system}.hunk
         pkgs.btop
         pkgs.fzf
@@ -20,7 +22,6 @@
         pkgs.scooter
         pkgs.zoxide
         pkgs.difftastic
-        inputs.helix.packages.${system}.default
       ];
     };
 }

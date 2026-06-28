@@ -23,7 +23,10 @@
 
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
 
-    helix.url = "github:helix-editor/helix";
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 

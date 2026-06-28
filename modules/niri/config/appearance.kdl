@@ -1,0 +1,88 @@
+layout {
+    background-color "#000000"
+    gaps 12
+    always-center-single-column
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.66667
+        proportion 0.33333
+    }
+
+    default-column-width {
+        proportion 0.5
+    }
+    focus-ring {
+        width 3
+        active-color "#1640b0"
+        inactive-color "#646464"
+        urgent-color "#ff5f59"
+        active-gradient from="#1640b0" to="#7030af" angle=45
+        inactive-gradient from="#646464" to="#535353" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#ff5f59" to="#ff6b55" angle=45
+            }
+
+    border {
+        off
+        width 2
+        active-color "#1640b0"
+        inactive-color "#646464"
+        urgent-color "#ff5f59"
+        active-gradient from="#1640b0" to="#7030af" angle=45
+        inactive-gradient from="#646464" to="#535353" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#ff5f59" to="#ff6b55" angle=45
+    }
+    tab-indicator {
+        on
+        // hide-when-single-tab
+        place-within-column
+        gap 5
+        width 4
+        length total-proportion=1.0
+        position "top"
+        gaps-between-tabs 2
+        corner-radius 8
+        active-color "#1640b0"
+        inactive-color "#646464"
+        urgent-color "#ff5f59"
+        active-gradient from="#1640b0" to="#7030af" angle=45
+        inactive-gradient from="#646464" to="#535353" angle=45 relative-to="workspace-view"
+        urgent-gradient from="#ff5f59" to="#ff6b55" angle=45
+    }
+
+    insert-hint {
+        on
+        color "#b6a0ff"
+        gradient from="#feacd0" to="#b6a0ff" angle=45 relative-to="workspace-view"
+    }
+
+
+        shadow {
+        off
+        softness 30
+        spread 5
+        offset x=0 y=5
+        draw-behind-window true
+        color "#0000004d"
+        inactive-color "#0000004d"
+    }
+}
+
+overview {
+    backdrop-color "#1e1e1e"
+
+    workspace-shadow {
+        softness 50
+        spread 20
+        offset x=0 y=10
+        color "#0007"
+    }
+}
+
+blur {
+    passes 2
+    offset 2
+    noise 0.02
+    saturation 1.5
+}

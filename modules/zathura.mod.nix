@@ -10,13 +10,16 @@ _: {
       inherit (lib.lists) singleton;
 
       inherit (config.local) user;
+      inherit (config.local.theme) fonts;
     in
     {
-      environment.systemPackages = singleton pkgs.zathura;
+      hjem.users.${user.name} = {
+        packages = singleton pkgs.zathura;
 
-      hjem.users.${user.name}.xdg.config.files."zathura/zathurarc".text = ''
-        set selection-clipboard clipboard
-        set font "JetBrains Mono 12"
-      '';
+        xdg.config.files."zathura/zathurarc".text = ''
+          set selection-clipboard clipboard
+          set font "${fonts.mono} 12"
+        '';
+      };
     };
 }

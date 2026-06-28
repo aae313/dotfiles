@@ -1,8 +1,11 @@
 _: {
   flake.nixosModules.dev-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.local) user;
+    in
     {
-      environment.systemPackages = [
+      hjem.users.${user.name}.packages = [
         pkgs.ast-grep
         pkgs.bash-language-server
         pkgs.fish-lsp

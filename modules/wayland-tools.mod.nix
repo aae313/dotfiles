@@ -1,9 +1,11 @@
 _: {
   flake.nixosModules.wayland-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.local) user;
+    in
     {
-      environment.systemPackages = [
-        pkgs.cliphist
+      hjem.users.${user.name}.packages = [
         pkgs.dex
         pkgs.libnotify
         pkgs.wl-clipboard

@@ -13,9 +13,6 @@
 
       inherit (config.local) user;
 
-      filesRoot = ../files;
-      configRoot = ../files/.config;
-
       relativeTo = root: path: lib.strings.removePrefix "./" (lib.path.removePrefix root path);
     in
     {
@@ -25,30 +22,22 @@
 
       hjem.users.${user.name}.enable = true;
 
-      # Shared linkers exposed to every program module so a config subtree can be
-      # adopted without enumerating each file. Home-relative keys are computed with
-      # `lib.path.removePrefix` (string stripping would leak store paths under
-      # impure eval).
+      # Shared linker exposed to every program module so a config subtree living
+      # next to its module can be adopted without enumerating each file. Keys are
+      # computed with `lib.path.removePrefix` (string stripping would leak store
+      # paths under impure eval).
       _module.args = {
-        # files/.config/<name>/** -> xdg.config.files, keyed relative to ~/.config.
-        linkConfigDir =
-          name:
-          listToAttrs (
-            map (path: nameValuePair (relativeTo configRoot path) { source = path; }) (
-              listFilesRecursive (configRoot + "/${name}")
-            )
-          );
+        inherit relativeTo;
 
-        # files/<dir>/** -> files, keyed relative to $HOME and marked executable.
-        linkExecutableDir =
-          dir:
+        # <src>/** -> xdg.config.files, keyed under <dest>/. `src` is a path
+        # literal supplied by the caller, so it resolves to that module's own
+        # directory.
+        linkConfigDir =
+          src: dest:
           listToAttrs (
-            map
-              (path: nameValuePair (relativeTo filesRoot path) {
-                source = path;
-                executable = true;
-              })
-              (listFilesRecursive (filesRoot + "/${dir}"))
+            map (path: nameValuePair "${dest}/${relativeTo src path}" { source = path; }) (
+              listFilesRecursive src
+            )
           );
       };
     };

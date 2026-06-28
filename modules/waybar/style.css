@@ -1,0 +1,79 @@
+@define-color color-bg rgba(0, 0, 0, 0.82);
+@define-color color-fg #ffffff;
+@define-color color-tooltip-bg #1e1e1e;
+@define-color color-tooltip-fg #ffffff;
+
+* {
+  font-family: "Inter", "Symbols Nerd Font", sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @color-bg;
+  border: none;
+  margin: 5px;
+}
+
+window#waybar>* {
+  margin: 4px 4px 0px 4px;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#clock,
+#custom-niri-taskbar {
+  border-radius: 100px;
+  color: @color-fg;
+  min-height: 0;
+}
+
+#clock {
+  padding: 0px 8px;
+}
+
+#image {
+  margin-left: 6px;
+  margin-right: 2px;
+  padding: 0px;
+  min-height: 0;
+}
+
+#custom-niri-taskbar {
+  font-family: "Symbols Nerd Font", "Inter", sans-serif;
+  font-size: 14px;
+  padding: 0px 6px;
+  margin: 0px;
+  background: none;
+}
+
+#custom-niri-taskbar.empty {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0px;
+  border-color: transparent;
+  border: none;
+  background-color: transparent;
+}
+
+tooltip {
+  background-color: @color-tooltip-bg;
+  border: none;
+  border-radius: 20px;
+}
+
+tooltip decoration,
+tooltip decoration:backdrop {
+  box-shadow: none;
+}
+
+tooltip label {
+  color: @color-tooltip-fg;
+  padding: 3px 7px;
+}

@@ -43,16 +43,21 @@
     };
 
   };
-  outputs =
-    {
-      flake-parts,
-      ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
 
-      flake = {
-        nixosConfigurations = import ./hosts inputs;
-      };
-    };
+  outputs =
+    { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { lib, ... }:
+      let
+        inherit (lib.filesystem) listFilesRecursive;
+        inherit (lib.lists) filter;
+        inherit (lib.strings) hasSuffix;
+      in
+      {
+        systems = [ "x86_64-linux" ];
+
+        imports =
+          listFilesRecursive ./modules ++ listFilesRecursive ./hosts |> filter (hasSuffix ".mod.nix");
+      }
+    );
 }

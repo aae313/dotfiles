@@ -1,6 +1,0 @@
-{ ... }:
-{
-  imports = [
-    ./local-user.nix
-  ];
-}

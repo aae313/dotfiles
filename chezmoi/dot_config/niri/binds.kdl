@@ -1,6 +1,6 @@
 binds {
     // === Apps ===
-    Mod+Return hotkey-overlay-title="OpenTerminal" {
+    Mod+Q hotkey-overlay-title="OpenTerminal" {
         spawn "nirius" "focus-or-spawn" "-a" "foot" "env" "START_ZELLIJ=1" "app2unit-term"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
@@ -80,9 +80,12 @@ binds {
     Mod+Shift+Q {
         close-window
     }
-    Mod+Q {
+    Mod+Return {
         maximize-column
-}
+    }
+    Mod+Shift+Return {
+        fullscreen-window
+    }
     Mod+Space {
         switch-preset-column-width
     }
@@ -326,6 +329,9 @@ switch-preset-column-width-back
     }
     Mod+Shift+9 {
         move-column-to-workspace 9
+    }
+    Mod+MouseBack {
+        maximize-column
     }
     // === Scroll ===
     Mod+WheelScrollDown cooldown-ms=150 {

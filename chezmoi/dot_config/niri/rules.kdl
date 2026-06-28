@@ -58,7 +58,7 @@ window-rule {
     }
 }
 
-// === App-specific ===
+
 window-rule {
     match app-id="^footclient$"
 

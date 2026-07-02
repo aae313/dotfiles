@@ -56,7 +56,11 @@ _: {
         "/boot" = {
           device = "/dev/disk/by-label/BOOT";
           fsType = "vfat";
-          options = singleton "noatime";
+          options = [
+            "noatime"
+            "fmask=0177"
+            "dmask=0077"
+          ];
         };
       };
       swapDevices = [ ];

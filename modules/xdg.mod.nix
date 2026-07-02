@@ -58,19 +58,19 @@ _: {
           '';
 
           "user-dirs.dirs".text = ''
-            XDG_DESKTOP_DIR="${config.local.user.home}/misc"
-            XDG_DOCUMENTS_DIR="${config.local.user.home}/misc"
-            XDG_DOWNLOAD_DIR="${config.local.user.home}/Downloads"
-            XDG_MUSIC_DIR="${config.local.user.home}/misc"
-            XDG_PICTURES_DIR="${config.local.user.home}/misc"
-            XDG_PUBLICSHARE_DIR="${config.local.user.home}/misc"
-            XDG_TEMPLATES_DIR="${config.local.user.home}/misc"
-            XDG_VIDEOS_DIR="${config.local.user.home}/misc"
-            XDG_BOOKS_DIR="${config.local.user.home}/misc/books"
-            XDG_DEV_DIR="${config.local.user.home}/dev"        '';
+            XDG_DESKTOP_DIR="${user.home}/misc"
+            XDG_DOCUMENTS_DIR="${user.home}/misc"
+            XDG_DOWNLOAD_DIR="${user.home}/Downloads"
+            XDG_MUSIC_DIR="${user.home}/misc"
+            XDG_PICTURES_DIR="${user.home}/misc"
+            XDG_PUBLICSHARE_DIR="${user.home}/misc"
+            XDG_TEMPLATES_DIR="${user.home}/misc"
+            XDG_VIDEOS_DIR="${user.home}/misc"
+            XDG_BOOKS_DIR="${user.home}/misc/books"
+            XDG_DEV_DIR="${user.home}/dev"        '';
 
           "xdg-terminals.list".text = ''
-            kitty.desktop
+            foot.desktop
           '';
         };
       };

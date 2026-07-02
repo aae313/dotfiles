@@ -8,6 +8,7 @@
       inherit (config.local) user;
     in
     {
+      programs.ydotool.enable = true;
       hjem.users.${user.name}.packages = [
         inputs.hunk.packages.${system}.hunk
         pkgs.btop

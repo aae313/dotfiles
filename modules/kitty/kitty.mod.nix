@@ -8,14 +8,13 @@ _: {
     }:
     let
       inherit (lib.attrsets) mapAttrsToList;
-      inherit (lib.lists) singleton;
-      inherit (lib.strings) concatLines;
+      inherit (lib.lists) elemAt singleton;
+      inherit (lib.strings) concatLines splitString;
 
       inherit (config.local) user;
       inherit (config.local.theme) fonts;
 
       settings = {
-        window_padding_width = "6 8 6 8";
         active_tab_font_style = "bold";
         allow_remote_control = "socket-only";
         bold_font = "auto";
@@ -30,7 +29,7 @@ _: {
         enabled_layouts = "tall:bias=50;full_size=1;mirrored=false,stack,splits";
         focus_follows_mouse = "yes";
         font_family = ''family="${fonts.mono}"'';
-        font_size = "11";
+        font_size = "12";
         hide_window_decorations = "yes";
         inactive_tab_font_style = "normal";
         inactive_text_alpha = "0.7";
@@ -101,6 +100,20 @@ _: {
           "map ctrl+alt+shift+f kitten choose-files"
         ];
 
+      editorLockMaps =
+        (map (
+          line:
+          let
+            parts = splitString " " line;
+            key = elemAt parts 1;
+          in
+          "map --when-focus-on var:in_editor ${key} no_op"
+        ) maps)
+        ++ [
+          "map ctrl+shift+c copy_to_clipboard"
+          "map ctrl+shift+v paste_from_clipboard"
+        ];
+
       colors = {
         background = "#000000";
         foreground = "#ffffff";
@@ -151,6 +164,8 @@ _: {
 
           clear_all_shortcuts yes
           ${concatLines maps}
+
+          ${concatLines editorLockMaps}
 
           ${concatLines (mapAttrsToList toKittyLine colors)}
         '';

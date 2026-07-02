@@ -1,10 +1,16 @@
-_: {
+{ inputs, ... }:
+{
   flake.nixosModules.kernel =
     { lib, ... }:
     let
+      inherit (lib.lists) singleton;
       inherit (lib.strings) fileContents;
     in
     {
+      # Provides `pkgs.cachyosKernels`, from which each host picks its
+      # `boot.kernelPackages` via `mkHost`.
+      nixpkgs.overlays = singleton inputs.nix-cachyos-kernel.overlays.pinned;
+
       boot = {
         kernel.sysctl = {
           # Prefer swap usage under memory pressure

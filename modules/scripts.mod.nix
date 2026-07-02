@@ -1,11 +1,10 @@
-_: {
+{ config, ... }:
+let
+  inherit (config.flake.lib) relativeTo;
+in
+{
   flake.nixosModules.scripts =
-    {
-      config,
-      lib,
-      relativeTo,
-      ...
-    }:
+    { config, lib, ... }:
     let
       inherit (lib.attrsets) listToAttrs nameValuePair;
       inherit (lib.filesystem) listFilesRecursive;
@@ -16,7 +15,7 @@ _: {
       # script edits take effect without a rebuild. `source` is a string,
       # which hjem links out-of-store as-is.
       src = ../scripts;
-      dir = "${user.home}/nixos/scripts";
+      dir = "${user.flakeDir}/scripts";
     in
     {
       hjem.users.${user.name}.files = listToAttrs (

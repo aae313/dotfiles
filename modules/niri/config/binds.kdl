@@ -1,6 +1,6 @@
 binds {
     Mod+Q hotkey-overlay-title="OpenTerminal" {
-        spawn "nirius" "focus-or-spawn" "-a" "kitty" "app2unit-term"
+        spawn "nirius" "focus-or-spawn" "-a" "foot" "env" "START_ZELLIJ=1" "app2unit-term"
     }
     Mod+Ctrl+Q hotkey-overlay-title="OpenTerminal" {
         spawn "xdg-terminal-exec"
@@ -17,15 +17,15 @@ binds {
     Mod+B hotkey-overlay-title="OpenBookmark" {
         spawn "open-bookmark"
     }
-    Mod+Shift+Semicolon {
+    Mod+Semicolon {
         spawn "fuzzel"
     }
     Mod+V repeat=false {
         spawn-sh "cliphist list | fuzzel --dmenu --font='monospace:size=9' --width=120 | cliphist decode | wl-copy"
     }
-    Mod+E {
-        spawn "nirius" "focus-or-spawn" "-a" "neovide" "nv"
-    }
+    // Mod+E {
+    //     no
+    // }
     Mod+A {
         spawn "niri-static-scratchpad" "org.mozilla.firefox.webapp-f1a423e1-22ba-401c-840f-7036c59c0ecb" "/home/wasd/.local/share/applications/org.mozilla.firefox.webapp-f1a423e1-22ba-401c-840f-7036c59c0ecb.desktop"
     }
@@ -84,7 +84,7 @@ binds {
         center-window
     }
     Mod+Ctrl+Space {
-        spawn-sh "niri msg action focus-column-left; niri msg action focus-column-right"
+        spawn "/home/wasd/nixos/modules/niri/scripts/cycle-two-column-widths.py"
     }
     Mod+Shift+W {
         switch-preset-column-width-back
@@ -105,10 +105,10 @@ binds {
         set-column-width "50%"
     }
     Mod+Shift+Minus {
-        set-window-height "-10%"
+        spawn "/home/wasd/nixos/modules/niri/scripts/resize-two-column-widths.py" "-"
     }
     Mod+Shift+Equal {
-        set-window-height "+10%"
+        spawn "/home/wasd/nixos/modules/niri/scripts/resize-two-column-widths.py" "+"
     }
     Mod+C {
         center-column

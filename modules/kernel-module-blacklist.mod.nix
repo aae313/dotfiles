@@ -7,7 +7,7 @@ _: {
       "netrom"
       "rose"
       # Old or rare or insufficiently audited filesystems
-      "adfs" # Active Directory Federation Services
+      "adfs" # Acorn Disc Filing System
       "affs" # Amiga Fast File System
       "befs" # "Be File System"
       "bfs" # BFS, used by SCO UnixWare OS for the /stand slice

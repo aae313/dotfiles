@@ -1,10 +1,10 @@
-_: {
+{ config, ... }:
+let
+  inherit (config.flake.lib) linkConfigDir;
+in
+{
   flake.nixosModules.fish =
-    {
-      config,
-      linkConfigDir,
-      ...
-    }:
+    { config, ... }:
     let
       inherit (config.local) user;
     in

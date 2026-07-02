@@ -1,0 +1,4 @@
+interface:
+  display_name: "Helix Workflow"
+  short_description: "Compose Helix commands and terminal workflows"
+  default_prompt: "Use $helix-workflow to design or troubleshoot a Helix command-driven workflow."

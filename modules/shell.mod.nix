@@ -30,11 +30,9 @@ _: {
           XDG_DATA_HOME = "${user.home}/.local/share";
           XDG_STATE_HOME = "${user.home}/.local/state";
 
-          EDITOR = "nv";
-          VISUAL = "nv";
-          SUDO_EDITOR = "nv";
-          SYSTEMD_PAGER = "bat -l syslog -p --strip-ansi=auto";
-          SYSTEMD_PAGERSECURE = "false";
+          EDITOR = "hx";
+          VISUAL = "hx";
+          SUDO_EDITOR = "hx";
         };
 
         variables = {

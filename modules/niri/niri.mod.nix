@@ -1,14 +1,17 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  inherit (config.flake.lib) linkConfigDir;
+in
 {
   flake.nixosModules.niri =
     {
       config,
       lib,
-      linkConfigDir,
       pkgs,
       ...
     }:
     let
+      inherit (lib.lists) singleton;
       inherit (lib.strings) optionalString;
 
       inherit (config.local) user;
@@ -23,7 +26,7 @@
       '';
     in
     {
-      imports = [ inputs.niri.nixosModules.niri ];
+      imports = singleton inputs.niri.nixosModules.niri;
 
       nixpkgs.overlays = [
         inputs.niri.overlays.niri

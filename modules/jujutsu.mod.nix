@@ -116,7 +116,7 @@ _: {
           ui.default-command = "log";
           ui.diff-editor = ":builtin";
           ui.diff-formatter = [
-            "difft"
+            (getExe pkgs.difftastic)
             "--color"
             "always"
             "$left"

@@ -1,4 +1,8 @@
-_: {
+{ config, ... }:
+let
+  inherit (config.flake.lib) linkConfigDir;
+in
+{
   flake.nixosModules.waybar =
     {
       config,
@@ -16,14 +20,6 @@ _: {
         pkgs.jq
       ];
 
-      hjem.users.${user.name}.xdg.config.files = {
-        "waybar/config.jsonc".source = ./config.jsonc;
-        "waybar/style.css".source = ./style.css;
-        "waybar/nixos.svg".source = ./nixos.svg;
-        "waybar/waybar-niri-taskbar" = {
-          source = ./waybar-niri-taskbar;
-          executable = true;
-        };
-      };
+      hjem.users.${user.name}.xdg.config.files = linkConfigDir ./config "waybar";
     };
 }

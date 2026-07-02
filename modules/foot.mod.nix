@@ -19,7 +19,7 @@ _: {
         box-drawings-uses-font-glyphs=yes
         locked-title=no
         shell=fish
-        font=${fonts.mono}:size=13
+        font=${fonts.mono}:size=12
 
         [cursor]
         style=beam

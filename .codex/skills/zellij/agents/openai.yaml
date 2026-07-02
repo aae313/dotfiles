@@ -1,0 +1,4 @@
+interface:
+  display_name: "Zellij Automation"
+  short_description: "Automate Zellij panes, sessions, pipes, and tools"
+  default_prompt: "Use $zellij to build a reproducible CLI workflow that coordinates Zellij panes, Helix, and external developer tools."

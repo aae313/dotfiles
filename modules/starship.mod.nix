@@ -1,4 +1,5 @@
-_: {
+{ inputs, ... }:
+{
   flake.nixosModules.starship =
     {
       config,
@@ -8,8 +9,12 @@ _: {
     }:
     let
       inherit (lib.lists) singleton;
+      inherit (lib.meta) getExe;
 
       inherit (config.local) user;
+      inherit (pkgs.stdenv.hostPlatform) system;
+
+      jjStarship = getExe inputs.jj-starship.packages.${system}.default;
     in
     {
       hjem.users.${user.name} = {
@@ -51,8 +56,8 @@ _: {
 
           custom.jj = {
             format = "$output ";
-            shell = [ "jj-starship" ];
-            when = "jj-starship detect";
+            shell = singleton jjStarship;
+            when = "${jjStarship} detect";
           };
 
           directory = {

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+column=$(
+	niri msg --json focused-window |
+		jq -r '.layout.pos_in_scrolling_layout[0] // empty'
+)
+
+if [[ ! $column =~ ^[0-9]+$ ]]; then
+	echo "Could not find column number" >&2
+	exit 1
+fi
+
+niri msg action focus-column 2
+niri msg action move-column-to-index 3
+niri msg action focus-column 1
+niri msg action focus-column "$column"

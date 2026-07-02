@@ -30,18 +30,18 @@
         (final: previous: {
           nirius = previous.nirius.overrideAttrs (
             finalAttrs: _previousAttrs: {
-              version = "0.7.3-unstable-2026-06-22";
+              version = "0.8.0";
 
               src = final.fetchFromSourcehut {
                 owner = "~tsdh";
                 repo = "nirius";
-                rev = "f924d407c01b3f12e630d2d07ec281e203efc341";
-                hash = "sha256-UYfY/ogIUuk9+qhPfky9jjLONY7otF+2msP2pY/Fruk=";
+                rev = "5708cbd8a22b6e8b8073fcf5bffc8069477a145b";
+                hash = "sha256-hLrGdeRDhNC7xyG0IIQN1A+O8WzqIZqIRZ04fkLfANs=";
               };
 
               cargoDeps = final.rustPlatform.fetchCargoVendor {
                 inherit (finalAttrs) pname src version;
-                hash = "sha256-jLT+RGOdI5L3UEc+z71WhS+mo9OlBPLauyj7Sv/25hE=";
+                hash = "sha256-3d/U5xsOPV5XzZuLNvkV4BYCfzrpFCol5p8Ras3eCn8=";
               };
             }
           );

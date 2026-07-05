@@ -19,7 +19,7 @@ _: {
         xdg.config.files."fuzzel/fuzzel.ini".text = /* ini */ ''
           [main]
           font=${fonts.mono}:size=14
-          terminal=footclient -e
+          terminal=kitty -e
           layer=overlay
           launch-prefix='app2unit --fuzzel-compat --'
           prompt='>> '

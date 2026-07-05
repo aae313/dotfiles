@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-want=(foot firefox-nightly)
+want=(kitty firefox-nightly)
 
 get_id() {
 	local app_id=$1

@@ -29,7 +29,7 @@
           scan_timeout = 2;
 
           c = {
-            detect_files = [ "Makefile" ];
+            detect_files = singleton "Makefile";
             format = "[$symbol$version]($style) ";
             style = "bold context";
           };

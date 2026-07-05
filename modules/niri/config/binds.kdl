@@ -1,6 +1,6 @@
 binds {
     Mod+Q hotkey-overlay-title="OpenTerminal" {
-        spawn "nirius" "focus-or-spawn" "-a" "foot" "env" "START_ZELLIJ=1" "app2unit-term"
+        spawn "nirius" "focus-or-spawn" "-a" "kitty" "app2unit-term"
     }
     Mod+Ctrl+Q hotkey-overlay-title="OpenTerminal" {
         spawn "xdg-terminal-exec"

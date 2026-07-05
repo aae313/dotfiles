@@ -36,6 +36,7 @@ _: {
 
 
         [colors-dark]
+        alpha=0.75
         cursor=ffffff 44df44
         foreground=ffffff
         background=000000

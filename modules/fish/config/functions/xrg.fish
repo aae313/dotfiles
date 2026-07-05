@@ -6,5 +6,5 @@ function xrg
 
     set -f file (command rg --files-with-matches -- $argv | command fzf --exit-0 --preview 'bat --style=numbers --color=always {}')
     test -n "$file"; or return
-    x $file
+    nv $file
 end

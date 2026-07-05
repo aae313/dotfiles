@@ -8,6 +8,7 @@ _: {
     }:
     let
       inherit (config.local) user;
+      inherit (lib.lists) singleton;
       inherit (lib.meta) getExe;
     in
     {
@@ -32,9 +33,9 @@ _: {
             "@-"
           ];
 
-          aliases.a = [ "abandon" ];
+          aliases.a = singleton "abandon";
 
-          aliases.c = [ "commit" ];
+          aliases.c = singleton "commit";
           aliases.ci = [
             "commit"
             "--interactive"
@@ -45,9 +46,9 @@ _: {
             "clone"
           ];
 
-          aliases.d = [ "diff" ];
+          aliases.d = singleton "diff";
 
-          aliases.e = [ "edit" ];
+          aliases.e = singleton "edit";
 
           aliases.f = [
             "git"
@@ -59,7 +60,7 @@ _: {
             "init"
           ];
 
-          aliases.l = [ "log" ];
+          aliases.l = singleton "log";
           aliases.la = [
             "log"
             "--revisions"
@@ -71,27 +72,27 @@ _: {
             "push"
           ];
 
-          aliases.r = [ "rebase" ];
+          aliases.r = singleton "rebase";
 
-          aliases.res = [ "resolve" ];
+          aliases.res = singleton "resolve";
 
-          aliases.resa = [ "resolve-ast" ];
+          aliases.resa = singleton "resolve-ast";
           aliases.resolve-ast = [
             "resolve"
             "--tool"
             "${getExe pkgs.mergiraf}"
           ];
 
-          aliases.s = [ "squash" ];
+          aliases.s = singleton "squash";
 
-          aliases.sh = [ "show" ];
+          aliases.sh = singleton "show";
 
           aliases.si = [
             "squash"
             "--interactive"
           ];
 
-          aliases.u = [ "undo" ];
+          aliases.u = singleton "undo";
 
           git.push = "origin";
           git.sign-on-push = true;
@@ -100,11 +101,11 @@ _: {
 
           remotes."*".auto-track-bookmarks = "${user.handle}/*";
 
-          revsets.bookmark-advance-to = ''
+          revsets.bookmark-advance-to = /* jj-revset */ ''
             heads(::@ & ~description(exact:"") & (~empty() | merges()))
           '';
 
-          revsets.log = ''
+          revsets.log = /* jj-revset */ ''
             present(@) | present(trunk()) | ancestors(remote_bookmarks().. | @.., 8)
           '';
 

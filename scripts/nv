@@ -1,0 +1,196 @@
+#!/usr/bin/env bash
+set -euo pipefail
+shopt -s inherit_errexit
+
+# nv — single-instance Neovide launcher. Forwards paths to the Neovim server
+# on a fixed socket when one is alive, otherwise starts Neovide listening on
+# it. Accepts file and directory paths only; a directory opens an fzf pick.
+
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+socket_path() {
+  [[ -n "${XDG_RUNTIME_DIR:-}" ]] || return 1
+  printf '%s\n' "$XDG_RUNTIME_DIR/nvim.sock"
+}
+
+server_alive() {
+  local socket="$1"
+  local status=0
+
+  [[ -S "$socket" ]] || return 1
+  timeout 2 nvim --server "$socket" --remote-expr 1 </dev/null >/dev/null 2>&1 || status=$?
+
+  ((status == 0)) && return 0
+  ((status == 124)) && die "nv: nvim server is not responding: $socket"
+  return 1
+}
+
+wait_for_server() {
+  local socket="$1"
+  local attempt
+
+  for ((attempt = 0; attempt < 50; attempt++)); do
+    if server_alive "$socket"; then
+      return
+    fi
+    sleep 0.2
+  done
+
+  die "nv: neovide did not start a server at: $socket"
+}
+
+expand_path() {
+  local path="$1"
+
+  # Callers may forward unexpanded tildes, which realpath would treat as
+  # literal file names.
+  if [[ "$path" == "~" ]]; then
+    path="$HOME"
+  elif [[ "$path" == \~/* ]]; then
+    path="$HOME/${path#\~/}"
+  fi
+
+  realpath --canonicalize-missing -- "$path"
+}
+
+pick_file() {
+  local directory="$1"
+  local selection
+
+  # fzf interacts through /dev/tty; stdout is the capture pipe here, so a
+  # [[ -t 1 ]] test would misfire.
+  { : </dev/tty; } 2>/dev/null ||
+    die "nv: picking from a directory requires a terminal: $directory"
+
+  selection="$(fd . "$directory" --type f | fzf)" || die "nv: no file selected"
+  [[ -n "$selection" ]] || die "nv: no file selected"
+  printf '%s\n' "$selection"
+}
+
+resolve_path() {
+  local target="$1"
+  local path
+
+  path="$(expand_path "$target")"
+
+  if [[ -d "$path" ]]; then
+    path="$(pick_file "$path")"
+    path="$(expand_path "$path")"
+  fi
+
+  printf '%s\n' "$path"
+}
+
+focus_neovide() {
+  nirius focus --app-id neovide >/dev/null 2>&1 || true
+}
+
+wait_for_neovide_window() {
+  local line window_id
+
+  # The event stream opens with a complete window snapshot before incremental
+  # updates, so subscribing after the spawn cannot miss the window.
+  while IFS= read -r line; do
+    window_id="$(jq --raw-output '
+      [
+        (.WindowsChanged.windows // [])[],
+        (.WindowOpenedOrChanged.window // empty)
+      ]
+      | map(select(.app_id == "neovide"))
+      | first
+      | .id // empty
+    ' <<<"$line")"
+
+    if [[ -n "$window_id" ]]; then
+      printf '%s\n' "$window_id"
+      return
+    fi
+  done < <(timeout 5 niri msg --json event-stream 2>/dev/null)
+
+  return 1
+}
+
+place_neovide_column() {
+  local window_id=""
+
+  window_id="$(wait_for_neovide_window)" || true
+
+  if [[ -z "$window_id" ]]; then
+    printf 'nv: neovide window did not appear; skipped placement\n' >&2
+    return
+  fi
+
+  niri msg action focus-window --id "$window_id"
+  niri msg action move-column-to-first
+}
+
+open_with_new_server() {
+  local socket="$1"
+  shift
+
+  rm --force "$socket"
+  # Close the lock fd for the spawn chain: long-lived descendants (e.g.
+  # wl-copy spawned by nvim's clipboard provider) inherit it and would hold
+  # the flock long after nv and neovide exit.
+  app2unit -- neovide "$@" -- --listen "$socket" {lock_fd}>&-
+  wait_for_server "$socket"
+}
+
+open_remote() {
+  local socket="$1"
+  shift
+
+  local output
+  output="$(timeout 5 nvim --server "$socket" --remote "$@" </dev/null 2>&1)" ||
+    die "nv: remote open failed: $output"
+  focus_neovide
+}
+
+main() {
+  local socket
+
+  if ! socket="$(socket_path)"; then
+    exec nvim "$@"
+  fi
+
+  local paths=()
+  local argument
+  for argument in "$@"; do
+    if [[ "$argument" == [-+]* ]]; then
+      die "nv: only file and directory paths are accepted: $argument"
+    fi
+    paths+=("$(resolve_path "$argument")")
+  done
+
+  # Pick before taking the lock so an open fzf cannot block other nv calls.
+  if (($# == 0)) && server_alive "$socket"; then
+    paths=("$(resolve_path "$PWD")")
+  fi
+
+  local lock_fd
+  exec {lock_fd}>"$socket.lock"
+  flock --timeout 10 "$lock_fd" ||
+    die "nv: timed out waiting for the nv lock: $socket.lock"
+
+  if server_alive "$socket"; then
+    if ((${#paths[@]} == 0)); then
+      focus_neovide
+      return
+    fi
+
+    open_remote "$socket" "${paths[@]}"
+    return
+  fi
+
+  open_with_new_server "$socket" "${paths[@]}"
+
+  # Release before the placement wait (up to 5 s) so queued nv calls can
+  # forward as soon as the server is up.
+  exec {lock_fd}>&-
+  place_neovide_column
+}
+
+main "$@"

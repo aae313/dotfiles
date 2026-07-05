@@ -21,7 +21,7 @@ _: {
         packages = singleton pkgs.bat;
 
         xdg.config.files = {
-          "bat/config".text = ''
+          "bat/config".text = /* conf */ ''
             --style="plain"
             --theme=modus
             --wrap=never

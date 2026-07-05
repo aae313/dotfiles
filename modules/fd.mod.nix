@@ -15,7 +15,7 @@ _: {
       hjem.users.${user.name} = {
         packages = singleton pkgs.fd;
 
-        xdg.config.files."fd/ignore".text = ''
+        xdg.config.files."fd/ignore".text = /* gitignore */ ''
           .git/
           .jj/
           .cache/

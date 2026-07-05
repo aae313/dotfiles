@@ -10,7 +10,7 @@ if [[ ! -f "$appearance_file" ]]; then
 fi
 
 setting_pattern='^[[:space:]]*center-focused-column[[:space:]]+"(never|always)"[[:space:]]*$'
-matches="$(grep -Ec "$setting_pattern" "$appearance_file" || true)"
+matches="$(grep --extended-regexp --count "$setting_pattern" "$appearance_file" || true)"
 
 if [[ "$matches" -ne 1 ]]; then
   printf 'niri-toggle-center-focused-column: expected exactly one supported center-focused-column setting in %s, found %s\n' "$appearance_file" "$matches" >&2
@@ -18,7 +18,7 @@ if [[ "$matches" -ne 1 ]]; then
 fi
 
 current="$(
-  sed -nE "s/$setting_pattern/\\1/p" "$appearance_file"
+  sed --quiet --regexp-extended "s/$setting_pattern/\\1/p" "$appearance_file"
 )"
 
 case "$current" in
@@ -48,4 +48,4 @@ mv "$tmp" "$appearance_file"
 trap - EXIT
 
 niri msg action load-config-file
-notify-send -t 1000 "center-focused-column: $next_value" || true
+notify-send --expire-time 1000 "center-focused-column: $next_value" || true

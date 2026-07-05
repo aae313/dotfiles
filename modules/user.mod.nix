@@ -7,6 +7,7 @@ _: {
       ...
     }:
     let
+      inherit (lib.lists) singleton;
       inherit (lib.options) mkOption;
       inherit (lib.types) str;
 
@@ -46,9 +47,7 @@ _: {
           isNormalUser = true;
           hashedPasswordFile = "/persist/passwd";
           shell = pkgs.fish;
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqPLz1VVjaPGsWaeAUnajDs/1awhmQLluvf+J+O9BOa light"
-          ];
+          openssh.authorizedKeys.keys = singleton "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqPLz1VVjaPGsWaeAUnajDs/1awhmQLluvf+J+O9BOa light";
           extraGroups = [
             "ydotool"
             "input"

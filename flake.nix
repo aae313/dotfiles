@@ -23,9 +23,7 @@
 
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
 
-    helix = {
-      url = "github:helix-editor/helix";
-    };
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
@@ -57,11 +55,11 @@
       { lib, ... }:
       let
         inherit (lib.filesystem) listFilesRecursive;
-        inherit (lib.lists) filter;
+        inherit (lib.lists) filter singleton;
         inherit (lib.strings) hasSuffix;
       in
       {
-        systems = [ "x86_64-linux" ];
+        systems = singleton "x86_64-linux";
 
         imports =
           listFilesRecursive ./modules ++ listFilesRecursive ./hosts |> filter (hasSuffix ".mod.nix");

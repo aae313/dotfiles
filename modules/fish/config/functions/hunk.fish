@@ -1,3 +1,3 @@
 function hunk
-    command env EDITOR=x hunk $argv
+    command env EDITOR=nv hunk $argv
 end

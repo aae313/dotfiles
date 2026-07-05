@@ -17,7 +17,7 @@ _: {
       hjem.users.${user.name} = {
         packages = singleton pkgs.ripgrep;
 
-        xdg.config.files."ripgrep/config".text = ''
+        xdg.config.files."ripgrep/config".text = /* conf */ ''
           --smart-case
           --glob=!{/proc,*.lock}
         '';

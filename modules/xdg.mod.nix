@@ -29,6 +29,7 @@ _: {
         "audio/*" = singleton "mpv.desktop";
         "video/*" = singleton "mpv.desktop";
         "image/*" = singleton "imv.desktop";
+        "text/*" = singleton "nv.desktop";
         "application/json" = browser;
         "inode/directory" = singleton "yazi.desktop";
       };
@@ -53,11 +54,11 @@ _: {
         xdg.mime-apps.default-applications = associations;
 
         xdg.config.files = {
-          "user-dirs.conf".text = ''
+          "user-dirs.conf".text = /* conf */ ''
             enabled=False
           '';
 
-          "user-dirs.dirs".text = ''
+          "user-dirs.dirs".text = /* conf */ ''
             XDG_DESKTOP_DIR="${user.home}/misc"
             XDG_DOCUMENTS_DIR="${user.home}/misc"
             XDG_DOWNLOAD_DIR="${user.home}/Downloads"
@@ -67,10 +68,11 @@ _: {
             XDG_TEMPLATES_DIR="${user.home}/misc"
             XDG_VIDEOS_DIR="${user.home}/misc"
             XDG_BOOKS_DIR="${user.home}/misc/books"
-            XDG_DEV_DIR="${user.home}/dev"        '';
+            XDG_DEV_DIR="${user.home}/dev"
+          '';
 
-          "xdg-terminals.list".text = ''
-            foot.desktop
+          "xdg-terminals.list".text = /* conf */ ''
+            kitty.desktop
           '';
         };
       };

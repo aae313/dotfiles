@@ -7,16 +7,40 @@ _: {
       ...
     }:
     let
-      inherit (lib.attrsets) mapAttrsToList;
-      inherit (lib.lists) elemAt singleton;
-      inherit (lib.strings) concatLines splitString;
+      inherit (lib.attrsets) attrNames mapAttrsToList;
+      inherit (lib.lists) subtractLists;
+      inherit (lib.meta) getExe;
+      inherit (lib.strings) concatLines;
 
       inherit (config.local) user;
       inherit (config.local.theme) fonts;
 
+      activeBackground = "#000000";
+      inactiveBackground = "#0d0e1c";
+
+      inactiveBgWatcher = pkgs.writeText "kitty-inactive-bg.py" ''
+        from typing import Any
+
+        from kitty.boss import Boss
+        from kitty.window import Window
+
+        ACTIVE_BG = "${activeBackground}"
+        INACTIVE_BG = "${inactiveBackground}"
+
+        def set_background(boss: Boss, window: Window, is_focused: bool) -> None:
+            background = ACTIVE_BG if is_focused else INACTIVE_BG
+            boss.call_remote_control(
+                window,
+                ("set-colors", f"--match=id:{window.id}", f"background={background}"),
+            )
+
+        def on_focus_change(boss: Boss, window: Window, data: dict[str, Any]) -> None:
+            set_background(boss, window, data["focused"])
+      '';
+
       settings = {
         active_tab_font_style = "bold";
-        allow_remote_control = "socket-only";
+        allow_remote_control = "yes";
         bold_font = "auto";
         bold_italic_font = "auto";
         confirm_os_window_close = "1";
@@ -25,14 +49,14 @@ _: {
         cursor_shape = "beam";
         cursor_trail = "1";
         cursor_trail_decay = "0.1 0.3";
-        cursor_trail_start_threshold = "2";
+        cursor_trail_start_threshold = "0";
         enabled_layouts = "tall:bias=50;full_size=1;mirrored=false,stack,splits";
         focus_follows_mouse = "yes";
         font_family = ''family="${fonts.mono}"'';
         font_size = "12";
         hide_window_decorations = "yes";
         inactive_tab_font_style = "normal";
-        inactive_text_alpha = "0.7";
+        # inactive_text_alpha = "0.90";
         italic_font = "auto";
         linux_display_server = "wayland";
         listen_on = "unix:\${XDG_RUNTIME_DIR}/kitty-{kitty_pid}";
@@ -40,82 +64,106 @@ _: {
         notify_on_cmd_finish = "unfocused 5";
         scrollback_fill_enlarged_window = "yes";
         scrollback_lines = "10000";
+        scrollback_pager = "${getExe pkgs.ov} --wrap=false -";
         scrollback_pager_history_size = "64";
-        shell = "${pkgs.fish}/bin/fish";
+        shell = getExe pkgs.fish;
         shell_integration = "enabled";
-        wayland_enable_ime = "no";
         tab_bar_edge = "top";
         tab_bar_style = "slant";
         update_check_interval = "0";
+        watcher = inactiveBgWatcher;
+        wayland_enable_ime = "no";
       };
 
-      maps =
-        mapAttrsToList (name: value: "map alt+${name} goto_tab ${value}") {
-          "1" = "1";
-          "2" = "2";
-          "3" = "3";
-          "4" = "4";
-          "5" = "5";
-          "6" = "6";
-          "7" = "7";
-          "8" = "8";
-          "9" = "-1";
-        }
-        ++ [
-          "map alt+[ previous_window"
-          "map alt+] next_window"
-          "map alt+enter launch --location=vsplit --cwd=current"
-          "map alt+shift+q close_window_with_confirmation ignore-shell"
-          "map alt+space toggle_layout stack"
-          "map alt+t command_palette"
-          "map alt+tab next_tab"
-          "map alt+w next_window"
-          "map ctrl++ change_font_size all +1.0"
-          "map ctrl+- change_font_size all -1.0"
-          "map ctrl+0 change_font_size all 0"
-          "map ctrl+alt+[ move_tab_backward"
-          "map ctrl+alt+] move_tab_forward"
-          "map ctrl+alt+b detach_window new-tab"
-          "map ctrl+alt+w layout_action bias 50 62 70"
-          "map ctrl+alt+j layout_action decrease_num_full_size_windows"
-          "map ctrl+alt+k layout_action increase_num_full_size_windows"
-          "map ctrl+alt+m layout_action mirror toggle"
-          "map ctrl+alt+o detach_window ask"
-          "map ctrl+alt+shift+o detach_tab ask"
-          "map ctrl+enter launch --type=tab --cwd=current"
-          "map ctrl+equal change_font_size all +1.0"
-          "map ctrl+/ search_scrollback"
-          "map ctrl+shift+- show_last_command_output"
-          "map ctrl+shift+c copy_to_clipboard"
-          "map ctrl+s show_scrollback"
-          "map ctrl+shift+p command_palette"
-          "map ctrl+shift+v paste_from_clipboard"
-          "map ctrl+alt+y copy_last_command_output"
-          "map ctrl+alt+e kitten hints --type linenum"
-          "map ctrl+alt+f kitten hints --type path --program -"
-          "map ctrl+shift+z scroll_to_prompt -1"
-          "map ctrl+shift+x scroll_to_prompt 1"
-          "map ctrl+shift+g show_last_command_output"
-          "map ctrl+alt+g show_last_visited_command_output"
-          "map ctrl+alt+shift+f kitten choose-files"
-        ];
+      mappings = {
+        "alt+1" = "goto_tab 1";
+        "alt+2" = "goto_tab 2";
+        "alt+3" = "goto_tab 3";
+        "alt+4" = "goto_tab 4";
+        "alt+5" = "goto_tab 5";
+        "alt+6" = "goto_tab 6";
+        "alt+7" = "goto_tab 7";
+        "alt+8" = "goto_tab 8";
+        "alt+9" = "goto_tab -1";
+        "alt+[" = "previous_window";
+        "alt+]" = "next_window";
+        "alt+q" = "launch --location=vsplit --cwd=current";
+        "alt+shift+q" = "close_window_with_confirmation ignore-shell";
+        "alt+space" = "toggle_layout stack";
+        "alt+t" = "command_palette";
+        "alt+tab" = "next_tab";
+        "alt+w" = "next_window";
+        "ctrl++" = "change_font_size all +1.0";
+        "ctrl+-" = "change_font_size all -1.0";
+        "ctrl+/" = "search_scrollback";
+        "ctrl+0" = "change_font_size all 0";
+        "ctrl+alt+[" = "move_tab_backward";
+        "ctrl+alt+]" = "move_tab_forward";
+        "ctrl+alt+b" = "detach_window new-tab";
+        "ctrl+alt+e" = "kitten hints --type linenum";
+        "ctrl+alt+f" = "kitten hints --type path --program -";
+        "ctrl+alt+g" = "show_last_visited_command_output";
+        "ctrl+alt+j" = "layout_action decrease_num_full_size_windows";
+        "ctrl+alt+k" = "layout_action increase_num_full_size_windows";
+        "ctrl+alt+m" = "layout_action mirror toggle";
+        "ctrl+alt+o" = "detach_window ask";
+        "ctrl+alt+shift+f" = "kitten choose-files";
+        "ctrl+alt+shift+o" = "detach_tab ask";
+        "ctrl+alt+w" = "layout_action bias 50 62 70";
+        "ctrl+alt+y" = "copy_last_command_output";
+        "ctrl+enter" = "launch --type=tab --cwd=current";
+        "ctrl+equal" = "change_font_size all +1.0";
+        "ctrl+s" = "show_scrollback";
+        "ctrl+shift+-" = "show_last_command_output";
+        "ctrl+shift+c" = "copy_to_clipboard";
+        "ctrl+shift+g" = "show_last_command_output";
+        "ctrl+shift+p" = "command_palette";
+        "ctrl+shift+v" = "paste_from_clipboard";
+        "ctrl+shift+x" = "scroll_to_prompt 1";
+        "ctrl+shift+z" = "scroll_to_prompt -1";
+      };
 
-      editorLockMaps =
-        (map (
-          line:
-          let
-            parts = splitString " " line;
-            key = elemAt parts 1;
-          in
-          "map --when-focus-on var:in_editor ${key} no_op"
-        ) maps)
-        ++ [
-          "map ctrl+shift+c copy_to_clipboard"
-          "map ctrl+shift+v paste_from_clipboard"
-        ];
+      editorPassthroughKeys = [
+        "alt+w"
+        "alt+["
+        "alt+]"
+        "alt+t"
+        "ctrl++"
+        "ctrl+-"
+        "ctrl+0"
+        "ctrl+alt+["
+        "ctrl+alt+]"
+        "ctrl+alt+b"
+        "ctrl+alt+j"
+        "ctrl+alt+k"
+        "ctrl+alt+m"
+        "ctrl+alt+o"
+        "ctrl+alt+shift+o"
+        "ctrl+alt+w"
+        "ctrl+enter"
+        "ctrl+equal"
+        "ctrl+shift+c"
+        "ctrl+shift+v"
+        "alt+1"
+        "alt+2"
+        "alt+3"
+        "alt+4"
+        "alt+5"
+        "alt+6"
+        "alt+7"
+        "alt+8"
+        "alt+9"
+      ];
+
+      maps = mapAttrsToList (key: action: "map ${key} ${action}") mappings;
+
+      # no_op under a focus condition forwards the key to the program instead
+      # of running the kitty action; nvim sets the in_editor var itself.
+      editorLockedKeys = subtractLists editorPassthroughKeys <| attrNames mappings;
+      editorLockMaps = map (key: "map --when-focus-on var:in_editor ${key} no_op") editorLockedKeys;
 
       colors = {
-        background = "#000000";
+        background = activeBackground;
         foreground = "#ffffff";
         selection_background = "#7030af";
         selection_foreground = "#ffffff";
@@ -157,7 +205,10 @@ _: {
     in
     {
       hjem.users.${user.name} = {
-        packages = singleton pkgs.kitty;
+        packages = [
+          pkgs.kitty
+          pkgs.ov
+        ];
 
         xdg.config.files."kitty/kitty.conf".text = /* kitty */ ''
           ${concatLines (mapAttrsToList toKittyLine settings)}

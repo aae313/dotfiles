@@ -30,9 +30,9 @@ _: {
           XDG_DATA_HOME = "${user.home}/.local/share";
           XDG_STATE_HOME = "${user.home}/.local/state";
 
-          EDITOR = "hx";
-          VISUAL = "hx";
-          SUDO_EDITOR = "hx";
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+          SUDO_EDITOR = "nvim";
         };
 
         variables = {

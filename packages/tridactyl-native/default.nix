@@ -17,8 +17,8 @@ buildNimPackage {
   lockFile = ./lock.json;
 
   installPhase = /* bash */ ''
-    mkdir -p "$out/lib/mozilla/native-messaging-hosts"
-    sed -i -e "s|REPLACE_ME_WITH_SED|$out/bin/native_main|" tridactyl.json
+    mkdir --parents "$out/lib/mozilla/native-messaging-hosts"
+    sed --in-place --expression "s|REPLACE_ME_WITH_SED|$out/bin/native_main|" tridactyl.json
     cp tridactyl.json "$out/lib/mozilla/native-messaging-hosts/"
   '';
 

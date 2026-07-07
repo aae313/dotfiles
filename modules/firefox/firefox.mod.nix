@@ -18,7 +18,10 @@ in
       inherit (config.local) user;
     in
     {
-      hjem.users.${user.name}.xdg.config.files."mozilla/firefox/hey/user.js".source = ./user.js;
+      hjem.users.${user.name}.xdg.config.files = {
+        "mozilla/firefox/hey/chrome/userChrome.css".source = ./userChrome.css;
+        "mozilla/firefox/hey/user.js".source = ./user.js;
+      };
 
       programs.firefox = {
         enable = true;

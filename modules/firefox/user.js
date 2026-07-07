@@ -142,6 +142,9 @@ user_pref("browser.profiles.enabled", true);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.compactmode.show", true);
 user_pref("browser.privateWindowSeparation.enabled", false); // WINDOWS
+user_pref("font.default.x-western", "sans-serif");
+user_pref("font.name.sans-serif.x-western", "Inter");
+user_pref("font.name.serif.x-western", "Inter");
 
 /** AI ***/
 user_pref("browser.ai.control.default", "blocked");

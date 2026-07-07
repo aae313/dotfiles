@@ -57,6 +57,31 @@ _: {
           monospace = singleton fonts.mono;
           emoji = singleton fonts.emoji;
         };
+
+        fontconfig.localConf = /* xml */ ''
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+          <fontconfig>
+            <alias binding="strong">
+              <family>sans-serif</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+            <alias binding="strong">
+              <family>system-ui</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+            <alias binding="strong">
+              <family>ui-sans-serif</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+          </fontconfig>
+        '';
       };
     };
 }

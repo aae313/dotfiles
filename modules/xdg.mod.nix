@@ -72,7 +72,7 @@ _: {
           '';
 
           "xdg-terminals.list".text = /* conf */ ''
-            kitty.desktop
+            foot.desktop
           '';
         };
       };

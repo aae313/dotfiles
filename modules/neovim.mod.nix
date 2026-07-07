@@ -1,5 +1,6 @@
-{ inputs, ... }: {
-  flake.nixosModules.shell =
+{ inputs, ... }:
+{
+  flake.nixosModules.neovim =
     {
       config,
       lib,
@@ -23,7 +24,7 @@
       environment.systemPackages = singleton pkgs.neovide;
 
       hjem.users.${user.name} = {
-        files.".local/share/applications/nv.desktop".text = /* ini */ ''
+        xdg.data.files."applications/nv.desktop".text = /* ini */ ''
           [Desktop Entry]
           Type=Application
           Name=nv
@@ -57,5 +58,4 @@
         };
       };
     };
-
 }

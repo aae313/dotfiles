@@ -10,7 +10,7 @@
     {
       programs.ydotool.enable = true;
       hjem.users.${user.name}.packages = [
-        inputs.hunk.packages.${system}.hunk
+        # inputs.hunk.packages.${system}.hunk
         pkgs.btop
         pkgs.fzf
         pkgs.hexyl

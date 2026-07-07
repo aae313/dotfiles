@@ -40,8 +40,9 @@
           # Reduce console kernel message verbosity
           "kernel.printk" = "3 3 3 3";
 
-          # Hide kernel pointers from unprivileged users
-          "kernel.kptr_restrict" = 2;
+          # Hide kernel pointers from unprivileged users (1, not 2, so root-run
+          # perf/eBPF tooling can still resolve kernel symbols)
+          "kernel.kptr_restrict" = 1;
 
           # Increase maximum file handles
           "fs.file-max" = 2097152;

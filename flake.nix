@@ -16,8 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,15 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    claude-code-nix = {
-      url = "github:sadjow/claude-code-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hunk = {
-      url = "github:modem-dev/hunk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hunk = {
+    #   url = "github:modem-dev/hunk";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     jj-starship = {
       url = "github:dmmulroy/jj-starship";

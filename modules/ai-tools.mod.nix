@@ -11,7 +11,6 @@
       hjem.users.${user.name}.packages = [
         pkgs.antigravity
         pkgs.opencode
-        inputs.claude-code-nix.packages.${system}.default
         inputs.codex-cli-nix.packages.${system}.default
       ];
     };

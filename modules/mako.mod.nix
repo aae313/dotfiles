@@ -11,7 +11,7 @@ _: {
       inherit (lib.meta) getExe;
 
       inherit (config.local) user;
-      inherit (config.local.theme) fonts;
+      inherit (config.local.theme) fonts palette;
     in
     {
       hjem.users.${user.name} = {
@@ -39,13 +39,13 @@ _: {
           default-timeout=5000
           # Modus colors
 
-          background-color=#000000
-          text-color=#ffffff
-          border-color=#2fafff
-          progress-color=over #303030
+          background-color=#${palette.bgMain}
+          text-color=#${palette.fgMain}
+          border-color=#${palette.blue}
+          progress-color=over #${palette.bgInactive}
 
           [urgency=high]
-          border-color=#ff5f59
+          border-color=#${palette.red}
           background-color=#3a0c14
         '';
       };

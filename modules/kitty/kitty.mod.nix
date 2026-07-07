@@ -8,14 +8,14 @@ _: {
     }:
     let
       inherit (lib.attrsets) attrNames mapAttrsToList;
-      inherit (lib.lists) subtractLists;
+      inherit (lib.lists) singleton subtractLists;
       inherit (lib.meta) getExe;
       inherit (lib.strings) concatLines;
 
       inherit (config.local) user;
-      inherit (config.local.theme) fonts;
+      inherit (config.local.theme) fonts palette;
 
-      activeBackground = "#000000";
+      activeBackground = "#${palette.bgMain}";
       inactiveBackground = "#0d0e1c";
 
       inactiveBgWatcher = pkgs.writeText "kitty-inactive-bg.py" ''
@@ -164,51 +164,48 @@ _: {
 
       colors = {
         background = activeBackground;
-        foreground = "#ffffff";
-        selection_background = "#7030af";
-        selection_foreground = "#ffffff";
-        url_color = "#c6daff";
-        cursor = "#ffffff";
-        cursor_text_color = "#000000";
+        foreground = "#${palette.fgMain}";
+        selection_background = "#${palette.bgSelection}";
+        selection_foreground = "#${palette.fgMain}";
+        url_color = "#${palette.fgAlt}";
+        cursor = "#${palette.fgMain}";
+        cursor_text_color = "#${palette.bgMain}";
 
         active_tab_background = "#545454";
-        active_tab_foreground = "#ffffff";
+        active_tab_foreground = "#${palette.fgMain}";
         inactive_tab_background = "#2f2f2f";
         inactive_tab_foreground = "#969696";
 
-        active_border_color = "#79a8ff";
-        inactive_border_color = "#646464";
+        active_border_color = "#${palette.blueWarmer}";
+        inactive_border_color = "#${palette.border}";
 
-        color0 = "#000000";
-        color1 = "#ff5f59";
-        color2 = "#44bc44";
-        color3 = "#d0bc00";
-        color4 = "#2fafff";
-        color5 = "#feacd0";
-        color6 = "#00d3d0";
-        color7 = "#a6a6a6";
+        color0 = "#${palette.bgMain}";
+        color1 = "#${palette.red}";
+        color2 = "#${palette.green}";
+        color3 = "#${palette.yellow}";
+        color4 = "#${palette.blue}";
+        color5 = "#${palette.magenta}";
+        color6 = "#${palette.cyan}";
+        color7 = "#${palette.termWhite}";
 
-        color8 = "#595959";
-        color9 = "#ff6b55";
-        color10 = "#00c06f";
-        color11 = "#fec43f";
-        color12 = "#79a8ff";
-        color13 = "#f78fe7";
-        color14 = "#6ae4b9";
-        color15 = "#ffffff";
+        color8 = "#${palette.termBrightBlack}";
+        color9 = "#${palette.redWarmer}";
+        color10 = "#${palette.greenCooler}";
+        color11 = "#${palette.yellowWarmer}";
+        color12 = "#${palette.blueWarmer}";
+        color13 = "#${palette.magentaWarmer}";
+        color14 = "#${palette.cyanCooler}";
+        color15 = "#${palette.fgMain}";
 
-        color16 = "#fec43f";
-        color17 = "#ff9580";
+        color16 = "#${palette.yellowWarmer}";
+        color17 = "#${palette.redFaint}";
       };
 
       toKittyLine = name: value: "${name} ${value}";
     in
     {
       hjem.users.${user.name} = {
-        packages = [
-          pkgs.kitty
-          pkgs.ov
-        ];
+        packages = singleton pkgs.kitty;
 
         xdg.config.files."kitty/kitty.conf".text = /* kitty */ ''
           ${concatLines (mapAttrsToList toKittyLine settings)}

@@ -6,7 +6,7 @@ _: {
     }:
     let
       inherit (config.local) user;
-      inherit (config.local.theme) fonts;
+      inherit (config.local.theme) fonts palette;
     in
     {
       programs.foot = {
@@ -36,34 +36,33 @@ _: {
 
 
         [colors-dark]
-        alpha=0.75
-        cursor=ffffff 44df44
-        foreground=ffffff
-        background=000000
-        selection-foreground=ffffff
-        selection-background=7030af
-        urls=c6daff
+        cursor=${palette.fgMain} 44df44
+        foreground=${palette.fgMain}
+        background=${palette.bgMain}
+        selection-foreground=${palette.fgMain}
+        selection-background=${palette.bgSelection}
+        urls=${palette.fgAlt}
 
-        regular0=000000
-        regular1=ff5f59
-        regular2=44bc44
-        regular3=d0bc00
-        regular4=2fafff
-        regular5=feacd0
-        regular6=00d3d0
-        regular7=a6a6a6
+        regular0=${palette.bgMain}
+        regular1=${palette.red}
+        regular2=${palette.green}
+        regular3=${palette.yellow}
+        regular4=${palette.blue}
+        regular5=${palette.magenta}
+        regular6=${palette.cyan}
+        regular7=${palette.termWhite}
 
-        bright0=595959
-        bright1=ff6b55
-        bright2=00c06f
-        bright3=fec43f
-        bright4=79a8ff
-        bright5=f78fe7
-        bright6=6ae4b9
-        bright7=ffffff
+        bright0=${palette.termBrightBlack}
+        bright1=${palette.redWarmer}
+        bright2=${palette.greenCooler}
+        bright3=${palette.yellowWarmer}
+        bright4=${palette.blueWarmer}
+        bright5=${palette.magentaWarmer}
+        bright6=${palette.cyanCooler}
+        bright7=${palette.fgMain}
 
-        16=fec43f
-        17=ff9580
+        16=${palette.yellowWarmer}
+        17=${palette.redFaint}
       '';
     };
 }

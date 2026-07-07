@@ -14,7 +14,7 @@ _: {
 
       wallpaper = pkgs.fetchurl {
         url = "https://w.wallhaven.cc/full/k8/wallhaven-k8kke7.png";
-        hash = "sha256-DbHx6nMfswzm+2FhX6Zc61bddQq9jHlZUbuFRIISV1I=";
+        hash = "sha256-GEWUwbGza2nyQ2cNg2dFDGyo8Ey5ORWQyTTuNpSkHCo=";
       };
 
       wallpaperCommand = pkgs.writeShellApplication {

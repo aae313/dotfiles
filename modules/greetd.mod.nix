@@ -1,13 +1,17 @@
 _: {
   flake.nixosModules.greetd =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      ...
+    }:
     let
-      inherit (lib.meta) getExe';
+      inherit (lib.meta) getExe;
 
       inherit (config.local) user;
 
       session = {
-        command = getExe' config.programs.niri.package "niri-session";
+        command = "${getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
         user = user.name;
       };
     in

@@ -22,7 +22,6 @@ _: {
       hjem.users.${user.name}.packages = [
         pkgs.bibata-cursors
         colloid
-        pkgs.tela-circle-icon-theme
         pkgs.tela-icon-theme
       ];
 

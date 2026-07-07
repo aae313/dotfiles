@@ -10,7 +10,7 @@ _: {
       inherit (lib.lists) singleton;
 
       inherit (config.local) user;
-      inherit (config.local.theme) fonts;
+      inherit (config.local.theme) fonts palette;
     in
     {
       hjem.users.${user.name} = {
@@ -19,7 +19,7 @@ _: {
         xdg.config.files."fuzzel/fuzzel.ini".text = /* ini */ ''
           [main]
           font=${fonts.mono}:size=14
-          terminal=kitty -e
+          terminal=footclient -e
           layer=overlay
           launch-prefix='app2unit --fuzzel-compat --'
           prompt='>> '
@@ -31,18 +31,18 @@ _: {
           inner-pad=8
 
           [colors]
-          background=#000000ff
-          text=#ffffffff
-          message=#c6daffff
-          prompt=#2fafffff
-          placeholder=#989898ff
-          input=#ffffffff
-          match=#d0bc00ff
+          background=#${palette.bgMain}ff
+          text=#${palette.fgMain}ff
+          message=#${palette.fgAlt}ff
+          prompt=#${palette.blue}ff
+          placeholder=#${palette.fgDim}ff
+          input=#${palette.fgMain}ff
+          match=#${palette.yellow}ff
           selection=#2f447fff
-          selection-text=#ffffffff
-          selection-match=#d0bc00ff
-          counter=#989898ff
-          border=#2fafffff
+          selection-text=#${palette.fgMain}ff
+          selection-match=#${palette.yellow}ff
+          counter=#${palette.fgDim}ff
+          border=#${palette.blue}ff
 
           [dmenu]
           exit-immediately-if-empty=yes

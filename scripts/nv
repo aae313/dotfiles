@@ -85,46 +85,7 @@ resolve_path() {
 }
 
 focus_neovide() {
-  nirius focus --app-id neovide >/dev/null 2>&1 || true
-}
-
-wait_for_neovide_window() {
-  local line window_id
-
-  # The event stream opens with a complete window snapshot before incremental
-  # updates, so subscribing after the spawn cannot miss the window.
-  while IFS= read -r line; do
-    window_id="$(jq --raw-output '
-      [
-        (.WindowsChanged.windows // [])[],
-        (.WindowOpenedOrChanged.window // empty)
-      ]
-      | map(select(.app_id == "neovide"))
-      | first
-      | .id // empty
-    ' <<<"$line")"
-
-    if [[ -n "$window_id" ]]; then
-      printf '%s\n' "$window_id"
-      return
-    fi
-  done < <(timeout 5 niri msg --json event-stream 2>/dev/null)
-
-  return 1
-}
-
-place_neovide_column() {
-  local window_id=""
-
-  window_id="$(wait_for_neovide_window)" || true
-
-  if [[ -z "$window_id" ]]; then
-    printf 'nv: neovide window did not appear; skipped placement\n' >&2
-    return
-  fi
-
-  niri msg action focus-window --id "$window_id"
-  niri msg action move-column-to-first
+  hyprctl dispatch 'hl.dsp.focus({ window = "class:neovide" })' >/dev/null 2>&1 || true
 }
 
 open_with_new_server() {
@@ -186,11 +147,7 @@ main() {
   fi
 
   open_with_new_server "$socket" "${paths[@]}"
-
-  # Release before the placement wait (up to 5 s) so queued nv calls can
-  # forward as soon as the server is up.
-  exec {lock_fd}>&-
-  place_neovide_column
+  focus_neovide
 }
 
 main "$@"

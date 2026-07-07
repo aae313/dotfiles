@@ -12,6 +12,7 @@
       inherit (lib.meta) getExe;
 
       inherit (config.local) user;
+      inherit (config.local.theme) palette;
       inherit (pkgs.stdenv.hostPlatform) system;
 
       jjStarship = getExe inputs.jj-starship.packages.${system}.default;
@@ -119,44 +120,44 @@
           };
 
           palettes.modus_vivendi = {
-            context = "#2fafff";
-            duration = "#feacd0";
-            error = "#ff5f59";
-            muted = "#989898";
-            path = "#6ae4b9";
-            remote = "#44bc44";
-            warning = "#fec43f";
+            context = "#${palette.blue}";
+            duration = "#${palette.magenta}";
+            error = "#${palette.red}";
+            muted = "#${palette.fgDim}";
+            path = "#${palette.cyanCooler}";
+            remote = "#${palette.green}";
+            warning = "#${palette.yellowWarmer}";
 
-            fg-main = "#ffffff";
-            fg-alt = "#c6daff";
-            fg-dim = "#989898";
+            fg-main = "#${palette.fgMain}";
+            fg-alt = "#${palette.fgAlt}";
+            fg-dim = "#${palette.fgDim}";
 
-            bg-main = "#000000";
-            bg-dim = "#1e1e1e";
-            bg-inactive = "#303030";
-            bg-active = "#535353";
+            bg-main = "#${palette.bgMain}";
+            bg-dim = "#${palette.bgDim}";
+            bg-inactive = "#${palette.bgInactive}";
+            bg-active = "#${palette.bgActive}";
 
-            border = "#646464";
+            border = "#${palette.border}";
 
-            red = "#ff5f59";
-            red-cooler = "#ff7f86";
-            red-faint = "#ff9580";
+            red = "#${palette.red}";
+            red-cooler = "#${palette.redCooler}";
+            red-faint = "#${palette.redFaint}";
 
-            green = "#44bc44";
+            green = "#${palette.green}";
 
-            yellow = "#d0bc00";
-            yellow-cooler = "#dfaf7a";
+            yellow = "#${palette.yellow}";
+            yellow-cooler = "#${palette.yellowCooler}";
 
-            blue = "#2fafff";
-            blue-cooler = "#00bcff";
+            blue = "#${palette.blue}";
+            blue-cooler = "#${palette.blueCooler}";
 
-            cyan = "#00d3d0";
-            cyan-cooler = "#6ae4b9";
+            cyan = "#${palette.cyan}";
+            cyan-cooler = "#${palette.cyanCooler}";
 
-            magenta = "#feacd0";
-            magenta-cooler = "#b6a0ff";
+            magenta = "#${palette.magenta}";
+            magenta-cooler = "#${palette.magentaCooler}";
 
-            indigo = "#9099d9";
+            indigo = "#${palette.indigo}";
           };
         };
       };

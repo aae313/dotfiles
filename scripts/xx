@@ -69,7 +69,7 @@ main() {
 
   local -a selections
   mapfile -t selections <<<"$selection"
-  x "${selections[@]}"
+  nv "${selections[@]}"
 }
 
 main "$@"

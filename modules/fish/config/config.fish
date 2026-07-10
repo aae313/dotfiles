@@ -35,4 +35,9 @@ if status is-interactive
     abbr -a ... 'cd ../..'
     abbr -a .... 'cd ../../..'
     abbr -a ..... 'cd ../../../..'
+
+    if not set -q ZELLIJ; and test "$START_ZELLIJ" = 1
+        set -e START_ZELLIJ
+        zellij
+    end
 end

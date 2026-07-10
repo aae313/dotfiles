@@ -1,91 +1,33 @@
 keybinds clear-defaults=true {
     normal {
-
-        bind "Alt Tab" {
-            MoveFocusOrTab "right"
-        }
-        bind "Alt Shift Tab" {
-            MoveFocusOrTab "left"
-        }
-        bind "Ctrl enter" {
-            NewTab
-        }
-        bind "Alt q" {
-            NewPane
-        }
-        bind "Alt Shift q" {
-            CloseFocus
-        }
-        bind "Ctrl b" {
-            BreakPane
-        }
-        bind "Ctrl ]" {
-            BreakPaneRight
-        }
-        bind "Ctrl [" {
-            BreakPaneLeft
-        }
-        bind "Alt Shift Enter" {
-            ToggleFocusFullscreen
-        }
-        bind "Ctrl Alt h" {
-            MovePane "Left"
-        }
-        bind "Ctrl Alt j" {
-            MovePane "Down"
-        }
-        bind "Ctrl Alt k" {
-            MovePane "Up"
-        }
-        bind "Ctrl Alt l" {
-            MovePane "Right"
-        }
-        bind "Ctrl Alt =" "Ctrl Alt +" {
-            Resize "Increase"
-        }
-        bind "Ctrl Alt -" {
-            Resize "Decrease"
-        }
         bind "Ctrl Space" {
             SwitchToMode "Tmux"
         }
         bind "Ctrl p" {
-            SwitchToMode "pane"
+            SwitchToMode "Pane"
         }
         bind "Ctrl t" {
-            SwitchToMode "tab"
+            SwitchToMode "Tab"
         }
         bind "Ctrl x" {
-            SwitchToMode "session"
+            SwitchToMode "Session"
         }
         bind "Ctrl r" {
-            SwitchToMode "resize"
+            SwitchToMode "Resize"
         }
         bind "Ctrl m" {
-            SwitchToMode "move"
+            SwitchToMode "Move"
         }
         bind "Ctrl /" {
-            SwitchToMode "scroll"
+            SwitchToMode "Scroll"
         }
         bind "Alt Esc" {
-            SwitchToMode "locked"
-        }
-        bind "Alt h" "Alt Left" {
-            MoveFocus "Left"
-        }
-        bind "Alt j" "Alt Down" {
-            MoveFocus "Down"
-        }
-        bind "Alt k" "Alt Up" {
-            MoveFocus "Up"
-        }
-        bind "Alt l" "Alt Right" {
-            MoveFocus "Right"
+            SwitchToMode "Locked"
         }
     }
     locked {
         bind "Alt Esc" {
-            SwitchToMode "normal"
+            SwitchToMode "Normal"
         }
     }
     resize {
@@ -486,107 +428,148 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
     }
-    shared {
-        bind "Alt [" {
-            MoveFocusOrTab "left"
+    shared_except "locked" "entersearch" "renametab" "renamepane" {
+        bind "Alt Tab" {
+            MoveFocusOrTab "Right"
+            SwitchToMode "Normal"
         }
-        bind "Alt ]" {
-            MoveFocusOrTab "right"
+        bind "Alt Shift Tab" {
+            MoveFocusOrTab "Left"
+            SwitchToMode "Normal"
         }
-        bind "Alt 1" {
-            GoToTab 1
-            SwitchToMode "normal"
+        bind "Ctrl Enter" {
+            NewTab
+            SwitchToMode "Normal"
         }
-        bind "Alt 2" {
-            GoToTab 2
-            SwitchToMode "normal"
-        }
-        bind "Alt 3" {
-            GoToTab 3
-            SwitchToMode "normal"
-        }
-        bind "Alt 4" {
-            GoToTab 4
-            SwitchToMode "normal"
-        }
-        bind "Alt 5" {
-            GoToTab 5
-            SwitchToMode "normal"
-        }
-        bind "Alt 6" {
-            GoToTab 6
-            SwitchToMode "normal"
-        }
-        bind "Alt 7" {
-            GoToTab 7
-            SwitchToMode "normal"
-        }
-        bind "Alt 8" {
-            GoToTab 8
-            SwitchToMode "normal"
-        }
-        bind "Alt 9" {
-            GoToTab 9
-            SwitchToMode "normal"
-        }
-        bind "Ctrl Alt [" {
-            MoveTab "left"
-        }
-        bind "Ctrl Alt ]" {
-            MoveTab "right"
-        }
-        bind "Alt /" {
-            ToggleFloatingPanes
-        }
-    }
-    shared_except "normal" "locked" {
-        bind "Ctrl esc" {
-            SwitchToMode "Locked"
-        }
-        bind "Ctrl q" {
-            Quit
-        }
-        bind "Alt f" {
-            ToggleFloatingPanes
-        }
-        bind "Alt n" {
+        bind "Alt q" {
             NewPane
+            SwitchToMode "Normal"
         }
-        bind "Alt i" {
-            MoveTab "Left"
+        bind "Alt Shift q" {
+            CloseFocus
+            SwitchToMode "Normal"
         }
-        bind "Alt o" {
-            MoveTab "Right"
+        bind "Ctrl ]" {
+            BreakPaneRight
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl [" {
+            BreakPaneLeft
+            SwitchToMode "Normal"
+        }
+        bind "Alt Shift Enter" {
+            ToggleFocusFullscreen
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt h" {
+            MovePane "Left"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt j" {
+            MovePane "Down"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt k" {
+            MovePane "Up"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt l" {
+            MovePane "Right"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt =" "Ctrl Alt +" {
+            Resize "Increase"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt -" {
+            Resize "Decrease"
+            SwitchToMode "Normal"
         }
         bind "Alt h" "Alt Left" {
             MoveFocusOrTab "Left"
-        }
-        bind "Alt l" "Alt Right" {
-            MoveFocusOrTab "Right"
+            SwitchToMode "Normal"
         }
         bind "Alt j" "Alt Down" {
             MoveFocus "Down"
+            SwitchToMode "Normal"
         }
         bind "Alt k" "Alt Up" {
             MoveFocus "Up"
+            SwitchToMode "Normal"
         }
-        bind "Alt =" "Alt +" {
-            Resize "Increase"
-        }
-        bind "Alt -" {
-            Resize "Decrease"
+        bind "Alt l" "Alt Right" {
+            MoveFocusOrTab "Right"
+            SwitchToMode "Normal"
         }
         bind "Alt [" {
-            PreviousSwapLayout
+            MoveFocusOrTab "Left"
+            SwitchToMode "Normal"
         }
         bind "Alt ]" {
-            NextSwapLayout
+            MoveFocusOrTab "Right"
+            SwitchToMode "Normal"
+        }
+        bind "Alt 1" {
+            GoToTab 1
+            SwitchToMode "Normal"
+        }
+        bind "Alt 2" {
+            GoToTab 2
+            SwitchToMode "Normal"
+        }
+        bind "Alt 3" {
+            GoToTab 3
+            SwitchToMode "Normal"
+        }
+        bind "Alt 4" {
+            GoToTab 4
+            SwitchToMode "Normal"
+        }
+        bind "Alt 5" {
+            GoToTab 5
+            SwitchToMode "Normal"
+        }
+        bind "Alt 6" {
+            GoToTab 6
+            SwitchToMode "Normal"
+        }
+        bind "Alt 7" {
+            GoToTab 7
+            SwitchToMode "Normal"
+        }
+        bind "Alt 8" {
+            GoToTab 8
+            SwitchToMode "Normal"
+        }
+        bind "Alt 9" {
+            GoToTab 9
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt [" {
+            MoveTab "Left"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Alt ]" {
+            MoveTab "Right"
+            SwitchToMode "Normal"
+        }
+        bind "Alt /" {
+            ToggleFloatingPanes
+            SwitchToMode "Normal"
         }
         bind "Alt p" {
             TogglePaneInGroup
+            SwitchToMode "Normal"
         }
         bind "Alt Shift p" {
             ToggleGroupMarking
+            SwitchToMode "Normal"
+        }
+    }
+    shared_except "locked" "scroll" "search" "entersearch" "renametab" "renamepane" {
+        bind "Ctrl b" {
+            BreakPane
+            SwitchToMode "Normal"
         }
     }
     shared_except "normal" "locked" "tmux" {
@@ -630,7 +613,7 @@ keybinds clear-defaults=true {
 plugins {
     autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
         is_enabled true
-        triggers "hx|x|xx|bash /home/wasd/.local/bin/xx|bash /home/wasd/.local/bin/x"
+        triggers "nvim|x|bash /home/wasd/.local/bin/xx"
         reaction_seconds "0.5"
     }
     about location="zellij:about"

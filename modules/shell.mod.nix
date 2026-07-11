@@ -8,6 +8,7 @@ _: {
     }:
     let
       inherit (lib.attrsets) genAttrs;
+      inherit (lib.lists) singleton;
       inherit (lib.meta) getExe;
 
       inherit (config.local) user;
@@ -16,10 +17,7 @@ _: {
       environment = {
         localBinInPath = true;
 
-        shells = [
-          pkgs.fish
-          pkgs.nushell
-        ];
+        shells = singleton pkgs.fish;
 
         shellAliases = genAttrs [ "ls" "ll" "l" ] (_: null);
 

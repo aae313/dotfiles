@@ -1,32 +1,9 @@
-@define-color rosewater #ffffff;
-@define-color red #ff5f59;
-@define-color blue #2fafff;
-@define-color sapphire #00bcff;
-@define-color text #ffffff;
-@define-color subtext0 #989898;
-@define-color overlay0 #646464;
-@define-color surface1 #535353;
-@define-color surface0 #303030;
-@define-color base #1e1e1e;
-@define-color mantle #1e1e1e;
-@define-color crust #000000;
-
-@define-color bg-hover #45605e;
-
-@define-color bar-bg rgba(0, 0, 0, 0.82);
-@define-color workspace-bg @surface0;
-@define-color workspace-empty @mantle;
-@define-color workspace-fg @subtext0;
-@define-color workspace-active-bg @blue;
-@define-color workspace-active-fg @crust;
-@define-color workspace-hover-bg @bg-hover;
-@define-color workspace-urgent-bg @red;
+@import url("theme.css");
 
 * {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  font-family: JetBrainsMono Nerd Font, monospace;
   font-size: 13px;
   min-height: 0;
 }
@@ -36,7 +13,7 @@ window#waybar {
 }
 
 #workspaces {
-  margin: 3px 0;
+  margin: 4px 0;
   padding: 0 6px;
 }
 
@@ -45,7 +22,7 @@ window#waybar {
   border-radius: 999px;
   color: @workspace-fg;
   margin: 0 3px;
-  padding: 0 9px;
+  padding: 0 4px;
 }
 
 #workspaces button.empty {
@@ -58,17 +35,30 @@ window#waybar {
 #workspaces button.active {
   background: @workspace-active-bg;
   color: @workspace-active-fg;
-  padding: 0 11px;
 }
 
 #workspaces button:hover {
   background: @workspace-hover-bg;
-  color: @text;
+  color: @workspace-active-fg;
 }
 
 #workspaces button.urgent {
   background: @workspace-urgent-bg;
   color: @workspace-active-fg;
+}
+
+#workspaces .taskbar-window {
+  border-radius: 999px;
+  margin: 0 1px;
+  padding: 1px 3px;
+}
+
+#workspaces .taskbar-window:hover {
+  background: @workspace-hover-bg;
+}
+
+#workspaces .taskbar-window.active {
+  background: @crust;
 }
 
 #clock {

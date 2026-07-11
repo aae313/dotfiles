@@ -19,11 +19,23 @@ _: {
       };
     in
     {
-      hjem.users.${user.name}.packages = [
-        pkgs.bibata-cursors
-        colloid
-        pkgs.tela-icon-theme
-      ];
+      hjem.users.${user.name}.rum.misc.gtk = {
+        enable = true;
+        gtk2Location = ".config/gtk-2.0/gtkrc";
+        packages = [
+          pkgs.bibata-cursors
+          colloid
+          pkgs.tela-icon-theme
+        ];
+        settings = {
+          application-prefer-dark-theme = true;
+          cursor-theme-name = "Bibata-Modern-Classic";
+          cursor-theme-size = 24;
+          font-name = "${fonts.sans} 11";
+          icon-theme-name = "Tela-dracula-dark";
+          theme-name = "Colloid-Purple-Dark-Nord";
+        };
+      };
 
       environment.variables = {
         XCURSOR_THEME = "Bibata-Modern-Classic";

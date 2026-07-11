@@ -12,6 +12,8 @@
 
       hjem.clobberByDefault = true;
 
+      hjem.extraModules = singleton inputs.hjem-rum.hjemModules.default;
+
       hjem.users.${user.name}.enable = true;
     };
 }

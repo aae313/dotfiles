@@ -8,9 +8,8 @@ _: {
     }:
     let
       inherit (lib.attrsets) attrNames mapAttrsToList;
-      inherit (lib.lists) singleton subtractLists;
+      inherit (lib.lists) subtractLists;
       inherit (lib.meta) getExe;
-      inherit (lib.strings) concatLines;
 
       inherit (config.local) user;
       inherit (config.local.theme) fonts palette;
@@ -71,7 +70,7 @@ _: {
         tab_bar_edge = "top";
         tab_bar_style = "slant";
         update_check_interval = "0";
-        watcher = inactiveBgWatcher;
+        watcher = "${inactiveBgWatcher}";
         wayland_enable_ime = "no";
       };
 
@@ -87,7 +86,7 @@ _: {
         "alt+9" = "goto_tab -1";
         "alt+[" = "previous_window";
         "alt+]" = "next_window";
-        "alt+q" = "launch --location=vsplit --cwd=current";
+        "alt+enter" = "launch --location=vsplit --cwd=current";
         "alt+shift+q" = "close_window_with_confirmation ignore-shell";
         "alt+space" = "toggle_layout stack";
         "alt+t" = "command_palette";
@@ -155,12 +154,12 @@ _: {
         "alt+9"
       ];
 
-      maps = mapAttrsToList (key: action: "map ${key} ${action}") mappings;
+      maps = mapAttrsToList (key: action: "${key} ${action}") mappings;
 
       # no_op under a focus condition forwards the key to the program instead
       # of running the kitty action; nvim sets the in_editor var itself.
       editorLockedKeys = subtractLists editorPassthroughKeys <| attrNames mappings;
-      editorLockMaps = map (key: "map --when-focus-on var:in_editor ${key} no_op") editorLockedKeys;
+      editorLockMaps = map (key: "--when-focus-on var:in_editor ${key} no_op") editorLockedKeys;
 
       colors = {
         background = activeBackground;
@@ -173,7 +172,7 @@ _: {
 
         active_tab_background = "#545454";
         active_tab_foreground = "#${palette.fgMain}";
-        inactive_tab_background = "#2f2f2f";
+        inactive_tab_background = "#262626";
         inactive_tab_foreground = "#969696";
 
         active_border_color = "#${palette.blueWarmer}";
@@ -201,22 +200,14 @@ _: {
         color17 = "#${palette.redFaint}";
       };
 
-      toKittyLine = name: value: "${name} ${value}";
     in
     {
-      hjem.users.${user.name} = {
-        packages = singleton pkgs.kitty;
-
-        xdg.config.files."kitty/kitty.conf".text = /* kitty */ ''
-          ${concatLines (mapAttrsToList toKittyLine settings)}
-
-          clear_all_shortcuts yes
-          ${concatLines maps}
-
-          ${concatLines editorLockMaps}
-
-          ${concatLines (mapAttrsToList toKittyLine colors)}
-        '';
+      hjem.users.${user.name}.rum.programs.kitty = {
+        enable = true;
+        settings = settings // colors // {
+          clear_all_shortcuts = "yes";
+          map = maps ++ editorLockMaps;
+        };
       };
     };
 }

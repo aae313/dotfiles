@@ -9,7 +9,6 @@
     in
     {
       hjem.users.${user.name}.packages = [
-        pkgs.antigravity
         pkgs.opencode
         inputs.codex-cli-nix.packages.${system}.default
       ];

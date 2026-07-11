@@ -10,9 +10,8 @@
     {
       programs.ydotool.enable = true;
       hjem.users.${user.name}.packages = [
-        # inputs.hunk.packages.${system}.hunk
+        inputs.hunk.packages.${system}.hunk
         pkgs.btop
-        pkgs.fzf
         pkgs.hexyl
         pkgs.hyperfine
         pkgs.jc
@@ -21,7 +20,6 @@
         pkgs.numbat
         pkgs.rsync
         pkgs.scooter
-        pkgs.zoxide
         pkgs.difftastic
       ];
     };

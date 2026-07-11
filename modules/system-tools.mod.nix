@@ -8,11 +8,9 @@ _: {
       hjem.users.${user.name}.packages = [
         pkgs.app2unit
         pkgs.carapace
-        pkgs.direnv
         pkgs.ffmpeg
         pkgs.file
         pkgs.libqalculate
-        pkgs.nushell
         pkgs.socat
         pkgs.xdg-terminal-exec
       ];

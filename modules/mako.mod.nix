@@ -37,7 +37,6 @@ _: {
           border-radius=5
           anchor=top-right
           default-timeout=5000
-          # Modus colors
 
           background-color=#${palette.bgMain}
           text-color=#${palette.fgMain}

@@ -16,8 +16,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
+    hjem-rum = {
+      url = "github:snugnug/hjem-rum";
+      inputs.hjem.follows = "hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -27,15 +28,16 @@
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hunk = {
-    #   url = "github:modem-dev/hunk";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    hunk = {
+      url = "github:modem-dev/hunk";
+    };
 
     jj-starship = {
       url = "github:dmmulroy/jj-starship";

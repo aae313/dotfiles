@@ -4,9 +4,6 @@ if status is-interactive
     set -g fish_key_bindings fish_vi_key_bindings
     fish_vi_key_bindings
     fish_user_key_bindings
-    fzf --fish | source
-    starship init fish | source
-    zoxide init fish --cmd cd | source
 
     # Self-heal the kitty in_editor var: a rendered prompt proves nvim is not
     # in the foreground, so a crashed nvim cannot leave the lock maps stuck.

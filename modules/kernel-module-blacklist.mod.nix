@@ -1,12 +1,9 @@
 _: {
   flake.nixosModules.kernel-module-blacklist = {
-    # Security
     boot.blacklistedKernelModules = [
-      # Obscure network protocols
       "ax25"
       "netrom"
       "rose"
-      # Old or rare or insufficiently audited filesystems
       "adfs" # Acorn Disc Filing System
       "affs" # Amiga Fast File System
       "befs" # "Be File System"

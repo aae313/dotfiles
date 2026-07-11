@@ -24,20 +24,10 @@
       environment.systemPackages = singleton pkgs.neovide;
 
       hjem.users.${user.name} = {
-        xdg.data.files."applications/nv.desktop".text = /* ini */ ''
-          [Desktop Entry]
-          Type=Application
-          Name=nv
-          GenericName=Text Editor
-          Exec=${user.home}/.local/bin/nv %F
-          Terminal=false
-          Categories=Utility;TextEditor;
-          MimeType=text/plain;
-        '';
-
-        xdg.config.files."neovide/config.toml" = {
-          generator = pkgs.writers.writeTOML "neovide-config.toml";
-          value = {
+        rum.programs.neovide = {
+          enable = true;
+          package = null;
+          settings = {
             fork = true;
             frame = "full";
             idle = true;
@@ -56,6 +46,17 @@
             };
           };
         };
+
+        xdg.data.files."applications/nv.desktop".text = /* ini */ ''
+          [Desktop Entry]
+          Type=Application
+          Name=nv
+          GenericName=Text Editor
+          Exec=${user.home}/.local/bin/nv %F
+          Terminal=false
+          Categories=Utility;TextEditor;
+          MimeType=text/plain;
+        '';
       };
     };
 }

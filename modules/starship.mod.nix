@@ -18,11 +18,10 @@
       jjStarship = getExe inputs.jj-starship.packages.${system}.default;
     in
     {
-      hjem.users.${user.name} = {
-        packages = singleton pkgs.starship;
-
-        xdg.config.files."starship.toml".generator = pkgs.writers.writeTOML "starship.toml";
-        xdg.config.files."starship.toml".value = {
+      hjem.users.${user.name}.rum.programs.starship = {
+        enable = true;
+        integrations.fish.enable = true;
+        settings = {
           add_newline = false;
           command_timeout = 100;
           format = "$status$hostname$directory\${custom.jj}$nix_shell$package$c$python$lua$rust$cmd_duration$jobs$container\n$character";

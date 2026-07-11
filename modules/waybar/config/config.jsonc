@@ -1,8 +1,11 @@
 {
   "layer": "top",
-  "output": "DP-1",
+  "output": [
+    "DP-1",
+    "eDP-1"
+  ],
   "position": "top",
-  "height": 24,
+  "height": 30,
   "spacing": 0,
   "exclusive": true,
   "passthrough": false,
@@ -19,7 +22,7 @@
   },
   "hyprland/workspaces": {
     "format": "{windows}",
-    "format-window-separator": " ",
+    "format-window-separator": "",
     "sort-by": "id",
     "all-outputs": true,
     "active-only": false,
@@ -37,9 +40,13 @@
         9
       ]
     },
-    "window-rewrite-default": "●",
-    "window-rewrite": {
-      "class<.*>": "●"
+    "workspace-taskbar": {
+      "enable": true,
+      "update-active-window": true,
+      "format": "{icon}",
+      "icon-size": 18,
+      "orientation": "horizontal",
+      "on-click-window": "/run/current-system/sw/bin/hyprctl dispatch 'hl.dsp.focus({ window = \"address:{address}\" })'"
     }
   }
 }

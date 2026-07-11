@@ -49,7 +49,7 @@ _: {
       };
 
       hjem.users.${user.name} = {
-        packages = singleton pkgs.mpv;
+        rum.programs.mpv.enable = true;
 
         xdg.mime-apps.default-applications = associations;
 
@@ -72,7 +72,7 @@ _: {
           '';
 
           "xdg-terminals.list".text = /* conf */ ''
-            foot.desktop
+            kitty.desktop
           '';
         };
       };

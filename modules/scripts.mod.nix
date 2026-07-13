@@ -10,10 +10,6 @@ in
       inherit (lib.filesystem) listFilesRecursive;
 
       inherit (config.local) user;
-
-      # Enumerate names from the flake copy, but link to the live working tree so
-      # script edits take effect without a rebuild. `source` is a string,
-      # which hjem links out-of-store as-is.
       src = ../scripts;
       dir = "${user.flakeDir}/scripts";
     in

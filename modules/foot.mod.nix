@@ -41,7 +41,7 @@ _: {
           };
 
           "colors-dark" = {
-            cursor = "${palette.fgMain} 44df44";
+            cursor = "${palette.fgMain} ${palette.greenIntense}";
             foreground = palette.fgMain;
             background = palette.bgMain;
             "selection-foreground" = palette.fgMain;

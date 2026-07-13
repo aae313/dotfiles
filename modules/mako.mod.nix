@@ -45,7 +45,7 @@ _: {
 
           [urgency=high]
           border-color=#${palette.red}
-          background-color=#3a0c14
+          background-color=#${palette.bgRedNuanced}
         '';
       };
     };

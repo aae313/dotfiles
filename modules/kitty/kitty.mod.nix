@@ -15,7 +15,7 @@ _: {
       inherit (config.local.theme) fonts palette;
 
       activeBackground = "#${palette.bgMain}";
-      inactiveBackground = "#0d0e1c";
+      inactiveBackground = "#${palette.bgDim}";
 
       inactiveBgWatcher = pkgs.writeText "kitty-inactive-bg.py" ''
         from typing import Any
@@ -170,10 +170,10 @@ _: {
         cursor = "#${palette.fgMain}";
         cursor_text_color = "#${palette.bgMain}";
 
-        active_tab_background = "#545454";
+        active_tab_background = "#${palette.bgTabCurrent}";
         active_tab_foreground = "#${palette.fgMain}";
-        inactive_tab_background = "#262626";
-        inactive_tab_foreground = "#969696";
+        inactive_tab_background = "#${palette.bgTabOther}";
+        inactive_tab_foreground = "#${palette.fgModeLineInactive}";
 
         active_border_color = "#${palette.blueWarmer}";
         inactive_border_color = "#${palette.border}";

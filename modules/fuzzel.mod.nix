@@ -34,7 +34,7 @@ _: {
             placeholder = "#${palette.fgDim}ff";
             input = "#${palette.fgMain}ff";
             match = "#${palette.yellow}ff";
-            selection = "#2f447fff";
+            selection = "#${palette.bgCompletion}ff";
             selection-text = "#${palette.fgMain}ff";
             selection-match = "#${palette.yellow}ff";
             counter = "#${palette.fgDim}ff";

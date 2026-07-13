@@ -10,8 +10,8 @@ in
       inherit (lib.filesystem) listFilesRecursive;
 
       inherit (config.local) user;
-      src = ../scripts;
-      dir = "${user.flakeDir}/scripts";
+      src = ./bin;
+      dir = "${user.flakeDir}/modules/scripts/bin";
     in
     {
       hjem.users.${user.name}.files = listToAttrs (

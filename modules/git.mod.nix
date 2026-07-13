@@ -20,7 +20,7 @@ _: {
           package = null;
           settings = {
             user = {
-              email = user.email;
+              inherit (user) email;
               name = user.handle;
               signingkey = "${user.home}/.ssh/id_ed25519.pub";
             };

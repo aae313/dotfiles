@@ -24,75 +24,77 @@ _: {
           user.email = user.email;
           user.name = user.handle;
 
-          aliases.",," = [
-            "edit"
-            "@+"
-          ];
-          aliases.".." = [
-            "edit"
-            "@-"
-          ];
+          aliases = {
+            ",," = [
+              "edit"
+              "@+"
+            ];
+            ".." = [
+              "edit"
+              "@-"
+            ];
 
-          aliases.a = singleton "abandon";
+            a = singleton "abandon";
 
-          aliases.c = singleton "commit";
-          aliases.ci = [
-            "commit"
-            "--interactive"
-          ];
+            c = singleton "commit";
+            ci = [
+              "commit"
+              "--interactive"
+            ];
 
-          aliases.cl = [
-            "git"
-            "clone"
-          ];
+            cl = [
+              "git"
+              "clone"
+            ];
 
-          aliases.d = singleton "diff";
+            d = singleton "diff";
 
-          aliases.e = singleton "edit";
+            e = singleton "edit";
 
-          aliases.f = [
-            "git"
-            "fetch"
-          ];
+            f = [
+              "git"
+              "fetch"
+            ];
 
-          aliases.i = [
-            "git"
-            "init"
-          ];
+            i = [
+              "git"
+              "init"
+            ];
 
-          aliases.l = singleton "log";
-          aliases.la = [
-            "log"
-            "--revisions"
-            "::"
-          ];
+            l = singleton "log";
+            la = [
+              "log"
+              "--revisions"
+              "::"
+            ];
 
-          aliases.p = [
-            "git"
-            "push"
-          ];
+            p = [
+              "git"
+              "push"
+            ];
 
-          aliases.r = singleton "rebase";
+            r = singleton "rebase";
 
-          aliases.res = singleton "resolve";
+            res = singleton "resolve";
 
-          aliases.resa = singleton "resolve-ast";
-          aliases.resolve-ast = [
-            "resolve"
-            "--tool"
-            "${getExe pkgs.mergiraf}"
-          ];
+            resa = singleton "resolve-ast";
+            resolve-ast = [
+              "resolve"
+              "--tool"
+              "${getExe pkgs.mergiraf}"
+            ];
 
-          aliases.s = singleton "squash";
+            s = singleton "squash";
 
-          aliases.sh = singleton "show";
+            sh = singleton "show";
 
-          aliases.si = [
-            "squash"
-            "--interactive"
-          ];
+            si = [
+              "squash"
+              "--interactive"
+            ];
 
-          aliases.u = singleton "undo";
+            u = singleton "undo";
+          };
 
           git.push = "origin";
           git.sign-on-push = true;
@@ -109,23 +111,27 @@ _: {
             present(@) | present(trunk()) | ancestors(remote_bookmarks().. | @.., 8)
           '';
 
-          signing.backend = "ssh";
-          signing.behavior = "drop";
-          signing.key = "${user.home}/.ssh/id_ed25519.pub";
+          signing = {
+            backend = "ssh";
+            behavior = "drop";
+            key = "${user.home}/.ssh/id_ed25519.pub";
+          };
 
-          ui.conflict-marker-style = "snapshot";
-          ui.default-command = "log";
-          ui.diff-editor = ":builtin";
-          ui.diff-formatter = [
-            (getExe pkgs.difftastic)
-            "--color"
-            "always"
-            "$left"
-            "$right"
-          ];
-          ui.merge-editor = getExe pkgs.mergiraf;
+          ui = {
+            conflict-marker-style = "snapshot";
+            default-command = "log";
+            diff-editor = ":builtin";
+            diff-formatter = [
+              (getExe pkgs.difftastic)
+              "--color"
+              "always"
+              "$left"
+              "$right"
+            ];
+            merge-editor = getExe pkgs.mergiraf;
 
-          ui.graph.style = "square";
+            graph.style = "square";
+          };
         };
       };
     };

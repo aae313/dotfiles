@@ -204,10 +204,13 @@ _: {
     {
       hjem.users.${user.name}.rum.programs.kitty = {
         enable = true;
-        settings = settings // colors // {
-          clear_all_shortcuts = "yes";
-          map = maps ++ editorLockMaps;
-        };
+        settings =
+          settings
+          // colors
+          // {
+            clear_all_shortcuts = "yes";
+            map = maps ++ editorLockMaps;
+          };
       };
     };
 }

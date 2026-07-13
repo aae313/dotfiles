@@ -10,10 +10,12 @@
     {
       imports = singleton inputs.hjem.nixosModules.hjem;
 
-      hjem.clobberByDefault = true;
+      hjem = {
+        clobberByDefault = true;
 
-      hjem.extraModules = singleton inputs.hjem-rum.hjemModules.default;
+        extraModules = singleton inputs.hjem-rum.hjemModules.default;
 
-      hjem.users.${user.name}.enable = true;
+        users.${user.name}.enable = true;
+      };
     };
 }

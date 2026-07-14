@@ -17,6 +17,7 @@ _: {
         fgDim = "989898";
 
         bgMain = "000000";
+        bgMainTinted = "0d0e1c";
         bgDim = "1e1e1e";
         bgInactive = "303030";
         bgActive = "535353";

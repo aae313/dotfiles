@@ -1,6 +1,9 @@
 _: {
   flake.nixosModules.security = {
-    programs.fuse.userAllowOther = true;
+    programs.fuse = {
+      enable = true;
+      userAllowOther = true;
+    };
 
     security = {
       polkit.enable = true;

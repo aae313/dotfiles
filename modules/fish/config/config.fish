@@ -1,6 +1,6 @@
 if status is-interactive
 
-    source $__fish_config_dir/themes/modus.theme
+    fish_config theme choose modus
 
     set -g fish_greeting
     set -g fish_key_bindings fish_vi_key_bindings

@@ -27,18 +27,18 @@ _: {
           };
 
           colors = {
-            background = "#${palette.bgMain}ff";
-            text = "#${palette.fgMain}ff";
-            message = "#${palette.fgAlt}ff";
-            prompt = "#${palette.blue}ff";
-            placeholder = "#${palette.fgDim}ff";
-            input = "#${palette.fgMain}ff";
-            match = "#${palette.yellow}ff";
-            selection = "#${palette.bgCompletion}ff";
-            selection-text = "#${palette.fgMain}ff";
-            selection-match = "#${palette.yellow}ff";
-            counter = "#${palette.fgDim}ff";
-            border = "#${palette.blue}ff";
+            background = "${palette.bgMain}ff";
+            text = "${palette.fgMain}ff";
+            message = "${palette.fgAlt}ff";
+            prompt = "${palette.blue}ff";
+            placeholder = "${palette.fgDim}ff";
+            input = "${palette.fgMain}ff";
+            match = "${palette.yellow}ff";
+            selection = "${palette.bgCompletion}ff";
+            selection-text = "${palette.fgMain}ff";
+            selection-match = "${palette.yellow}ff";
+            counter = "${palette.fgDim}ff";
+            border = "${palette.blue}ff";
           };
 
           dmenu.exit-immediately-if-empty = "yes";

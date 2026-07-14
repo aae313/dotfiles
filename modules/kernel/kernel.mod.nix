@@ -4,7 +4,6 @@
     { lib, ... }:
     let
       inherit (lib.lists) singleton;
-      inherit (lib.strings) fileContents;
     in
     {
       # Provides `pkgs.cachyosKernels`, from which each host picks its
@@ -67,7 +66,5 @@
         enable = true;
         scheduler = "scx_rusty";
       };
-
-      services.udev.extraRules = fileContents ./60-ioschedulers.rules;
     };
 }

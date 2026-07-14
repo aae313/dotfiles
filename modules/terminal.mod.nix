@@ -8,16 +8,16 @@ _: {
     }:
     let
       inherit (lib.attrsets) attrNames mapAttrsToList;
-      inherit (lib.lists) subtractLists;
+      inherit (lib.lists) map subtractLists;
       inherit (lib.meta) getExe;
 
       inherit (config.local) user;
       inherit (config.local.theme) fonts palette;
 
       activeBackground = "#${palette.bgMain}";
-      inactiveBackground = "#${palette.bgDim}";
+      inactiveBackground = "#${palette.bgMainTinted}";
 
-      inactiveBgWatcher = pkgs.writeText "kitty-inactive-bg.py" ''
+      inactiveBgWatcher = pkgs.writeText "kitty-inactive-bg.py" /* python */ ''
         from typing import Any
 
         from kitty.boss import Boss
@@ -37,7 +37,7 @@ _: {
             set_background(boss, window, data["focused"])
       '';
 
-      settings = {
+      kittySettings = {
         active_tab_font_style = "bold";
         allow_remote_control = "yes";
         bold_font = "auto";
@@ -74,7 +74,7 @@ _: {
         wayland_enable_ime = "no";
       };
 
-      mappings = {
+      kittyMappings = {
         "alt+1" = "goto_tab 1";
         "alt+2" = "goto_tab 2";
         "alt+3" = "goto_tab 3";
@@ -154,14 +154,14 @@ _: {
         "alt+9"
       ];
 
-      maps = mapAttrsToList (key: action: "${key} ${action}") mappings;
+      kittyMaps = mapAttrsToList (key: action: "${key} ${action}") kittyMappings;
 
       # no_op under a focus condition forwards the key to the program instead
       # of running the kitty action; nvim sets the in_editor var itself.
-      editorLockedKeys = subtractLists editorPassthroughKeys <| attrNames mappings;
+      editorLockedKeys = subtractLists editorPassthroughKeys <| attrNames kittyMappings;
       editorLockMaps = map (key: "--when-focus-on var:in_editor ${key} no_op") editorLockedKeys;
 
-      colors = {
+      kittyColors = {
         background = activeBackground;
         foreground = "#${palette.fgMain}";
         selection_background = "#${palette.bgSelection}";
@@ -199,18 +199,95 @@ _: {
         color16 = "#${palette.yellowWarmer}";
         color17 = "#${palette.redFaint}";
       };
-
     in
     {
       hjem.users.${user.name}.rum.programs.kitty = {
         enable = true;
         settings =
-          settings
-          // colors
+          kittySettings
+          // kittyColors
           // {
             clear_all_shortcuts = "yes";
-            map = maps ++ editorLockMaps;
+            map = kittyMaps ++ editorLockMaps;
           };
+      };
+    };
+
+  flake.nixosModules.foot =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      inherit (lib.meta) getExe;
+
+      inherit (config.local) user;
+      inherit (config.local.theme) fonts palette;
+    in
+    {
+      programs.foot = {
+        enable = true;
+        xdg.serverAutostart = true;
+      };
+
+      hjem.users.${user.name}.rum.programs.foot = {
+        enable = true;
+        package = null;
+        settings = {
+          main = {
+            "box-drawings-uses-font-glyphs" = "yes";
+            "locked-title" = "no";
+            shell = getExe pkgs.fish;
+            font = "${fonts.mono}:size=12";
+          };
+
+          cursor = {
+            style = "beam";
+            "beam-thickness" = 2;
+          };
+
+          bell = {
+            urgent = "yes";
+            notify = "yes";
+          };
+
+          "key-bindings" = {
+            "show-urls-launch" = "Control+Shift+u";
+            "unicode-input" = "Control+Shift+i";
+          };
+
+          "colors-dark" = {
+            cursor = "${palette.fgMain} ${palette.greenIntense}";
+            foreground = palette.fgMain;
+            background = palette.bgMain;
+            "selection-foreground" = palette.fgMain;
+            "selection-background" = palette.bgSelection;
+            urls = palette.fgAlt;
+
+            regular0 = palette.bgMain;
+            regular1 = palette.red;
+            regular2 = palette.green;
+            regular3 = palette.yellow;
+            regular4 = palette.blue;
+            regular5 = palette.magenta;
+            regular6 = palette.cyan;
+            regular7 = palette.termWhite;
+
+            bright0 = palette.termBrightBlack;
+            bright1 = palette.redWarmer;
+            bright2 = palette.greenCooler;
+            bright3 = palette.yellowWarmer;
+            bright4 = palette.blueWarmer;
+            bright5 = palette.magentaWarmer;
+            bright6 = palette.cyanCooler;
+            bright7 = palette.fgMain;
+
+            "16" = palette.yellowWarmer;
+            "17" = palette.redFaint;
+          };
+        };
       };
     };
 }

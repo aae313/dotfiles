@@ -1,9 +1,6 @@
 _: {
   flake.nixosModules.audio =
-    { lib, ... }:
-    let
-      inherit (lib.strings) fileContents;
-    in
+    { ... }:
     {
       environment.variables = {
         SDL_AUDIODRIVER = "pipewire";
@@ -21,7 +18,5 @@ _: {
         pulse.enable = true;
         jack.enable = true;
       };
-
-      services.udev.extraRules = fileContents ./99-cpu-dma-latency.rules;
     };
 }

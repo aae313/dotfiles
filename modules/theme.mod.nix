@@ -169,4 +169,90 @@ _: {
         termBrightWhite = "ffffff";
       };
     };
+
+  flake.nixosModules.fonts =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      inherit (lib.lists) singleton;
+      inherit (lib.options) mkOption;
+      inherit (lib.types) str;
+
+      inherit (config.local.theme) fonts;
+    in
+    {
+      options.local.theme.fonts = {
+        mono = mkOption {
+          type = str;
+          default = "JetBrainsMono Nerd Font";
+        };
+
+        sans = mkOption {
+          type = str;
+          default = "Inter";
+        };
+
+        symbols = mkOption {
+          type = str;
+          default = "Symbols Nerd Font";
+        };
+
+        emoji = mkOption {
+          type = str;
+          default = "Noto Color Emoji";
+        };
+      };
+
+      config.fonts = {
+        packages = [
+          pkgs.material-symbols
+          pkgs.noto-fonts
+
+          pkgs.noto-fonts-color-emoji
+          pkgs.roboto
+          (pkgs.google-fonts.override { fonts = singleton "Inter"; })
+          pkgs.jetbrains-mono
+          pkgs.nerd-fonts.jetbrains-mono
+          pkgs.nerd-fonts.symbols-only
+        ];
+
+        enableDefaultPackages = false;
+
+        fontconfig.defaultFonts = {
+          serif = singleton fonts.sans;
+          sansSerif = singleton fonts.sans;
+          monospace = singleton fonts.mono;
+          emoji = singleton fonts.emoji;
+        };
+
+        fontconfig.localConf = /* xml */ ''
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+          <fontconfig>
+            <alias binding="strong">
+              <family>sans-serif</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+            <alias binding="strong">
+              <family>system-ui</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+            <alias binding="strong">
+              <family>ui-sans-serif</family>
+              <prefer>
+                <family>${fonts.sans}</family>
+              </prefer>
+            </alias>
+          </fontconfig>
+        '';
+      };
+    };
 }

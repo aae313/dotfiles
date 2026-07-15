@@ -31,7 +31,7 @@ _: {
         "image/*" = singleton "imv.desktop";
         "text/*" = singleton "nv.desktop";
         "application/json" = browser;
-        "inode/directory" = singleton "yazi.desktop";
+        "inode/directory" = singleton "yazi";
       };
     in
     {

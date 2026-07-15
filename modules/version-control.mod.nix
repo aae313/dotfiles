@@ -136,7 +136,7 @@ _: {
               resolve-ast = [
                 "resolve"
                 "--tool"
-                "${getExe pkgs.mergiraf}"
+                "mergiraf"
               ];
 
               s = singleton "squash";

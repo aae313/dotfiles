@@ -13,6 +13,7 @@
         inputs.hunk.packages.${system}.hunk
         pkgs.btop
         pkgs.hexyl
+        pkgs.perf
         pkgs.hyperfine
         pkgs.jc
         pkgs.jq

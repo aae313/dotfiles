@@ -21,7 +21,6 @@ _: {
         pkgs.nixfmt
         pkgs.prettier
         pkgs.python3
-        pkgs.uv
         pkgs.shellcheck
         pkgs.shfmt
         pkgs.statix

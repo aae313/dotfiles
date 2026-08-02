@@ -24,7 +24,7 @@
 
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay/f27953eea28eb3a0bf58d84e8d51f65b1dfed481";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 

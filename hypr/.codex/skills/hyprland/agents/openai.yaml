@@ -1,4 +1,0 @@
-interface:
-  display_name: "Hyprland"
-  short_description: "Configure Hyprland Lua and IPC scripts"
-  default_prompt: "Use $hyprland to configure Hyprland with Lua or write a Hyprland IPC script."

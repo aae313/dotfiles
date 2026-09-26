@@ -8,26 +8,21 @@
 
 # Development Rules
 
-- Never search `/nix/store` directly (or anything equivalent). Prefer:
-  ```sh
-  nix flake archive --json
-  ```
-- Never execute `nix flake archive --json` together with commands that immediately search its output, as this forces unnecessary review.
-  - Run `nix flake archive --json` once.
-  - Refer to the resulting store path literally in subsequent commands.
-  - **Do not** use variables, for example:
-    ```sh
-    NIXPKGS=/nix/store/... rg "$NIXPKGS"
-    ```
-    or
-    ```sh
-    np=/nix/store/...
-    sed -n 258,275p "$np/lib/modules.nix"
-    ```
-  - Instead, use the literal `/nix/store/...` path in each later command.
-- Always prefer the new Nix CLI (`nix` commands).
-  - Use `nix build` instead of `nix-build`.
-  - Apply the same principle to all other commands.
+- Never `find /nix/store` or anything equivalent. Prefer using
+  `nix flake archive --json`.
+- Do not execute `nix flake archive --json` with commands that actually search
+  over the result of that, as it forces the user to review every single time.
+  Run `nix flake archive --json` once, then refer to its output literally in
+  other, separate find commands. Not like `NIXPKGS=/nix/store/... rg $NIXPKGS`,
+  not like `np=/nix/store/...; sed -n 258,275p "$np/lib/modules.nix"`,
+  _literally_, without any variables.
+- Never use non-new `nix` commands. Prefer `nix build` over `nix-build` and so
+  on. Always prefer new (nix3) commands.
+- Never use python to parse json if jq can do it fine, jq avoids permission
+  prompts.
+- Do not ever run `builtins.getFlake`, use flakerefs in the nix3 cli properly.
+  `getFlake` copies the entire path to the nix store, which includes `target`
+  dirs and is overall a waste of storage and time.
 
 # Nix Style Rules
 

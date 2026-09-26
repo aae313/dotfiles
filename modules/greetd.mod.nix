@@ -10,7 +10,7 @@ _: {
       inherit (config.local) user;
 
       session = {
-        command = getExe' config.programs.uwsm.package "uwsm start hyprland-uwsm.desktop";
+        command = getExe' config.programs.niri.package "niri-session";
         user = user.name;
       };
     in

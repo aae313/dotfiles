@@ -7,7 +7,6 @@ _: {
     {
       environment.sessionVariables = {
         DISABLE_QT_COMPAT = "0";
-        GDK_BACKEND = "wayland";
         GDK_SCALE = "1";
         QT_QPA_PLATFORM = "wayland";
         QT_AUTO_SCREEN_SCALE_FACTOR = "1";

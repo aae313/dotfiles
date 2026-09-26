@@ -85,7 +85,16 @@ resolve_path() {
 }
 
 focus_neovide() {
-  hyprctl dispatch 'hl.dsp.focus({ window = "class:neovide" })' >/dev/null 2>&1 || true
+  local attempt
+
+  for ((attempt = 0; attempt < 50; attempt++)); do
+    if nirius focus --app-id '^neovide$' >/dev/null 2>&1; then
+      return
+    fi
+    sleep 0.1
+  done
+
+  die "nv: neovide window did not appear"
 }
 
 open_with_new_server() {

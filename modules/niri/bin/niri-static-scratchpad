@@ -8,15 +8,18 @@ fi
 
 app_id="$1"
 desktop_file="$2"
+if [[ "$desktop_file" == \~/* ]]; then
+  desktop_file="$HOME/${desktop_file#\~/}"
+fi
 app_id_regex="^$(printf '%s' "$app_id" | sed 's/[][\\.^$*+?{}()|]/\\&/g')$"
 
 window_id_for_app() {
-  niri msg -j windows | jq -er --arg app_id "$app_id" \
+  niri msg --json windows | jq --exit-status --raw-output --arg app_id "$app_id" \
     'first(.[] | select(.app_id == $app_id) | .id)'
 }
 
 focused_window_id() {
-  niri msg -j focused-window | jq -er '.id'
+  niri msg --json focused-window | jq --exit-status --raw-output '.id'
 }
 
 is_scratchpad_window() {
@@ -58,5 +61,5 @@ if is_scratchpad_window "$window_id"; then
   exec nirius scratchpad-show --id "$window_id"
 fi
 
-nirius scratchpad-toggle -a "$app_id_regex"
+nirius scratchpad-toggle --app-id "$app_id_regex"
 exec nirius scratchpad-show --id "$window_id"

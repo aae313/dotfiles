@@ -37,15 +37,13 @@ _: {
     {
       environment.systemPackages = [
         pkgs.shared-mime-info
-        pkgs.xdg-desktop-portal
         pkgs.xdg-user-dirs
-        pkgs.xdg-utils
       ];
 
       xdg.portal = {
         enable = true;
+        extraPortals = singleton pkgs.xdg-desktop-portal-gtk;
         xdgOpenUsePortal = true;
-        config.common.default = "*";
       };
 
       hjem.users.${user.name} = {

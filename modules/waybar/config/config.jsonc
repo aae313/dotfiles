@@ -1,52 +1,36 @@
 {
-  "layer": "top",
-  "output": [
-    "DP-1",
-    "eDP-1"
-  ],
-  "position": "top",
-  "height": 30,
-  "spacing": 0,
-  "exclusive": true,
-  "passthrough": false,
-  "reload_style_on_change": true,
-  "modules-left": [],
-  "modules-center": [
-    "hyprland/workspaces"
-  ],
-  "modules-right": [
-    "clock"
-  ],
-  "clock": {
-    "format": "{:%H:%M}"
-  },
-  "hyprland/workspaces": {
-    "format": "{windows}",
-    "format-window-separator": "",
-    "sort-by": "id",
-    "all-outputs": true,
-    "active-only": false,
-    "disable-scroll": false,
-    "persistent-workspaces": {
-      "*": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
-      ]
+    "layer": "top",
+    "output": "DP-1",
+    "height": 22,
+    "spacing": 2,
+
+    "modules-left": [],
+    "modules-center": [
+        "custom/niri-taskbar"
+    ],
+    "modules-right": [
+        "clock",
+        "image#nixos"
+    ],
+
+    "custom/niri-taskbar": {
+        "exec": "$HOME/.local/bin/niri-taskbar",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": false,
+        "escape": false,
+        "hide-empty-text": true
     },
-    "workspace-taskbar": {
-      "enable": true,
-      "update-active-window": true,
-      "format": "{icon}",
-      "icon-size": 18,
-      "orientation": "horizontal",
-      "on-click-window": "/run/current-system/sw/bin/hyprctl dispatch 'hl.dsp.focus({ window = \"address:{address}\" })'"
+
+    "clock": {
+        "format": " {:%H:%M}",
+        "format-alt": " {:L%A, %b %d}",
+        "tooltip-format": "{:%Y}"
+    },
+
+    "image#nixos": {
+        "path": "/home/wasd/.config/waybar/nixos.svg",
+        "size": 17,
+        "tooltip": false
     }
-  }
 }

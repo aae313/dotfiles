@@ -32,7 +32,7 @@ _: {
       yaml = pkgs.formats.yaml { };
     in
     {
-      environment.sessionVariables.MANPAGER = "ov --section-delimiter '^[^\\s]' --section-header";
+      environment.sessionVariables.MANPAGER = "ov --section-delimiter '^[^\\\\s]' --section-header";
 
       hjem.users.${user.name} = {
         packages = singleton pkgs.ov;

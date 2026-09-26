@@ -28,7 +28,10 @@
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    niri = {
+      url = "github:epireyn/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";

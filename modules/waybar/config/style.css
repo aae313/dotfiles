@@ -1,67 +1,79 @@
-@import url("theme.css");
+@define-color color-bg rgba(0, 0, 0, 0.82);
+@define-color color-fg #ffffff;
+@define-color color-tooltip-bg #1e1e1e;
+@define-color color-tooltip-fg #ffffff;
 
 * {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+  font-family: "Inter", "Symbols Nerd Font", sans-serif;
   font-size: 13px;
+  font-weight: bold;
+  border: none;
   min-height: 0;
 }
 
 window#waybar {
-  background: @bar-bg;
+  background-color: @color-bg;
+  border: none;
+  margin: 5px;
 }
 
-#workspaces {
-  margin: 4px 0;
-  padding: 0 6px;
+window#waybar>* {
+  margin: 4px 4px 0px 4px;
 }
 
-#workspaces button {
-  background: @workspace-bg;
-  border-radius: 999px;
-  color: @workspace-fg;
-  margin: 0 3px;
-  padding: 0 4px;
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
-#workspaces button.empty {
-  background: @workspace-empty;
-  color: transparent;
-  min-width: 8px;
-  padding: 0 4px;
-}
-
-#workspaces button.active {
-  background: @workspace-active-bg;
-  color: @workspace-active-fg;
-}
-
-#workspaces button:hover {
-  background: @workspace-hover-bg;
-  color: @workspace-active-fg;
-}
-
-#workspaces button.urgent {
-  background: @workspace-urgent-bg;
-  color: @workspace-active-fg;
-}
-
-#workspaces .taskbar-window {
-  border-radius: 999px;
-  margin: 0 1px;
-  padding: 1px 3px;
-}
-
-#workspaces .taskbar-window:hover {
-  background: @workspace-hover-bg;
-}
-
-#workspaces .taskbar-window.active {
-  background: @crust;
+#clock,
+#custom-niri-taskbar {
+  border-radius: 100px;
+  color: @color-fg;
+  min-height: 0;
 }
 
 #clock {
-  color: @text;
-  padding: 0 10px;
+  padding: 0px 8px;
+}
+
+#image {
+  margin-left: 6px;
+  margin-right: 2px;
+  padding: 0px;
+  min-height: 0;
+}
+
+#custom-niri-taskbar {
+  font-family: "Symbols Nerd Font", "Inter", sans-serif;
+  font-size: 14px;
+  padding: 0px 6px;
+  margin: 0px;
+  background: none;
+}
+
+#custom-niri-taskbar.empty {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0px;
+  border-color: transparent;
+  border: none;
+  background-color: transparent;
+}
+
+tooltip {
+  background-color: @color-tooltip-bg;
+  border: none;
+  border-radius: 20px;
+}
+
+tooltip decoration,
+tooltip decoration:backdrop {
+  box-shadow: none;
+}
+
+tooltip label {
+  color: @color-tooltip-fg;
+  padding: 3px 7px;
 }

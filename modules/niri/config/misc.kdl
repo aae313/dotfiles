@@ -46,6 +46,3 @@ recent-windows {
 }
 
 spawn-sh-at-startup "app2unit -t service niriusd"
-spawn-sh-at-startup "app2unit wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "app2unit wl-paste --type image --watch cliphist store"
-spawn-sh-at-startup "app2unit -t service wallpaper"
